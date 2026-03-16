@@ -6,9 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "generate": "faust generatePossibleTypes"
   },
   "dependencies": {
+    "@apollo/client": "^3.14.1",
+    "@faustwp/cli": "^3.3.6",
+    "@faustwp/core": "^3.3.6",
+    "graphql": "^16.13.1",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3"
