@@ -1,21 +1,21 @@
-import { WordPressTemplateProps } from "@faustwp/core";
+import type { FaustTemplateProps } from "@faustwp/core";
 import Layout from "@/components/Layout";
 import RichText from "@/components/RichText";
 import Seo from "@/components/Seo";
 import { normalizePageType } from "@/lib/normalizePageType";
 
-type PageTemplateProps = WordPressTemplateProps & {
-  data: {
-    page: {
-      title: string;
-      content?: string | null;
-      uri: string;
-      pageSettings?: {
-        pageType?: string | string[] | null;
-      } | null;
+type PageData = {
+  page: {
+    title: string;
+    content?: string | null;
+    uri: string;
+    pageSettings?: {
+      pageType?: string | string[] | null;
     } | null;
-  };
+  } | null;
 };
+
+type PageTemplateProps = FaustTemplateProps<PageData>;
 
 export default function PageTemplate({ data }: PageTemplateProps) {
   const page = data?.page;

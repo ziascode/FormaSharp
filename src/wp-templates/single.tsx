@@ -1,18 +1,18 @@
-import { WordPressTemplateProps } from "@faustwp/core";
+import type { FaustTemplateProps } from "@faustwp/core";
 import Layout from "@/components/Layout";
 import RichText from "@/components/RichText";
 import Seo from "@/components/Seo";
 
-type SingleTemplateProps = WordPressTemplateProps & {
-  data: {
-    post: {
-      title: string;
-      content?: string | null;
-      uri: string;
-      excerpt?: string | null;
-    } | null;
-  };
+type SingleData = {
+  post: {
+    title: string;
+    content?: string | null;
+    uri: string;
+    excerpt?: string | null;
+  } | null;
 };
+
+type SingleTemplateProps = FaustTemplateProps<SingleData>;
 
 export default function SingleTemplate({ data }: SingleTemplateProps) {
   const post = data?.post;
