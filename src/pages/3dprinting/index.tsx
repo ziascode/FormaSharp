@@ -33,8 +33,16 @@ function ThreeDPrinting() {
 
     <div className="h-[50vh] bg-white flex items-center justify-center max-w-7xl mx-auto">
         <div className="w-[80vw] h-[70vh] rounded-2xl rounded-b-2xl overflow-hidden -translate-y-[30vh]">
-        <img className="rounded-2xl" src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/3d-printing.mp4" alt="" />
-     
+        <video
+          className="h-full w-full rounded-2xl object-cover"
+          src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/3d-printing.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls
+          preload="metadata"
+        />
         </div>
     </div>
 
