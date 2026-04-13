@@ -23,7 +23,7 @@ function Badges() {
                 {/* Hero Scroll Video */}
                 <div className='w-1/2 h-[130vh]  -translate-y-[150px] '>
                     <ScrollyVideo 
-                    videoPercentage={0.1}
+                    videoPercentage={0}
                     transitionSpeed={16}
                     frameThreshold={0.05}
                     useWebCodecs

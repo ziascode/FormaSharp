@@ -4,22 +4,22 @@ import React, { useState } from 'react';
 const accordionItems = [
   {
     id: 1,
-    title: 'Startups',
+    title: '1',
     imageUrl: 'https://images.unsplash.com/photo-1628258334105-2a0b3d6efee1?q=80&w=1974&auto=format&fit=crop',
   },
   {
     id: 2,
-    title: 'Manufacturers',
+    title: '2',
     imageUrl: 'https://images.unsplash.com/photo-1677756119517-756a188d2d94?q=80&w=2070&auto=format&fit=crop',
   },
   {
     id: 3,
-    title: 'Inventors',
+    title: '3',
     imageUrl: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1974&auto=format&fit=crop',
   },
   {
     id: 4,
-    title: 'Ecommerce Businesses',
+    title: '4',
     imageUrl: 'https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/ecommerce.jpg',
   },
 ];
@@ -94,17 +94,17 @@ export function LandingAccordionItem() {
           {/* Left Side: Text Content */}
           <div className="w-full md:w-1/2 text-center md:text-left">
             <h2 className="text-4xl md:text-6xl font-bold text-gray-900 leading-tight tracking-tighter">
-              Who We Help
+              Our Process
             </h2>
             <p className="mt-6 text-lg text-gray-600 max-w-xl mx-auto md:mx-0">
-              We help startups, manufacturers, inventors, and ecommerce businesses bring their ideas to life.
+            Our process is designed to help you bring your ideas to life. We start with a conversation to understand your needs and goals. Then we create a detailed plan for the project. We then execute the plan and deliver the final product.
             </p>
             <div className="mt-8">
               <a
                 href="#contact"
-                className="primary-button inline-block bg-gray-900 text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:bg-gray-800 transition-colors duration-300"
+                
               >
-                Book a Consultation
+                <button className='button-primary'>Book a Consultation</button>
               </a>
             </div>
           </div>

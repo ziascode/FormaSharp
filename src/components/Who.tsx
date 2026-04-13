@@ -4,7 +4,7 @@ import { LandingAccordionItem } from '@/components/ui/interactive-image-accordio
 function Who() {
   return (
     <div>
-        <LandingAccordionItem />
+        {/* <LandingAccordionItem /> */}
 
     </div>
   )

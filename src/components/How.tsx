@@ -7,10 +7,10 @@ function How() {
     <div className='relative -translate-y-[50vh] flex flex-col mb-[-30vh]'>
         <motion.h2
           className='relative z-0 text-center text-4xl font-bold text-black py-16'
-          initial={{ y: 172, opacity: 0 }}
+          initial={{ y: 102, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true, amount: 0.45 }}
-          transition={{ duration: 1.55, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
         >
           How we can help you
         </motion.h2>
