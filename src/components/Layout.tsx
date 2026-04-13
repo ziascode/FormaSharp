@@ -51,15 +51,7 @@ export default function Layout({ children }: LayoutProps) {
               { href: "/blog", label: "Blog" },
               { href: "/about", label: "About" },
             ].map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`relative transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-[#ff6726] after:transition-transform after:duration-300 hover:after:scale-x-100 ${
-                  isSolidNav ? "text-white/90 hover:text-white" : "text-white/85 hover:text-white"
-                }`}
-              >
-                {item.label}
-              </Link>
+              
             ))}
             <Link
               href="/services"
