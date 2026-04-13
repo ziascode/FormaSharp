@@ -86,7 +86,7 @@ function How() {
                         </div>
                         <div className='flex flex-col'>
                                 <h2 className='!font-thin'>E-commerce</h2>
-                                <p className='!text-lg'><span className='!font-semibold'>Need to test your product before full scale production?</span><br/>We create functional prototypes and 3D models to validate designs, refine functionality, and ensure products meet your expectations before moving to mass production.</p>
+                                <p className='!text-lg'><span className='!font-semibold'>Do you need to test your product before full scale production?</span><br/>We create functional prototypes and 3D models to validate designs, refine functionality, and ensure products meet your expectations before moving to mass production.</p>
                                 <button className='button-primary !w-[20vw]'>Start your project ↗</button>
                         </div>
 
