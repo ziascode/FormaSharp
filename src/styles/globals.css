@@ -8,12 +8,19 @@
 
 @custom-variant dark (&:is(.dark *));
 
+:root {
+  --brand-text-main: #ff6726;
+}
+
+
 body {
   background: #CBD5E1 !important;
   font-family: 'questrial', system-ui, sans-serif;
   margin: 0;
   padding: 0;
 }
+
+
 
 .gudea-regular {
   font-family: var(--font-gudea), sans-serif;
@@ -65,11 +72,26 @@ body {
 }
 
 .button-tertiary {
-  background-color: #ffffff00;
-  color: #ffffff;
-  padding: 6px 5px;
-  border-bottom: 1px solid #fff;
+  background-color: #ffffff11;
+  color: #ff6726;
+  padding: 12px 30px;
+  border: solid 1px #ff6726;
+  border-radius: 25px;
+  font-size: 1.16rem;
+  font-weight: 600;
   font-family: 'questrial', sans-serif;
+}
+.button-tertiary:hover {
+  background-color: #ff6726;
+  color: #ffffff;
+  padding: 12px 30px;
+  border: solid 2px #ff6726;
+  border-radius: 25px;
+  font-size: 1.16rem;
+  font-weight: 600;
+  font-family: 'questrial', sans-serif;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .bg-primary {
@@ -99,36 +121,38 @@ body {
 
 h1 {
   font-size: 80px;
-  line-height: 1.1;
+  line-height: 1;
   letter-spacing: 2px;
   margin-bottom: 2rem;
   font-family: "Clash Grotesk", sans-serif;
   font-weight: 500;
 }
 h2 {
-  font-size: 50px;
+  font-size: 60px;
   line-height: 1.2;
   margin-bottom: 2rem;
   font-family: "Clash Grotesk", sans-serif;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 h3 {
   font-size: 1.5rem;
+  font-weight: 600;
   line-height: 1.2;
   margin-bottom: 2rem;
-  font-family: 'questrial', sans-serif;
+  font-family: 'Gotham', sans-serif;
   font-weight: 300;
 }
 
 p {
-  font-size: 1rem;
-  font-weight: 300;
+  font-size: 1.16rem;
+  font-weight: 400;
   line-height: 1.5;
   margin-bottom: 2rem;
   font-family: 'poppins', sans-serif;
-  font-spacing: 1.2;
+  word-spacing: 2px;
   font-optical-sizing: auto;
+  color: #4c4c4c;
  
 }
 
