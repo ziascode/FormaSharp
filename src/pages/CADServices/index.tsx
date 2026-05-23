@@ -252,7 +252,7 @@ function CADServices() {
           <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16 xl:gap-20">
             <div className="text-left lg:col-span-5 lg:col-start-1 xl:col-span-5">
               <h2 className="max-w-xl text-left text-4xl font-bold leading-[1.08] tracking-tight text-neutral-950 md:text-5xl lg:text-[2.75rem] lg:leading-[1.06]">
-              FomraSharp CAD Services
+              FormaSharp CAD Services
                   </h2>
                   <p className="max-w-3xl mx-auto">
             CAD services convert ideas and engineering requirements into
