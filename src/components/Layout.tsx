@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
+import ExitIntentPopup from "@/components/ExitIntentPopup";
 
 type LayoutProps = {
   children: ReactNode;
@@ -56,6 +57,7 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/portfolio", label: "Portfolio" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Layout({ children }: LayoutProps) {
@@ -203,6 +205,7 @@ export default function Layout({ children }: LayoutProps) {
           Footer content coming soon.
         </div>
       </footer>
+      <ExitIntentPopup />
     </div>
   );
 }

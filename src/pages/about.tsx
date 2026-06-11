@@ -1,151 +1,397 @@
-import type { GetStaticProps } from "next";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import Layout from "@/components/Layout";
+import { motion, useInView } from "framer-motion";
+import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
+import { DotPattern } from "@/components/ui/DotPatternProps";
 import Seo from "@/components/Seo";
-import RichText from "@/components/RichText";
-import { wpFetch } from "@/lib/wpFetch";
-import { GET_PAGE_BY_URI } from "@/lib/queries";
-import { normalizePageType } from "@/lib/normalizePageType";
+import { cn } from "@/lib/utils";
 
-type AboutPageProps = {
-  page: {
-    title: string;
-    content?: string | null;
-    uri: string;
-    pageSettings?: {
-      pageType?: string | string[] | null;
-    } | null;
-  } | null;
-  pageType: string | null;
+const LOGO_SRC =
+  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/formasharp-logo.webp";
+
+const IMG = {
+  pGraphic:
+    "https://images.squarespace-cdn.com/content/v1/68336a436acf0028ccedc8c9/ba47a3ff-5bb7-4ccf-90ec-d14a5f468fc2/Ai+File3.png?format=1500w",
+  productRender:
+    "https://images.squarespace-cdn.com/content/v1/68336a436acf0028ccedc8c9/d5980bd1-d68a-4b12-8a11-11c05cbb0dc1/CP0020-0001_Camera_Default+Camera+3.png?format=1500w",
+  founder:
+    "https://images.squarespace-cdn.com/content/v1/68336a436acf0028ccedc8c9/287e5879-6c3e-4302-93df-8ce4753801cb/Suhair+Sabir+2019.jpg?format=1500w",
+  cswaBadge:
+    "https://images.squarespace-cdn.com/content/v1/68336a436acf0028ccedc8c9/e424ec9e-0848-4df9-b6d4-6f9a530e7fa0/ASSOCIATE+-+MECHANICAL+DESIGN.png?format=1000w",
+  peoLogo:
+    "https://images.squarespace-cdn.com/content/v1/68336a436acf0028ccedc8c9/ba56deb2-f4b3-4e48-a14c-957ffa7c1208/peo-logo.png?format=1000w",
 };
 
-export default function About({ page, pageType }: AboutPageProps) {
-  const title = page?.title || "About";
+type StatItem = {
+  value: number;
+  suffix: string;
+  label: string;
+};
 
+const STATS: StatItem[] = [
+  { value: 9, suffix: "", label: "Years of engineering experience" },
+  { value: 10, suffix: "+", label: "Manufacturing processes supported" },
+  { value: 15, suffix: "+", label: "Industries supported" },
+  { value: 24, suffix: "h", label: "Average response time" },
+];
+
+type ServiceItem = {
+  href: string;
+  label: string;
+  description: string;
+};
+
+const SERVICES: ServiceItem[] = [
+  {
+    href: "/ProductDesign",
+    label: "Product Design",
+    description: "Concept to production-ready engineered products.",
+  },
+  {
+    href: "/CADServices",
+    label: "CAD Services",
+    description: "Precision 3D models, assemblies, and technical drawings.",
+  },
+  {
+    href: "/Simulation",
+    label: "Mechanical Engineering & Simulation",
+    description: "FEA, CFD, and thermal analysis for engineering decisions.",
+  },
+  {
+    href: "/DesignForManufacturing",
+    label: "Design for Manufacturing (DFM)",
+    description: "Optimize designs for efficient, cost-effective production.",
+  },
+  {
+    href: "/ReverseEngineering",
+    label: "Reverse Engineering",
+    description: "Rebuild accurate CAD models from existing physical parts.",
+  },
+  {
+    href: "/3dprinting",
+    label: "Prototyping & 3D Printing",
+    description: "High-resolution prototypes on engineering-grade materials.",
+  },
+];
+
+const CREDENTIALS = [
+  {
+    image: IMG.cswaBadge,
+    title: "Certified SolidWorks Associate",
+    description:
+      "Every design meets recognized industry standards for precision and quality.",
+  },
+  {
+    image: IMG.peoLogo,
+    title: "Professional Engineering Foundation",
+    description:
+      "Grounded in formal engineering education and mechanical systems expertise.",
+  },
+];
+
+export default function About() {
   return (
-    <Layout>
+    <div>
       <Seo
-        title={title}
-        description={pageType ? `${pageType} page` : undefined}
-        canonical={page?.uri ?? undefined}
+        title="About Us"
+        description="FormaSharp Product Design Inc. is a Canadian product design company specializing in CAD services and end-to-end design support."
+        canonical="/about/"
       />
 
-      {/* About — intro from WP */}
-      <section className="border-b border-neutral-800 bg-neutral-950 px-6 py-20">
-        <div className="mx-auto max-w-6xl">
-          <h1 className="mb-6 text-4xl font-semibold tracking-tight text-neutral-50 md:text-5xl">
-            {page?.title ?? "About"}
-          </h1>
-          <div className="max-w-3xl text-neutral-400 [&_a]:text-amber-500">
-            <RichText html={page?.content ?? null} />
+      {/* HERO */}
+      <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-[#0a0f1e]">
+        {/* Blue glow, top-right */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 75% 75% at 88% 0%, rgba(37,99,235,0.40), transparent 60%)",
+          }}
+          aria-hidden
+        />
+        <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-6 py-24 text-center">
+          <div className="mb-8 inline-flex items-center gap-3 font-mono text-xs font-semibold uppercase tracking-[0.25em] text-[#ff6726]">
+            <span aria-hidden>&#9670;</span>
+            About Us
+          </div>
+          <div className="flex flex-col items-center gap-5 md:flex-row md:gap-7">
+            <span className="text-5xl font-bold leading-none text-white md:text-7xl">
+              We are
+            </span>
+            <img
+              src={LOGO_SRC}
+              alt="FormaSharp"
+              className="h-14 w-auto md:h-20"
+              loading="eager"
+            />
           </div>
         </div>
       </section>
 
-      {/* Credentials */}
-      <section className="border-b border-neutral-800 bg-neutral-900/30 px-6 py-20">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="mb-6 text-3xl font-semibold tracking-tight text-neutral-50 md:text-4xl">
-            Credentials
-          </h2>
-          <p className="max-w-3xl text-neutral-400">
-            Our team holds industry-recognized qualifications and experience in
-            product design, CAD, and engineering. We combine technical expertise
-            with a commitment to quality and client success.
-          </p>
+      {/* STATS BAND */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="grid grid-cols-1 border-x border-black/10 sm:grid-cols-2 lg:grid-cols-4">
+            {STATS.map((stat, index) => (
+              <StatCell key={stat.label} stat={stat} index={index} />
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Process */}
-      <section className="border-b border-neutral-800 bg-neutral-950 px-6 py-20">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="mb-6 text-3xl font-semibold tracking-tight text-neutral-50 md:text-4xl">
-            Process
-          </h2>
-          <ul className="max-w-3xl list-disc space-y-2 pl-6 text-neutral-400">
-            <li>End-to-end product design and CAD services</li>
-            <li>Concept development through to production-ready designs</li>
-            <li>
-              Patent services — we refer you to trusted legal partners for
-              patent filing and protection. Contact us to be connected with a
-              lawyer.
-            </li>
-          </ul>
+      {/* ABOUT THE FOUNDER */}
+      <section className="bg-[#f8f9fa] py-16 md:py-24 lg:py-28">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-5">
+              <div className="overflow-hidden rounded-2xl bg-neutral-200 shadow-sm">
+                <img
+                  src={IMG.founder}
+                  alt="Syed S., founder of FormaSharp Product Design Inc."
+                  className="h-full w-full object-cover object-center"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            <div className="lg:col-span-7">
+              <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
+                About the Founder
+              </div>
+              <h2 className="text-4xl font-bold leading-[1.08] tracking-tight text-neutral-950 md:text-5xl">
+                Engineering depth behind every project
+              </h2>
+              <p>
+                FormaSharp Product Design Inc. was founded in 2025 in Mississauga,
+                Ontario, Canada by Syed S., who brings extensive experience in
+                heavy machinery equipment design along with a deep understanding
+                of mechanical systems, precision engineering, and
+                manufacturability.
+              </p>
+              <p>
+                Syed holds a Bachelor of Engineering in Nuclear Engineering from
+                the University of Ontario Institute of Technology (UOIT) and has
+                authored several research papers, presenting at the 27th
+                International Conference on Nuclear Engineering (ICONE-27) in
+                Tsukuba, Japan and the 39th Annual Conference of the Canadian
+                Nuclear Society in Ottawa, Canada. As a Certified SolidWorks
+                Associate (CSWA), he ensures every design meets industry standards
+                for precision and quality.
+              </p>
+              <p>
+                He started this company to offer the same level of quality and
+                professionalism to entrepreneurs, startups, and growing
+                businesses, without the red tape. That hands-on expertise, paired
+                with a passion for problem-solving and product development, drives
+                everything we do.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Why choose us */}
-      <section className="border-b border-neutral-800 bg-neutral-900/30 px-6 py-20">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="mb-6 text-3xl font-semibold tracking-tight text-neutral-50 md:text-4xl">
-            Why choose us
-          </h2>
-          <p className="mb-8 max-w-3xl text-neutral-400">
-            We focus on clear communication, on-time delivery, and designs that
-            are ready for manufacture. Our clients benefit from a single point
-            of contact and a process built around their goals.
-          </p>
-          <ul className="max-w-3xl list-disc space-y-2 pl-6 text-neutral-400">
-            <li>Experienced in SolidWorks and industry-standard tools</li>
-            <li>Pragmatic approach from idea to production</li>
-            <li>Transparent pricing and project timelines</li>
-          </ul>
+      {/* CREDENTIALS / RECOGNITION */}
+      <section className="relative z-10 bg-[linear-gradient(to_bottom_right,#121926,#01628a)] px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12 max-w-3xl md:mb-16">
+            <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
+              Credentials & Recognition
+            </div>
+            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+              Built on certified, industry-recognized expertise
+            </h2>
+            <p className="mt-4 !text-base leading-relaxed !text-white/80 md:text-lg">
+              Our qualifications back up the work, so you can trust that every
+              deliverable is accurate, manufacturable, and held to a professional
+              standard.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {CREDENTIALS.map((item) => (
+              <div
+                key={item.title}
+                className="flex items-center gap-6 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm md:p-8"
+              >
+                <div className="flex size-24 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white p-2">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="h-full w-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+                <div>
+                  <h3 className="!mb-2 !text-xl !font-bold text-white">
+                    {item.title}
+                  </h3>
+                  <p className="!mb-0 !text-base !text-white/80">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Local / Toronto */}
-      <section className="border-b border-neutral-800 bg-neutral-950 px-6 py-20">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="mb-6 text-3xl font-semibold tracking-tight text-neutral-50 md:text-4xl">
-            Local presence — Toronto
-          </h2>
-          <p className="max-w-3xl text-neutral-400">
-            We are based in the Greater Toronto Area and serve clients locally
-            and across Canada. Working with a Toronto-based team means
-            time-zone alignment, easy collaboration, and a partner who
-            understands the North American market.
-          </p>
+      {/* WHAT WE DO */}
+      <section className="bg-white py-16 md:py-24 lg:py-28">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="mb-12 max-w-3xl md:mb-16">
+            <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
+              What We Do
+            </div>
+            <h2 className="text-4xl font-bold leading-[1.08] tracking-tight text-neutral-950 md:text-5xl">
+              Engineering services that move products forward
+            </h2>
+            <p>
+              From the first sketch to manufacturing-ready files, we cover the
+              full range of design and engineering work under one roof.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {SERVICES.map((service) => (
+              <Link
+                key={service.href}
+                href={service.href}
+                className="group flex flex-col rounded-2xl border border-black/10 bg-stone-50 p-6 transition-colors hover:border-[#ff6726]/40 hover:bg-[#ff6726]/5 md:p-7"
+              >
+                <h3 className="!mb-2 !text-xl !font-bold text-neutral-950">
+                  {service.label}
+                </h3>
+                <p className="!mb-6 !text-base !text-black/70">
+                  {service.description}
+                </p>
+                <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-[#ff6726]">
+                  Learn more
+                  <ArrowRight
+                    className="size-4 transition-transform group-hover:translate-x-0.5"
+                    strokeWidth={2.5}
+                    aria-hidden
+                  />
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Long term: North America + Book virtual appointment */}
-      <section className="border-b border-neutral-800 bg-amber-500/10 px-6 py-20">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="mb-4 text-3xl font-semibold tracking-tight text-neutral-50 md:text-4xl">
-            Long term: targeting North America
-          </h2>
-          <p className="mb-8 text-neutral-400">
-            We are expanding our reach across North America. Wherever you are,
-            you can work with us remotely.
+      {/* FINAL CTA */}
+      <DotPattern className="bg-black/95">
+        <div
+          id="cta"
+          className="mx-auto flex max-w-4xl flex-col items-center justify-center px-6 py-24 text-center md:py-32"
+        >
+          <div className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
+            Contact Us
+          </div>
+          <h1 className="!text-6xl !leading-none font-bold text-white">
+            Interested in working{" "}
+            <span className="italic text-[#ff6726]">together?</span>
+          </h1>
+          <p className="mt-6 max-w-2xl text-base leading-relaxed !text-white md:text-lg">
+            Share a few details about your project and we will be in touch
+            shortly. Whether you are bringing a new product to life or refining a
+            mechanical system, we are here to help you build it right.
           </p>
-          <Link
-            href="#"
-            className="inline-flex items-center rounded-lg bg-amber-500 px-8 py-4 text-base font-semibold text-neutral-950 transition hover:bg-amber-400"
-          >
-            Book virtual appointment
-          </Link>
+          <div className="mt-10 flex flex-col flex-wrap items-center justify-center gap-4 sm:flex-row">
+            <InteractiveHoverButton className="button-primary">
+              Start Your Project
+            </InteractiveHoverButton>
+            <button className="button-secondary">Book a Consultation</button>
+          </div>
+
+          <div className="mt-12 flex flex-col flex-wrap items-center justify-center gap-x-8 gap-y-3 font-mono text-xs tracking-wider text-white/50 sm:flex-row">
+            <span className="inline-flex items-center gap-2">
+              <MapPin className="size-3.5 text-[#ff6726]" strokeWidth={2} aria-hidden />
+              Mississauga, ON
+            </span>
+            <a
+              href="mailto:admin@formasharp.com"
+              className="inline-flex items-center gap-2 transition-colors hover:text-white"
+            >
+              <Mail className="size-3.5 text-[#ff6726]" strokeWidth={2} aria-hidden />
+              admin@formasharp.com
+            </a>
+            <a
+              href="tel:+14164719300"
+              className="inline-flex items-center gap-2 transition-colors hover:text-white"
+            >
+              <Phone className="size-3.5 text-[#ff6726]" strokeWidth={2} aria-hidden />
+              (416) 471-9300
+            </a>
+          </div>
         </div>
-      </section>
-    </Layout>
+      </DotPattern>
+    </div>
   );
 }
 
-export const getStaticProps: GetStaticProps<AboutPageProps> = async () => {
-  const data = await wpFetch<{ page: AboutPageProps["page"] }>(
-    GET_PAGE_BY_URI,
-    {
-      uri: "/about/",
-    },
+function useCountUp(target: number, isInView: boolean, duration = 1400) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let frame = 0;
+    const start = performance.now();
+
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      setCount(Math.round(eased * target));
+      if (progress < 1) {
+        frame = requestAnimationFrame(tick);
+      }
+    };
+
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [target, isInView, duration]);
+
+  return count;
+}
+
+function StatCell({ stat, index }: { stat: StatItem; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.4 });
+  const count = useCountUp(stat.value, isInView);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 24 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{
+        duration: 0.6,
+        delay: index * 0.08,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className={cn(
+        "relative px-6 py-10 md:px-8 md:py-12",
+        index !== STATS.length - 1 && "lg:border-r lg:border-black/10",
+        "border-b border-black/10 lg:border-b-0",
+      )}
+    >
+      <span className="absolute right-6 top-6 font-mono text-xs tracking-[0.2em] text-black/40 md:right-8">
+        / 0{index + 1}
+      </span>
+
+      <div className="flex items-start font-bold leading-none tracking-tight text-neutral-950">
+        <span className="text-6xl md:text-7xl">{count}</span>
+        {stat.suffix && (
+          <span className="text-3xl text-[#ff6726] md:text-4xl">
+            {stat.suffix}
+          </span>
+        )}
+      </div>
+
+      <p className="mt-6 max-w-[14ch] font-mono text-xs uppercase leading-relaxed tracking-[0.18em] text-black/50">
+        {stat.label}
+      </p>
+    </motion.div>
   );
-
-  const page = data.page ?? null;
-  const pageType = normalizePageType(page?.pageSettings?.pageType);
-
-  return {
-    props: {
-      page,
-      pageType,
-    },
-    revalidate: 60,
-  };
-};
+}
