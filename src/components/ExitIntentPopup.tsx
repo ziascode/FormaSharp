@@ -1,12 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Mail, Phone, User, X } from "lucide-react";
+import { Check, Mail, Phone, User, X } from "lucide-react";
 
 const VALUE_POINTS = [
-  "We design innovative products that align with your vision and market needs",
-  "We develop your concepts using the latest technology and engineering expertise",
-  "We offer end-to-end manufacturing with quality control and delivery",
+  "Innovative product designs built around your vision and market.",
+  "Concepts engineered with the latest technology and expertise.",
+  "End-to-end manufacturing, from first concept to finished product.",
 ];
 
 const REARM_DELAY_MS = 1200;
@@ -121,13 +121,16 @@ export default function ExitIntentPopup() {
             aria-hidden
           />
 
-          <ul className="relative z-10 space-y-6">
+          <ul className="relative z-10 space-y-5">
             {VALUE_POINTS.map((point) => (
               <li
                 key={point}
-                className="text-lg font-bold leading-snug text-white md:text-xl"
+                className="flex items-start gap-3 text-lg font-bold leading-snug text-white md:text-xl"
               >
-                {point}
+                <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-white/25 ring-1 ring-white/40">
+                  <Check className="size-4 text-white" strokeWidth={3} />
+                </span>
+                <span>{point}</span>
               </li>
             ))}
           </ul>
