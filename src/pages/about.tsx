@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, type Variants } from "framer-motion";
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { DotPattern } from "@/components/ui/DotPatternProps";
@@ -21,6 +21,8 @@ const IMG = {
     "https://images.squarespace-cdn.com/content/v1/68336a436acf0028ccedc8c9/e424ec9e-0848-4df9-b6d4-6f9a530e7fa0/ASSOCIATE+-+MECHANICAL+DESIGN.png?format=1000w",
   peoLogo:
     "https://images.squarespace-cdn.com/content/v1/68336a436acf0028ccedc8c9/ba56deb2-f4b3-4e48-a14c-957ffa7c1208/peo-logo.png?format=1000w",
+  nxBadge:
+    "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/03/credibility-badge-for-NX-design-associate.jpeg",
 };
 
 type StatItem = {
@@ -88,7 +90,36 @@ const CREDENTIALS = [
     description:
       "Grounded in formal engineering education and mechanical systems expertise.",
   },
+  {
+    image: IMG.nxBadge,
+    title: "NX Design Associate",
+    description:
+      "Certified in Siemens NX for advanced product design and modeling workflows.",
+  },
 ];
+
+const credentialsContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const credentialItemVariants: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
 
 export default function About() {
   return (
@@ -100,7 +131,7 @@ export default function About() {
       />
 
       {/* HERO */}
-      <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-[#0a0f1e]">
+      <section className="relative flex min-h-[60vh] items-center justify-center overflow-hidden bg-[#0a0f1e]">
         {/* Blue glow, top-right */}
         <div
           className="pointer-events-none absolute inset-0"
@@ -116,13 +147,11 @@ export default function About() {
             About Us
           </div>
           <div className="flex flex-col items-center gap-5 md:flex-row md:gap-7">
-            <span className="text-5xl font-bold leading-none text-white md:text-7xl">
-              We are
-            </span>
+            
             <img
               src={LOGO_SRC}
               alt="FormaSharp"
-              className="h-14 w-auto md:h-20"
+              className="h-18 w-auto md:h-32"
               loading="eager"
             />
           </div>
@@ -194,44 +223,55 @@ export default function About() {
       {/* CREDENTIALS / RECOGNITION */}
       <section className="relative z-10 bg-[linear-gradient(to_bottom_right,#121926,#01628a)] px-6 py-24 md:py-32">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-12 max-w-3xl md:mb-16">
-            <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
-              Credentials & Recognition
-            </div>
-            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
-              Built on certified, industry-recognized expertise
-            </h2>
-            <p className="mt-4 !text-base leading-relaxed !text-white/80 md:text-lg">
-              Our qualifications back up the work, so you can trust that every
-              deliverable is accurate, manufacturable, and held to a professional
-              standard.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {CREDENTIALS.map((item) => (
-              <div
-                key={item.title}
-                className="flex items-center gap-6 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm md:p-8"
-              >
-                <div className="flex size-24 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white p-2">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="h-full w-full object-contain"
-                    loading="lazy"
-                  />
-                </div>
-                <div>
-                  <h3 className="!mb-2 !text-xl !font-bold text-white">
-                    {item.title}
-                  </h3>
-                  <p className="!mb-0 !text-base !text-white/80">
-                    {item.description}
-                  </p>
-                </div>
+          <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
+            {/* LEFT: text */}
+            <div className="max-w-xl">
+              <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
+                Credentials & Recognition
               </div>
-            ))}
+              <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+                Built on certified, industry-recognized expertise
+              </h2>
+              <p className="mt-4 !text-base leading-relaxed !text-white/80 md:text-lg">
+                Our qualifications back up the work, so you can trust that every
+                deliverable is accurate, manufacturable, and held to a
+                professional standard.
+              </p>
+            </div>
+
+            {/* RIGHT: stacked badges with appear-up on scroll */}
+            <motion.div
+              className="flex flex-col gap-6"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={credentialsContainerVariants}
+            >
+              {CREDENTIALS.map((item) => (
+                <motion.div
+                  key={item.title}
+                  variants={credentialItemVariants}
+                  className="flex items-center gap-6 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm md:p-8"
+                >
+                  <div className="flex size-24 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white p-2">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="h-full w-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="!mb-2 !text-xl !font-bold text-white">
+                      {item.title}
+                    </h3>
+                    <p className="!mb-0 !text-base !text-white/80">
+                      {item.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </section>
@@ -376,9 +416,7 @@ function StatCell({ stat, index }: { stat: StatItem; index: number }) {
         "border-b border-black/10 lg:border-b-0",
       )}
     >
-      <span className="absolute right-6 top-6 font-mono text-xs tracking-[0.2em] text-black/40 md:right-8">
-        / 0{index + 1}
-      </span>
+      
 
       <div className="flex items-start font-bold leading-none tracking-tight text-neutral-950">
         <span className="text-6xl md:text-7xl">{count}</span>

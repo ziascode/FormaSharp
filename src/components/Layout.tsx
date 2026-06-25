@@ -78,7 +78,7 @@ export default function Layout({ children }: LayoutProps) {
       <header
         className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-500 ease-out ${
           isSolidNav
-            ? "border-white/10 bg-[#121926]/85 backdrop-blur-xl shadow-[0_14px_40px_rgba(18,25,38,0.38)]"
+            ? "border-black/10 bg-white/90 backdrop-blur-xl shadow-[0_14px_40px_rgba(18,25,38,0.12)]"
             : "border-transparent bg-transparent"
         }`}
       >
@@ -106,7 +106,7 @@ export default function Layout({ children }: LayoutProps) {
             {NAV_ITEMS.map((item) => {
               const triggerClasses = `relative inline-flex items-center gap-1 transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-[#ff6726] after:transition-transform after:duration-300 hover:after:scale-x-100 ${
                 isSolidNav
-                  ? "text-white/90 hover:text-white"
+                  ? "text-neutral-700 hover:text-neutral-950"
                   : "text-white/85 hover:text-white"
               }`;
 

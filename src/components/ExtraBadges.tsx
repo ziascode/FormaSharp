@@ -75,7 +75,7 @@ export default function ExtraBadges({
           <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white">
             <img
               className="h-full w-full object-contain p-1"
-              src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/03/credibility-badge-for-NX-design-associate.jpeg"
+              src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/03/credibility-logo-for-certificate-of-authorization-designation-from-peo.jpeg"
               alt=""
             />
           </div>
@@ -91,7 +91,7 @@ export default function ExtraBadges({
           <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white">
             <img
               className="h-full w-full object-contain p-1"
-              src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/03/credibility-logo-for-certificate-of-authorization-designation-from-peo.jpeg"
+              src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/03/credibility-badge-for-NX-design-associate.jpeg"
               alt=""
             />
           </div>

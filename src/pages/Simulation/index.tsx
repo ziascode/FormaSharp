@@ -18,36 +18,36 @@ type CapabilityItem = {
 };
 
 const CAPABILITIES: CapabilityItem[] = [
-  {
-    tag: "FEA / Structural",
-    title: "Finite Element Analysis",
-    description:
-      "Find out if your part will survive real operating loads before you cut a single piece of material.",
-    bullets: [
-      "Stress & force evaluation",
-      "Deflection & deformation",
-      "Vibration & fatigue life",
-      "Factor of safety mapping",
-      "Pressure & constraints",
-    ],
-    colSpan: 2,
-    icon: Box,
-  },
-  {
-    tag: "CFD / Fluid",
-    title: "Computational Fluid Dynamics",
-    description:
-      "CFD models the movement of air and liquids through and around a product.",
-    bullets: [
-      "Cooling performance",
-      "Airflow efficiency",
-      "Pressure distribution",
-      "Fan & duct optimization",
-      "Internal fluid behavior",
-    ],
-    colSpan: 2,
-    icon: Wind,
-  },
+  // {
+  //   tag: "FEA / Structural",
+  //   title: "Finite Element Analysis",
+  //   description:
+  //     "Find out if your part will survive real operating loads before you cut a single piece of material.",
+  //   bullets: [
+  //     "Stress & force evaluation",
+  //     "Deflection & deformation",
+  //     "Vibration & fatigue life",
+  //     "Factor of safety mapping",
+  //     "Pressure & constraints",
+  //   ],
+  //   colSpan: 2,
+  //   icon: Box,
+  // },
+  // {
+  //   tag: "CFD / Fluid",
+  //   title: "Computational Fluid Dynamics",
+  //   description:
+  //     "CFD models the movement of air and liquids through and around a product.",
+  //   bullets: [
+  //     "Cooling performance",
+  //     "Aerodynamic  Optimization",
+  //     "Pressure distribution",
+  //     "Fan & duct optimization",
+  //     "Internal fluid behavior",
+  //   ],
+  //   colSpan: 2,
+  //   icon: Wind,
+  // },
   {
     tag: "Thermal",
     title: "Thermal Analysis",
@@ -74,7 +74,7 @@ const CAPABILITIES: CapabilityItem[] = [
       "Material reduction",
       "Manufacturability review",
     ],
-    colSpan: 3,
+    colSpan: 2,
     icon: Minimize2,
   },
   {
@@ -88,7 +88,7 @@ const CAPABILITIES: CapabilityItem[] = [
       "Engineering-backed evidence",
       "Prevention analysis",
     ],
-    colSpan: 3,
+    colSpan: 2,
     icon: Microscope,
   },
 ];
@@ -180,7 +180,7 @@ function Simulation() {
             Better engineering decisions start <span className="text-[#ff6726]">before</span> production.
             </h1>
             <h3 className="max-w-2xl text-lg text-white/80">
-            FormaSharp uses FEA, CFD, and thermal simulation to reveal structural, airflow, and heat issues in your design, before manufacturing locks you in. Fewer prototypes. No surprises at production.
+            Formasharp uses thermal analysis, structural optimization, and failure investigation to reveal crucial fail points in your design, before manufacturing locks you in. Fewer prototypes. No surprises at production.
             </h3>
             <div>
             <InteractiveHoverButton className="button-primary">
@@ -215,7 +215,7 @@ function Simulation() {
             to validate a design.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-black/70 md:text-lg">
-            From structural integrity to airflow optimization and failure
+            From structural integrity to aerodynamic  optimization and failure
             investigation, FormaSharp covers the full spectrum of mechanical
             engineering simulation.
           </p>
@@ -322,12 +322,10 @@ function Simulation() {
        <div className="text-black/90 flex flex-col justify-center text-center">
         <h2 className=" max-w-2xl mx-auto"> Engineering analysis<span className="text-[#ff6726]"> for early-stage design</span></h2>
         <p className=" max-w-7xl mx-auto"> Engineering decisions carry real consequences. A component that appears robust on screen
-may crack under load, overheat during operation, or experience airflow issues that reduce
-performance.
+may crack under load or overheat during operation.
 FormaSharp provides mechanical engineering and simulation services that help startups,
 manufacturers, and engineering teams evaluate designs before committing to tooling or
-production. Using Finite Element Analysis (FEA), Computational Fluid Dynamics (CFD), and
-thermal simulation, we uncover performance issues early and identify opportunities for
+production. We uncover performance issues early and identify opportunities for
 improvement.</p>
         <button className="button-tertiary mx-auto">Book a Consultation →</button>
        </div>
@@ -479,7 +477,7 @@ improvement.</p>
           <button className="button-secondary">Speak With an Engineer</button>
         </div>
         <div className="mt-10 font-mono text-xs tracking-wider text-white/40">
-          FEA · CFD · Thermal · Structural Optimization · Failure Investigation
+          Structural Optimization · Aerodynamic Optimization · Failure Investigation
         </div>
       </div>
     </DotPattern>
