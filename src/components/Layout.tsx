@@ -22,7 +22,7 @@ const SERVICE_LINKS: NavChild[] = [
   {
     href: "/Simulation",
     label: "Mechanical Engineering & Simulation",
-    description: "FEA, CFD, and thermal analysis for engineering decisions.",
+    description: "Thermal analysis for engineering decisions.",
   },
   {
     href: "/ProductDesign",
@@ -98,11 +98,11 @@ export default function Layout({ children }: LayoutProps) {
               src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/formasharp-logo.webp"
               alt="FormaSharp"
               className={`w-auto transition-all duration-500 ease-out  ${
-                isSolidNav ? "h-10 md:h-11" : "h-12 md:h-14"
+                isSolidNav ? "h-14 md:h-16" : "h-16 md:h-18"
               }`}
             />
           </Link>
-          <div className="flex items-center gap-7 md:gap-8 text-base font-medium">
+          <div className="flex items-center gap-7 md:gap-8 text-lg font-medium">
             {NAV_ITEMS.map((item) => {
               const triggerClasses = `relative inline-flex items-center gap-1 transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-[#ff6726] after:transition-transform after:duration-300 hover:after:scale-x-100 ${
                 isSolidNav
