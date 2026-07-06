@@ -170,8 +170,8 @@ function How() {
               How we can <span className="text-[#ff6726]">help you</span>
             </h2>
             <p className="!mb-8 !text-base text-neutral-600">
-              Wherever you are in your product journey — a first sketch, a
-              working concept, or a design headed for the production line — we
+              Wherever you are in your product journey, whether a first sketch,
+              a working concept, or a design headed for the production line, we
               bring the engineering, design, and prototyping expertise to move
               it forward.
             </p>
