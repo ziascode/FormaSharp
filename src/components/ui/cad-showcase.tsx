@@ -1,86 +1,55 @@
-import { useState } from "react";
-import { Plus } from "lucide-react";
-import { cn } from "@/lib/utils";
-
-interface CadFeature {
-  title: string;
-  description: string;
-}
-
-const features: CadFeature[] = [
-  {
-    title: "Technical Accuracy",
-    description:
-      "Our engineering background supports careful attention to dimensions, tolerances, and assembly relationships.",
-  },
-  {
-    title: "Organized Documentation",
-    description:
-      "Clear file structures and consistent naming conventions improve collaboration and revision control.",
-  },
-  {
-    title: "Responsive Support",
-    description:
-      "We adapt to your preferred formats, standards, and project timelines.",
-  },
-  {
-    title: "Seamless Integration",
-    description:
-      "CAD services connect naturally with our design, simulation, prototyping, and manufacturing preparation capabilities.",
-  },
-];
+import {
+  IconClock,
+  IconDimensions,
+  IconFolder,
+  IconPlugConnected,
+} from "@tabler/icons-react";
+import { ServiceHelpShowcase } from "@/components/ui/service-help-showcase";
 
 export function CadShowcase() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
   return (
-    <section className="relative w-full max-w-7xl mx-auto px-6 py-16 bg-slate-300 rounded-xl">
-      <div className="space-y-0">
-        {features.map((feature, index) => {
-          const isOpen = openIndex === index;
-          const panelId = `cad-feature-panel-${index}`;
-          return (
-            <button
-              key={feature.title}
-              type="button"
-              onClick={() => setOpenIndex(isOpen ? null : index)}
-              aria-expanded={isOpen}
-              aria-controls={panelId}
-              className="group block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff6726] rounded-md"
-            >
-              <div className="relative border-t border-border py-5">
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="text-lg font-medium tracking-tight text-foreground">
-                    {feature.title}
-                  </h3>
-                  <Plus
-                    className={cn(
-                      "h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300 ease-out",
-                      isOpen && "rotate-45"
-                    )}
-                    aria-hidden
-                  />
-                </div>
-                <div
-                  id={panelId}
-                  className={cn(
-                    "grid transition-[grid-template-rows] duration-300 ease-out",
-                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                  )}
-                >
-                  <div className="overflow-hidden">
-                    <p className="text-black/70 text-sm mt-1 leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </button>
-          );
-        })}
-
-        <div className="border-t border-border" />
-      </div>
-    </section>
+    <ServiceHelpShowcase
+      heading={
+        <>
+          CAD deliverables built for{" "}
+          <span className="text-[#ff6726]">practical use</span>
+        </>
+      }
+      paragraphs={[
+        "Well-developed CAD files should do more than look accurate. They should help your team move forward efficiently.",
+        "FormaSharp combines engineering knowledge with disciplined documentation practices to create design files that are organized, dependable, and easy to use.",
+      ]}
+      ctaLabel="Start your CAD project ↗"
+      cards={[
+        {
+          title: "Drawings your manufacturer can build from",
+          question: "Need documentation your supplier can actually use?",
+          description:
+            "Our engineering background supports careful attention to dimensions, tolerances, and assembly relationships. Every deliverable is checked against how the part will actually be made, not just how it looks on screen.",
+          icon: <IconDimensions className="size-14" stroke={1.25} />,
+        },
+        {
+          title: "Files your team can find and revise quickly",
+          question: "Tired of disorganized CAD packages and unclear revisions?",
+          description:
+            "Clear file structures and consistent naming conventions improve collaboration and revision control. You receive organized CAD packages that are easy to hand off, review, and update as the project evolves.",
+          icon: <IconFolder className="size-14" stroke={1.25} />,
+        },
+        {
+          title: "Fast turnarounds when specs change",
+          question: "Need updates without slowing the project down?",
+          description:
+            "We adapt to your preferred formats, standards, and project timelines. When requirements shift mid-project, we respond quickly so documentation stays aligned with the latest design.",
+          icon: <IconClock className="size-14" stroke={1.25} />,
+        },
+        {
+          title: "CAD that connects to prototyping and DFM",
+          question: "Want files that stay useful beyond the CAD stage?",
+          description:
+            "CAD services connect naturally with our design, simulation, prototyping, and manufacturing preparation capabilities. Your files stay useful across the full development path, from first concept through production preparation.",
+          icon: <IconPlugConnected className="size-14" stroke={1.25} />,
+        },
+      ]}
+    />
   );
 }

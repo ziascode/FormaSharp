@@ -526,28 +526,7 @@ function CADServices() {
         </div>
       </section>
 
-      {/* WHY FORMA SHARP — S7 (preamble + image + accordion) */}
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-start justify-around gap-8 py-12 md:pt-42">
-        <h2 className="font-bold text-black w-full md:w-[40%]">
-          CAD Deliverables Built for Practical Use
-        </h2>
-        <div className="w-full md:w-[60%] space-y-4">
-          <p className="text-lg text-black">
-            Well-developed CAD files should do more than look accurate. They should help your team move forward efficiently.
-          </p>
-          <p className="text-lg text-black">
-            FormaSharp combines engineering knowledge with disciplined
-            documentation practices to create design files that are organized,
-            dependable, and easy to use.
-          </p>
-        </div>
-      </div>
-
-      
-
-      <div className="max-w-7xl mx-auto py-10 pb-26 px-6 gap-4 flex flex-col items-start justify-start">
-        <CadShowcase />
-      </div>
+      <CadShowcase />
 
       {/* RELATED SERVICES — S8 (chip row)
       <section className="bg-stone-50 border-y border-black/5 py-16 md:py-20">

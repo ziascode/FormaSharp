@@ -1,7 +1,6 @@
 import React from "react";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { DotPattern } from "@/components/ui/DotPatternProps";
-import ImageMasking1 from "@/components/ui/image-masking-1";
 import { ProjectShowcase } from "@/components/ui/project-showcase";
 import ExtraBadges from "@/components/ExtraBadges";
 
@@ -92,30 +91,7 @@ assess assembly, and make informed decisions with greater certainty.</p>
 
     {/* <hr style={{ border: 'none', borderTop: '1px solid rgb(28, 27, 27)', margin: '20px 0' }} /> */}
 
-    <div className="max-w-7xl mx-auto px-6 flex flex-row items-start justify-around gap-8 py-12 -translate-y-[10vh]">
-        <h2 className="w-[40%] text-4xl font-bold text-black">FormaSharp Prototyping</h2>
-        
-        <p className="w-[60%] text-lg text-black">FormaSharp provides professional prototyping and 3D printing services that help startups, manufacturers, and engineering teams evaluate product designs in real-world conditions before committing to production. <br/> From early-stage concept models to functional prototypes, we enable you to identify design flaws, improve performance, and make informed decisions; reducing costly revisions and delays later in the development process.
-</p>
-    </div>
-
-    <div className="max-w-7xl mx-auto px-6 flex flex-row items-start justify-around gap-8">
-        <ImageMasking1  imageSrc="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/3d5-1.jpg" className="w-[90%]"/>
-        {/* <div className="w-[40%]">
-            <h2 className=" text-black">Prototyping is more than just creating a physical model; it is a structured process used to evaluate, improve, and finalize product designs.</h2>
-        </div>
-         */}
-    </div>
-
-    <div className="max-w-7xl mx-auto py-40 px-6 gap-4 flex flex-col items-start justify-start ">
-        <div className="max-w-7xl mx-auto px-6 flex flex-row items-start justify-around gap-8 py-12">
-            <h2 className=" font-bold text-black w-[40%]">What We Deliver</h2>
-            <p className="text-lg text-black w-[60%]">Our prototyping and 3D printing services are designed to help you bring your product to life. We offer a wide range of services to help you with your product development process. Whether you need a simple concept model or a functional prototype, our team ensures that each version provides meaningful insight that moves your project forward.</p>
-        </div>
-        
-        <ProjectShowcase />
-    </div>
-
+    <ProjectShowcase />
 
     <DotPattern className="bg-black/95">
       <div

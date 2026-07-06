@@ -3,7 +3,6 @@ import type { LucideIcon } from "lucide-react";
 import { Archive, Box, Boxes, FileText, Scan, Wrench } from "lucide-react";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { DotPattern } from "@/components/ui/DotPatternProps";
-import ImageMasking1 from "@/components/ui/image-masking-1";
 import { ReverseShowcase } from "@/components/ui/reverse-showcase";
 import { cn } from "@/lib/utils";
 import ExtraBadges from "@/components/ExtraBadges";
@@ -596,30 +595,7 @@ function ReverseEngineering() {
     </section>
 
 
-    {/* S7 — WHY FORMA SHARP (preamble + image + accordion, Simulation pattern) */}
-    <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-start justify-around gap-14 py-12 md:pt-32">
-        <h2 className="font-bold text-black w-full md:w-[40%]">
-          Reverse Engineering with <span className="text-[#ff6726]"> Precision</span>
-        </h2>
-        <div className="w-full md:w-[60%] space-y-4">
-          <p className="text-lg text-black">
-            Accurate reconstruction requires more than measuring dimensions. It also requires understanding how the part functions and how it interfaces with surrounding components.
-          </p>
-          <p className="text-lg text-black">
-            FormaSharp combines measurement, CAD development, and mechanical engineering to deliver design files that are practical and dependable.
-          </p>
-        </div>
-    </div>
-
-
-    <div className="max-w-7xl mx-auto px-6 flex flex-row items-start justify-around gap-8">
-        <ImageMasking1 imageSrc="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/4eng-scaled.jpg" className="w-[90%]"/>
-    </div>
-
-    <div className="max-w-7xl mx-auto py-40 px-6 gap-4 flex flex-col items-start justify-start ">
-        <ReverseShowcase />
-    </div>
-
+    <ReverseShowcase />
 
     {/* S8 — RELATED SERVICES (chip row) */}
     <section className="bg-stone-50 border-y border-black/5 py-16 md:py-20">

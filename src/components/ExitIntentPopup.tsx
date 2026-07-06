@@ -1,13 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Check, Mail, Phone, User, X } from "lucide-react";
-
-const VALUE_POINTS = [
-  "Innovative product designs built around your vision and market.",
-  "Concepts engineered with the latest technology and expertise.",
-  "End-to-end manufacturing, from first concept to finished product.",
-];
+import { Mail, Phone, User, X } from "lucide-react";
 
 const EXIT_INTENT_STORAGE_KEY = "formasharp-exit-intent-shown";
 export const OPEN_CONTACT_POPUP_EVENT = "formasharp:open-contact-popup";
@@ -133,62 +127,17 @@ export default function ExitIntentPopup() {
       />
 
       {/* Card */}
-      <div className="relative z-10 grid w-full max-w-4xl grid-cols-1 overflow-hidden rounded-2xl bg-white shadow-2xl md:grid-cols-2">
+      <div className="relative z-10 w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl">
         {/* Close button */}
         <button
           type="button"
           onClick={close}
           aria-label="Close"
-          className="absolute right-4 top-4 z-20 flex size-9 items-center justify-center rounded-full bg-black/5 text-black/60 transition-colors hover:bg-black/10 hover:text-black md:bg-white/15 md:text-white md:hover:bg-white/25 md:hover:text-white"
+          className="absolute right-4 top-4 z-20 flex size-9 items-center justify-center rounded-full bg-black/5 text-black/60 transition-colors hover:bg-black/10 hover:text-black"
         >
           <X className="size-5" strokeWidth={2.5} />
         </button>
 
-        {/* Left panel */}
-        <div className="relative flex flex-col justify-between overflow-hidden bg-[#ff6726] p-8 md:p-10">
-          {/* Faint dot texture */}
-          <div
-            className="pointer-events-none absolute inset-0 opacity-20"
-            style={{
-              backgroundImage:
-                "radial-gradient(rgba(255,255,255,0.6) 1.5px, transparent 1.5px)",
-              backgroundSize: "22px 22px",
-            }}
-            aria-hidden
-          />
-
-          <ul className="relative z-10 space-y-5">
-            {VALUE_POINTS.map((point) => (
-              <li
-                key={point}
-                className="flex items-start gap-3 text-lg font-bold leading-snug text-white md:text-xl"
-              >
-                <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-white/25 ring-1 ring-white/40">
-                  <Check className="size-4 text-white" strokeWidth={3} />
-                </span>
-                <span>{point}</span>
-              </li>
-            ))}
-          </ul>
-
-          {/* Illustration cluster */}
-          <div
-            className="relative z-10 mt-10 flex items-end gap-6"
-            aria-hidden
-          >
-            <Mail className="absolute -top-2 left-28 size-6 text-white/80" strokeWidth={2} />
-            <div className="flex size-20 items-center justify-center rounded-2xl bg-white shadow-lg">
-              <Phone className="size-9 text-[#1d4ed8]" strokeWidth={2} fill="#1d4ed8" />
-            </div>
-            <div className="relative ml-4 flex flex-col items-center">
-              <span className="size-9 rounded-full bg-[#101828]" />
-              <span className="-mt-1 h-9 w-14 rounded-t-3xl bg-[#2563eb]" />
-              <span className="absolute right-[-10px] top-2 h-3 w-7 rotate-45 rounded-full bg-[#2563eb]" />
-            </div>
-          </div>
-        </div>
-
-        {/* Right panel */}
         <div className="flex flex-col justify-center p-8 md:p-10">
           {isSubmitted ? (
             <div className="py-8 text-center">

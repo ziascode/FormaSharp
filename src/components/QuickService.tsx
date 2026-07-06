@@ -110,7 +110,7 @@ const SERVICES: Service[] = [
     title: "INDUSTRIAL DESIGN",
     description:
       "Product form, usability, and visual appeal balanced with manufacturability.",
-    href: "/ProductDesign",
+    href: "/IndustrialDesign",
     icon: ICONS.industrialDesign,
   },
   {

@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import ExitIntentPopup, { openContactPopup } from "@/components/ExitIntentPopup";
+import Footer from "@/components/Footer";
 
 type LayoutProps = {
   children: ReactNode;
@@ -28,6 +29,11 @@ const SERVICE_LINKS: NavChild[] = [
     href: "/ProductDesign",
     label: "Product Design",
     description: "Concept to production-ready engineered products.",
+  },
+  {
+    href: "/IndustrialDesign",
+    label: "Industrial Design",
+    description: "User-centered form, ergonomics, and visual product development.",
   },
   {
     href: "/DesignForManufacturing",
@@ -57,6 +63,11 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
+
+const LOGO_TRANSPARENT =
+  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/formasharp-logo-dark.png";
+const LOGO_SOLID =
+  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/formasharp-logo.webp";
 
 export default function Layout({ children }: LayoutProps) {
   const [isSolidNav, setIsSolidNav] = useState(false);
@@ -93,7 +104,7 @@ export default function Layout({ children }: LayoutProps) {
             }`}
           >
             <img
-              src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/formasharp-logo.webp"
+              src={isSolidNav ? LOGO_SOLID : LOGO_TRANSPARENT}
               alt="FormaSharp"
               className={`w-auto transition-all duration-500 ease-out  ${
                 isSolidNav ? "h-14 md:h-16" : "h-16 md:h-18"
@@ -199,11 +210,7 @@ export default function Layout({ children }: LayoutProps) {
         </nav>
       </header>
       <main className="flex-1">{children}</main>
-      <footer className="border-t border-neutral-800 py-8 text-sm text-neutral-400">
-        <div className="mx-auto max-w-6xl px-6">
-          Footer content coming soon.
-        </div>
-      </footer>
+      <Footer />
       <ExitIntentPopup />
     </div>
   );

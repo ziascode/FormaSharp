@@ -3,7 +3,6 @@ import type { LucideIcon } from "lucide-react";
 import { Box, Microscope, Minimize2, Thermometer, Wind } from "lucide-react";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { DotPattern } from "@/components/ui/DotPatternProps";
-import ImageMasking1 from "@/components/ui/image-masking-1";
 import { SimulationShowcase } from "@/components/ui/simulation-showcase";
 import { cn } from "@/lib/utils";
 import ExtraBadges from "@/components/ExtraBadges";
@@ -433,26 +432,7 @@ improvement.</p>
     {/* <hr style={{ border: 'none', borderTop: '1px solid rgb(28, 27, 27)', margin: '20px 0' }} /> */}
 
     
-    <div className="max-w-7xl mx-auto px-6 flex flex-row items-start justify-around gap-8  py-12 md:pt-32">
-            <h2 className=" font-bold text-black w-[40%]">Simulation That Supports Engineering Decisions</h2>
-            <p className="text-lg text-black w-[60%]">Engineering analysis is most valuable when results are interpreted in the context of design intent and project goals. FormaSharp combines simulation expertise with product development experience to deliver findings that are technically rigorous and directly actionable. Whether you need to verify structural strength, improve cooling, or investigate a design concern,
-            FormaSharp can provide the analysis needed to support better decisions.</p>
-        </div>
-    
-
-    <div className="max-w-7xl mx-auto px-6 flex flex-row items-start justify-around gap-8">
-        <ImageMasking1  imageSrc="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/4eng-scaled.jpg" className="w-[90%]"/>
-        {/* <div className="w-[40%]">
-            <h2 className=" text-black">Prototyping is more than just creating a physical model; it is a structured process used to evaluate, improve, and finalize product designs.</h2>
-        </div>
-         */}
-    </div>
-
-    <div className="max-w-7xl mx-auto py-40 px-6 gap-4 flex flex-col items-start justify-start ">
-       
-        
-        <SimulationShowcase />
-    </div>
+    <SimulationShowcase />
 
     {/* Final CTA */}
     <DotPattern className="bg-black/95">
