@@ -73,7 +73,7 @@ export default function Hero() {
 
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link href="/contact" className="button-primary inline-block text-center">
-                Request a quote
+                Request quote
               </Link>
               <a
                 href="#services"
