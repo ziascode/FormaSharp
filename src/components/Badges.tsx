@@ -5,7 +5,7 @@ import ImageMasking1 from "@/components/ui/image-masking-1";
 
 function Badges() {
   return (
-    <div className='bg-white'>
+    <div className='bg-white -mb-[30vh]'>
     <div className="bottom-section mx-auto max-w-7xl px-4 py-10">
 
               {/* Top section */}
@@ -15,7 +15,7 @@ function Badges() {
                 <div className='w-1/2 -translate-y-[200px]'>
                     <TextReveal className='color-black!important'>We are an engineering partner focused on developing products that can actually be built.</TextReveal>
                     {/* <TextReveal className='color-black!important'>Every project is approached with a focus on performance, manufacturability, and long-term reliability.</TextReveal> */}
-                    <ImageMasking1 imageSrc="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/cad-design.jpg" alt="Hero Animation" />
+                    <ImageMasking1 imageSrc="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/3dproduct-opt.jpg" alt="3D printed product" />
                 
                 </div>
                 

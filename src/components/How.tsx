@@ -1,107 +1,195 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Lightbulb } from 'lucide-react';
+"use client";
+
+import React, { type ReactNode } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+
+type HelpCardData = {
+  title: string;
+  question: string;
+  description: string;
+  image: string;
+  href: string;
+  icon: ReactNode;
+};
+
+const svgProps = {
+  xmlns: "http://www.w3.org/2000/svg",
+  width: 56,
+  height: 56,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "#ff6726",
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+};
+
+const CARDS: HelpCardData[] = [
+  {
+    title: "Early-stage product development",
+    question: "Starting with an idea or early concept?",
+    description:
+      "We help transform initial ideas into structured product concepts by defining functionality, evaluating feasibility, and identifying the most effective design approach.",
+    image:
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/cad-early-stage-design.jpg",
+    href: "/contact",
+    icon: (
+      <svg {...svgProps} strokeWidth={0.7}>
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M10 14l11 -11" />
+        <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
+      </svg>
+    ),
+  },
+  {
+    title: "Startup & Innovators",
+    question: "Need to turn your concept into a real design?",
+    description:
+      "Our team develops detailed CAD models, mechanical systems, and engineering solutions that bring your product to life while ensuring it performs as intended.",
+    image:
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/startup2-1.jpg",
+    href: "/contact",
+    icon: (
+      <svg {...svgProps} strokeWidth={0.8}>
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M3 12h6" />
+        <path d="M21 12h-6" />
+        <path d="M12 3v6" />
+        <path d="M12 15v6" />
+        <path d="M5.636 5.636l4.243 4.243" />
+        <path d="M18.364 18.364l-4.243 -4.243" />
+        <path d="M18.364 5.636l-4.243 4.243" />
+        <path d="M9.879 14.121l-4.243 4.243" />
+      </svg>
+    ),
+  },
+  {
+    title: "Manufacturers",
+    question: "Preparing your product for real-world production?",
+    description:
+      "We optimize designs for manufacturing, ensuring efficiency, cost control, and smooth production with complete technical documentation.",
+    image:
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/dfm2.jpg",
+    href: "/contact",
+    icon: (
+      <svg {...svgProps} strokeWidth={0.6}>
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M19.875 6.27c.7 .398 1.13 1.143 1.125 1.948v7.284c0 .809 -.443 1.555 -1.158 1.948l-6.75 4.27a2.27 2.27 0 0 1 -2.184 0l-6.75 -4.27a2.23 2.23 0 0 1 -1.158 -1.948v-7.285c0 -.809 .443 -1.554 1.158 -1.947l6.75 -3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98l-.033 0" />
+        <path d="M15.5 9.422c.312 .18 .503 .515 .5 .876v3.277c0 .364 -.197 .7 -.515 .877l-3 1.922a1 1 0 0 1 -.97 0l-3 -1.922a1 1 0 0 1 -.515 -.876v-3.278c0 -.364 .197 -.7 .514 -.877l3 -1.79c.311 -.174 .69 -.174 1 0l3 1.79h-.014l0 .001" />
+      </svg>
+    ),
+  },
+  {
+    title: "E-commerce",
+    question: "Do you need to test your product before full scale production?",
+    description:
+      "We create functional prototypes and 3D models to validate designs, refine functionality, and ensure products meet your expectations before moving to mass production.",
+    image:
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/ecommerce-engi.jpg",
+    href: "/contact",
+    icon: (
+      <svg {...svgProps} strokeWidth={0.5}>
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M21 8.007v7.986a2 2 0 0 1 -1.006 1.735l-7 4.007a2 2 0 0 1 -1.988 0l-7 -4.007a2 2 0 0 1 -1.006 -1.735v-7.986a2 2 0 0 1 1.006 -1.735l7 -4.007a2 2 0 0 1 1.988 0l7 4.007a2 2 0 0 1 1.006 1.735" />
+        <path d="M3.29 6.97l4.21 2.03" />
+        <path d="M20.71 6.97l-4.21 2.03" />
+        <path d="M20.7 17h-17.4" />
+        <path d="M11.76 2.03l-4.26 6.97l-4.3 7.84" />
+        <path d="M12.24 2.03q 2.797 4.44 4.26 6.97t 4.3 7.84" />
+        <path d="M12 17l-4.5 -8h9l-4.5 8" />
+        <path d="M12 17v5" />
+      </svg>
+    ),
+  },
+];
+
+function HelpCard({ card, index }: { card: HelpCardData; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{
+        duration: 0.7,
+        delay: (index % 2) * 0.08,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+    >
+      <Link
+        href={card.href}
+        className="group relative block min-h-[340px] overflow-hidden rounded-3xl"
+      >
+        {/* Background image with zoom on hover */}
+        <img
+          src={card.image}
+          alt=""
+          className="absolute inset-0 size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-110"
+        />
+
+        {/* Navy scrim for legibility */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#121926]/90 via-[#121926]/65 to-[#121926]/25" />
+
+        {/* Content */}
+        <div className="relative z-10 flex min-h-[340px] flex-col justify-center gap-3 px-8 py-14 lg:px-14">
+          <div>{card.icon}</div>
+
+          <h3
+            className="!mb-0 max-w-xl !text-2xl font-semibold !text-white md:!text-3xl"
+            style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
+          >
+            {card.title}
+          </h3>
+
+          <p className="!mb-0 max-w-xl !text-base !text-white/85">
+            <span className="font-semibold !text-white">{card.question}</span>
+            <br />
+            {card.description}
+          </p>
+        </div>
+
+        {/* CTA revealed on hover */}
+        <span className="absolute bottom-6 right-6 z-10 inline-flex translate-y-3 items-center gap-2 rounded-full bg-[#ff6726] px-6 py-3 text-sm font-semibold text-[#202020] opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100">
+          Start your project ↗
+        </span>
+      </Link>
+    </motion.div>
+  );
+}
 
 function How() {
   return (
-    <div className='relative -translate-y-[50vh] flex flex-col mb-[-30vh]'>
-        <motion.h2
-          className='relative z-0 text-center text-4xl font-bold text-black py-16'
-          initial={{ y: 102, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true, amount: 0.45 }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-        >
-          How we can help you
-        </motion.h2>
-        <div className='relative z-10 flex flex-col h-full'>
+    <div className="relative z-10 mb-0 mt-0">
+      <section className="bg-[#FAFAFA] pb-16 pt-24 md:pb-24 md:pt-36">
+        <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 sm:px-6 lg:flex-row lg:gap-16">
+          {/* LEFT — sticky heading + description */}
+          <div className="h-fit shrink-0 lg:sticky lg:top-[calc(7rem+5vh)] lg:w-[340px]">
+            <h2
+              className="!mb-6 !text-4xl font-bold !leading-[1.1] text-neutral-900 md:!text-5xl"
+              style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
+            >
+              How we can <span className="text-[#ff6726]">help you</span>
+            </h2>
+            <p className="!mb-8 !text-base text-neutral-600">
+              Wherever you are in your product journey — a first sketch, a
+              working concept, or a design headed for the production line — we
+              bring the engineering, design, and prototyping expertise to move
+              it forward.
+            </p>
+            <Link href="/contact" className="button-primary inline-block">
+              Start your project ↗
+            </Link>
+          </div>
 
-                {/* card 1 */}
-                <div className='relative z-10 -mt-14 w-full border-0 border-gray-300 bg-primary hover:bg-slate-500/10 flex flex-row items-center justify-center'>
-                    <div className='w-1/2 py-6 pb-20 pl-24 pr-22 '>
-                        <div className='pb-12'>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#ff6726" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-send"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M10 14l11 -11" /><path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" /></svg>
-                        </div>
-                        <div className='flex flex-col'>
-                                <h2 className='!font-thin'>Early-stage product development</h2>
-                                <p className='!text-lg'><span className='!font-semibold'>Starting with an idea or early concept?</span><br/>We help transform initial ideas into structured product concepts by defining functionality, evaluating feasibility, and identifying the most effective design approach.</p>
-                                <button className='button-primary !w-[20vw]'>Start your project ↗</button>
-                        </div>
-
-                    </div>
-                    <div className='w-1/2 h-[80vh] bg-[url("https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/cad-early-stage-design.jpg")] bg-cover bg-center py-0'>
-                    </div>
-                    
-                </div>
-
-                {/* card 2 */}
-                <div className='w-full  border-0 border-gray-300 bg-primary hover:bg-slate-500/10 flex flex-row items-center justify-center'>
-                   
-                    <div className='w-1/2 h-[80vh] bg-[url("https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/startup2-1.jpg")] bg-cover bg-center py-0'>
-                    </div>
-                    <div className='w-1/2 py-6 pb-20 pl-24 pr-22 '>
-                        <div className='pb-12'>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#ff6726" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-brand-zapier"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 12h6" /><path d="M21 12h-6" /><path d="M12 3v6" /><path d="M12 15v6" /><path d="M5.636 5.636l4.243 4.243" /><path d="M18.364 18.364l-4.243 -4.243" /><path d="M18.364 5.636l-4.243 4.243" /><path d="M9.879 14.121l-4.243 4.243" /></svg>
-                        
-                        </div>
-                        <div className='flex flex-col'>
-                                <h2 className='!font-thin'>Startup & Innovators</h2>
-                                <p className='!text-lg'><span className='!font-semibold'>Need to turn your concept into a real design?</span><br/>Our team develops detailed CAD models, mechanical systems, and engineering solutions that bring your product to life while ensuring it performs as intended.</p>
-                                <button className='button-primary !w-[20vw]'>Start your project ↗</button>
-                        </div>
-
-                    </div>
-                    
-                </div>
-
-        
-                
-                 {/* card 3 */}
-                <div className='w-full  border-0 border-gray-300 bg-primary hover:bg-slate-500/10 flex flex-row items-center justify-center'>
-                    <div className='w-1/2 py-6 pb-20 pl-24 pr-22 '>
-                        <div className='pb-12'>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#ff6726" strokeWidth="0.6" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-assembly"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M19.875 6.27c.7 .398 1.13 1.143 1.125 1.948v7.284c0 .809 -.443 1.555 -1.158 1.948l-6.75 4.27a2.27 2.27 0 0 1 -2.184 0l-6.75 -4.27a2.23 2.23 0 0 1 -1.158 -1.948v-7.285c0 -.809 .443 -1.554 1.158 -1.947l6.75 -3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98l-.033 0" /><path d="M15.5 9.422c.312 .18 .503 .515 .5 .876v3.277c0 .364 -.197 .7 -.515 .877l-3 1.922a1 1 0 0 1 -.97 0l-3 -1.922a1 1 0 0 1 -.515 -.876v-3.278c0 -.364 .197 -.7 .514 -.877l3 -1.79c.311 -.174 .69 -.174 1 0l3 1.79h-.014l0 .001" /></svg>  
-                        </div>
-                        <div className='flex flex-col'>
-                                <h2 className='!font-thin'>Manufacturers</h2>
-                                <p className='!text-lg'><span className='!font-semibold'>Preparing your product for real-world production?</span><br/>We optimize designs for manufacturing, ensuring efficiency, cost control, and smooth production with complete technical documentation.</p>
-                                <button className='button-primary !w-[20vw]'>Start your project ↗</button>
-                        </div>
-
-                    </div>
-                    <div className='w-1/2 h-[80vh] bg-[url("https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/dfm2.jpg")] bg-cover bg-center py-0'>
-                    </div>
-                    
-                </div>
-
-
-                 {/* card 4 */}
-                 <div className='w-full  border-0 border-gray-300 bg-primary hover:bg-slate-500/10 flex flex-row items-center justify-center'>
-                    <div className='w-1/2 h-[80vh] bg-[url("https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/ecommerce-engi.jpg")] bg-cover bg-center py-0'>
-                    </div>
-                    
-                    <div className='w-1/2 py-6 pb-20 pl-24 pr-22 '>
-                        <div className='pb-12'>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#ff6726" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-ikosaedr"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M21 8.007v7.986a2 2 0 0 1 -1.006 1.735l-7 4.007a2 2 0 0 1 -1.988 0l-7 -4.007a2 2 0 0 1 -1.006 -1.735v-7.986a2 2 0 0 1 1.006 -1.735l7 -4.007a2 2 0 0 1 1.988 0l7 4.007a2 2 0 0 1 1.006 1.735" /><path d="M3.29 6.97l4.21 2.03" /><path d="M20.71 6.97l-4.21 2.03" /><path d="M20.7 17h-17.4" /><path d="M11.76 2.03l-4.26 6.97l-4.3 7.84" /><path d="M12.24 2.03q 2.797 4.44 4.26 6.97t 4.3 7.84" /><path d="M12 17l-4.5 -8h9l-4.5 8" /><path d="M12 17v5" /></svg>
-                        </div>
-                        <div className='flex flex-col'>
-                                <h2 className='!font-thin'>E-commerce</h2>
-                                <p className='!text-lg'><span className='!font-semibold'>Do you need to test your product before full scale production?</span><br/>We create functional prototypes and 3D models to validate designs, refine functionality, and ensure products meet your expectations before moving to mass production.</p>
-                                <button className='button-primary !w-[20vw]'>Start your project ↗</button>
-                        </div>
-
-                    </div>
-                    
-                    
-                </div>
-          
-            
-
+          {/* RIGHT — stacked cards */}
+          <div className="flex grow flex-col gap-5">
+            {CARDS.map((card, index) => (
+              <HelpCard key={card.title} card={card} index={index} />
+            ))}
+          </div>
         </div>
-
-        
+      </section>
     </div>
-  )
+  );
 }
 
 export default How;

@@ -1,37 +1,76 @@
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
+"use client";
 
-const HERO_VIDEO_SRC =
-  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/hero-vid1.mp4";
+import Link from "next/link";
+import { useEffect, useRef } from "react";
+import { ArrowRight } from "lucide-react";
+
+const HERO_VIDEO_SRC = "/videos/decon2-scrub.mp4";
 
 export default function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const tryPlay = () => {
+      video.play().catch(() => {});
+    };
+
+    if (video.readyState >= 2) {
+      tryPlay();
+    } else {
+      video.addEventListener("loadeddata", tryPlay, { once: true });
+    }
+
+    return () => video.removeEventListener("loadeddata", tryPlay);
+  }, []);
+
   return (
-    <div className="relative isolate m-0 flex h-[100vh] flex-col items-start justify-center overflow-hidden bg-[#111]">
+    <div className="relative isolate m-0 flex h-[110vh] flex-col overflow-hidden bg-[#111]">
       <video
-        className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
+        ref={videoRef}
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
         src={HERO_VIDEO_SRC}
         autoPlay
         muted
-        loop
         playsInline
         preload="auto"
         aria-hidden
       />
-      <div className="absolute inset-0 -z-10 bg-black/35" aria-hidden />
 
-      <div className="relative z-10 max-w-5xl px-6 sm:px-6 md:px-[30vw] lg:px-[5vw]">
-        <div className="max-w-xl text-left text-white">
-          <h1 className="max-w-2xl text-4xl font-bold">
-            Engineering Ideas into Products
-          </h1>
-          <p className="mx-auto mt-4 max-w-4xl text-lg">
-            From early-stage concepts to production-ready designs, FormaSharp
-            helps startups, manufacturers, and engineering teams develop
-            products that are functional, optimized, and ready for real-world
-            manufacturing.{" "}
-          </p>
-          <InteractiveHoverButton className="button-primary mt-6">
-            Explore Services
-          </InteractiveHoverButton>
+      <div className="relative z-10 flex h-full flex-col justify-center px-6 sm:px-10 lg:px-16 xl:px-24">
+        <div className="mx-auto w-full max-w-7xl">
+          <div className="max-w-2xl text-left text-white">
+            <span className="mb-6 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-white/90">
+              Mechanical engineering & product development
+            </span>
+
+            <h1
+              className="!mb-5 max-w-xl !text-4xl !leading-[1.05] font-bold text-white sm:!text-5xl lg:!text-6xl"
+              style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
+            >
+              Engineering ideas into products.
+            </h1>
+
+            <p className="!mb-8 max-w-lg !text-base !text-white/85 sm:!text-lg">
+              Mechanical design, DFM, and 3D prototyping for startups and
+              manufacturers who need parts that work the first time on the line.
+            </p>
+
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Link href="/contact" className="button-primary inline-block text-center">
+                Request a quote
+              </Link>
+              <Link
+                href="/portfolio"
+                className="button-secondary inline-flex items-center justify-center gap-2 text-center"
+              >
+                See our work
+                <ArrowRight className="size-4" aria-hidden />
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>

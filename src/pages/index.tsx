@@ -16,7 +16,9 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import Who from "@/components/Who";
 import QuickService from "@/components/QuickService";
 import Process from "@/components/Process";
+import StatsBand from "@/components/StatsBand";
 import How from "@/components/How";
+import FinalCta from "@/components/FinalCta";
 
 type ServiceNode = {
   id: string;
@@ -96,34 +98,14 @@ export default function Home({ page, pageType, services }: HomePageProps) {
       <Hero />
       <QuickService />
       <Badges />
+      <StatsBand />
       <How />
       {/* <ServiceCards /> */}
       <Video />
       <WhyChooseUs />
-      <Process />
+      <FinalCta />
+      {/* <Process /> */}
 
-     
-
-      {/* Contact strip */}
-      <section className="border-t border-neutral-800 bg-neutral-950 px-6 py-16">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="mb-4 text-2xl font-semibold tracking-tight text-neutral-50 md:text-3xl">
-            Contact Us to Specify Your Next Project Details Right Now!
-          </h2>
-          <form action="#" className="flex flex-col gap-4">
-            <input type="text" placeholder="Name" className="w-full p-2 rounded-md border border-neutral-800 bg-neutral-950/60 text-neutral-50" />
-            <input type="email" placeholder="Email" className="w-full p-2 rounded-md border border-neutral-800 bg-neutral-950/60 text-neutral-50"   />
-            <input type="text" placeholder="Message" className="w-full p-2 rounded-md border border-neutral-800 bg-neutral-950/60 text-neutral-50" />
-            
-          </form>
-          <Link
-            href="/about"
-            className="inline-flex items-center rounded-lg border border-amber-500 bg-transparent px-6 py-3 text-sm font-semibold text-amber-500 transition hover:bg-amber-500/10"
-          >
-            Request a quote
-          </Link>
-        </div>
-      </section>
       </div>
     </>
   );

@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { motion, useInView, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { DotPattern } from "@/components/ui/DotPatternProps";
 import Seo from "@/components/Seo";
-import { cn } from "@/lib/utils";
+import StatsBand from "@/components/StatsBand";
 
 const LOGO_SRC =
   "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/formasharp-logo.webp";
@@ -24,19 +24,6 @@ const IMG = {
   nxBadge:
     "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/03/credibility-badge-for-NX-design-associate.jpeg",
 };
-
-type StatItem = {
-  value: number;
-  suffix: string;
-  label: string;
-};
-
-const STATS: StatItem[] = [
-  { value: 9, suffix: "", label: "Years of engineering experience" },
-  { value: 10, suffix: "+", label: "Manufacturing processes supported" },
-  { value: 15, suffix: "+", label: "Industries supported" },
-  { value: 24, suffix: "h", label: "Average response time" },
-];
 
 type ServiceItem = {
   href: string;
@@ -158,16 +145,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* STATS BAND */}
-      <section className="bg-white">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid grid-cols-1 border-x border-black/10 sm:grid-cols-2 lg:grid-cols-4">
-            {STATS.map((stat, index) => (
-              <StatCell key={stat.label} stat={stat} index={index} />
-            ))}
-          </div>
-        </div>
-      </section>
+      <StatsBand variant="light" />
 
       {/* ABOUT THE FOUNDER */}
       <section className="bg-[#f8f9fa] py-16 md:py-24 lg:py-28">
@@ -367,69 +345,5 @@ export default function About() {
         </div>
       </DotPattern>
     </div>
-  );
-}
-
-function useCountUp(target: number, isInView: boolean, duration = 1400) {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!isInView) return;
-
-    let frame = 0;
-    const start = performance.now();
-
-    const tick = (now: number) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-      setCount(Math.round(eased * target));
-      if (progress < 1) {
-        frame = requestAnimationFrame(tick);
-      }
-    };
-
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [target, isInView, duration]);
-
-  return count;
-}
-
-function StatCell({ stat, index }: { stat: StatItem; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.4 });
-  const count = useCountUp(stat.value, isInView);
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 24 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{
-        duration: 0.6,
-        delay: index * 0.08,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className={cn(
-        "relative px-6 py-10 md:px-8 md:py-12",
-        index !== STATS.length - 1 && "lg:border-r lg:border-black/10",
-        "border-b border-black/10 lg:border-b-0",
-      )}
-    >
-      
-
-      <div className="flex items-start font-bold leading-none tracking-tight text-neutral-950">
-        <span className="text-6xl md:text-7xl">{count}</span>
-        {stat.suffix && (
-          <span className="text-3xl text-[#ff6726] md:text-4xl">
-            {stat.suffix}
-          </span>
-        )}
-      </div>
-
-      <p className="mt-6 max-w-[14ch] font-mono text-xs uppercase leading-relaxed tracking-[0.18em] text-black/50">
-        {stat.label}
-      </p>
-    </motion.div>
   );
 }

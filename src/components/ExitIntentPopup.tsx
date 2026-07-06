@@ -9,7 +9,28 @@ const VALUE_POINTS = [
   "End-to-end manufacturing, from first concept to finished product.",
 ];
 
-const REARM_DELAY_MS = 1200;
+const EXIT_INTENT_STORAGE_KEY = "formasharp-exit-intent-shown";
+export const OPEN_CONTACT_POPUP_EVENT = "formasharp:open-contact-popup";
+
+export function openContactPopup(): void {
+  window.dispatchEvent(new CustomEvent(OPEN_CONTACT_POPUP_EVENT));
+}
+
+function hasSeenExitIntent(): boolean {
+  try {
+    return localStorage.getItem(EXIT_INTENT_STORAGE_KEY) === "true";
+  } catch {
+    return true;
+  }
+}
+
+function markExitIntentShown(): void {
+  try {
+    localStorage.setItem(EXIT_INTENT_STORAGE_KEY, "true");
+  } catch {
+    // Ignore storage failures (private browsing, etc.)
+  }
+}
 
 export default function ExitIntentPopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,27 +42,42 @@ export default function ExitIntentPopup() {
     message: "",
   });
 
-  const armedRef = useRef(true);
+  const enabledRef = useRef(true);
 
-  const open = useCallback(() => {
-    if (!armedRef.current) return;
-    armedRef.current = false;
+  const openFromExitIntent = useCallback(() => {
+    if (hasSeenExitIntent() || !enabledRef.current) return;
+    enabledRef.current = false;
+    markExitIntentShown();
+    setIsSubmitted(false);
+    setIsOpen(true);
+  }, []);
+
+  const openManually = useCallback(() => {
     setIsSubmitted(false);
     setIsOpen(true);
   }, []);
 
   const close = useCallback(() => {
     setIsOpen(false);
-    // Re-arm after a short delay so it does not immediately reopen.
-    window.setTimeout(() => {
-      armedRef.current = true;
-    }, REARM_DELAY_MS);
   }, []);
+
+  // Navbar / explicit CTA opens the popup anytime.
+  useEffect(() => {
+    const handleOpen = () => openManually();
+    window.addEventListener(OPEN_CONTACT_POPUP_EVENT, handleOpen);
+    return () =>
+      window.removeEventListener(OPEN_CONTACT_POPUP_EVENT, handleOpen);
+  }, [openManually]);
 
   // Desktop exit intent: cursor leaving through the top of the window.
   useEffect(() => {
+    if (hasSeenExitIntent()) {
+      enabledRef.current = false;
+      return;
+    }
+
     const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0) open();
+      if (e.clientY <= 0) openFromExitIntent();
     };
     document.documentElement.addEventListener("mouseleave", handleMouseLeave);
     return () =>
@@ -49,7 +85,7 @@ export default function ExitIntentPopup() {
         "mouseleave",
         handleMouseLeave,
       );
-  }, [open]);
+  }, [openFromExitIntent]);
 
   // Escape to close + lock body scroll while open.
   useEffect(() => {
