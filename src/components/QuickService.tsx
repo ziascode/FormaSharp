@@ -229,8 +229,9 @@ export default function QuickService() {
 
   return (
     <section
+      id="services"
       ref={sectionRef}
-      className="overflow-hidden bg-white py-16 md:py-24"
+      className="scroll-mt-28 overflow-hidden bg-white py-16 md:py-24"
     >
       <style>{`
         .fs-card {

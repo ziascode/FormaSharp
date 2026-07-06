@@ -26,6 +26,19 @@ export default function Hero() {
     return () => video.removeEventListener("loadeddata", tryPlay);
   }, []);
 
+  const scrollToServices = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const target = document.getElementById("services");
+    if (!target) return;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    target.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      block: "start",
+    });
+  };
+
   return (
     <div className="relative isolate m-0 flex h-[110vh] flex-col overflow-hidden bg-[#111]">
       <video
@@ -62,13 +75,14 @@ export default function Hero() {
               <Link href="/contact" className="button-primary inline-block text-center">
                 Request a quote
               </Link>
-              <Link
-                href="/portfolio"
+              <a
+                href="#services"
+                onClick={scrollToServices}
                 className="button-secondary inline-flex items-center justify-center gap-2 text-center"
               >
-                See our work
+                Explore Our Services
                 <ArrowRight className="size-4" aria-hidden />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
