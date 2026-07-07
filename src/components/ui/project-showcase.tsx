@@ -5,6 +5,7 @@ import {
   IconRulerMeasure,
 } from "@tabler/icons-react";
 import { ServiceHelpShowcase } from "@/components/ui/service-help-showcase";
+import { quotePageUrl } from "@/lib/quoteForm";
 
 export function ProjectShowcase() {
   return (
@@ -20,6 +21,7 @@ export function ProjectShowcase() {
         "From early-stage concept models to functional prototypes, we enable you to identify design flaws, improve performance, and make informed decisions, reducing costly revisions and delays later in the development process. Whether you need a simple concept model or a functional prototype, our team ensures that each version provides meaningful insight that moves your project forward.",
       ]}
       ctaLabel="Start your prototype project ↗"
+      ctaHref={quotePageUrl("prototyping")}
       cards={[
         {
           title: "Rapid 3D Printing",

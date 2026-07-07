@@ -1,7 +1,8 @@
+import Link from "next/link";
 import React from "react";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { DotPattern } from "@/components/ui/DotPatternProps";
 import { ProjectShowcase } from "@/components/ui/project-showcase";
+import { quotePageUrl } from "@/lib/quoteForm";
 import ExtraBadges from "@/components/ExtraBadges";
 
 function ThreeDPrinting() {
@@ -18,9 +19,9 @@ function ThreeDPrinting() {
             Test, Validate, and Refine Your Product Before Manufacturing
             </h3>
             <div>
-            <InteractiveHoverButton className="button-primary">
-                Book a Consultation
-            </InteractiveHoverButton>
+            <Link href={quotePageUrl("prototyping")} className="button-primary inline-block">
+                Request a Quote
+            </Link>
             </div>
         </div>
         
@@ -44,7 +45,7 @@ From simple concept models to working prototypes, we create physical parts that 
 drawings alone cannot.
 By turning digital designs into tangible models, you can confirm usability, check component fit,
 assess assembly, and make informed decisions with greater certainty.</p>
-        <button className="button-tertiary mx-auto">Book a Consultation →</button>
+        <Link href={quotePageUrl("prototyping")} className="button-tertiary mx-auto inline-block">Request a Quote →</Link>
        </div>
     </div>
 
@@ -112,12 +113,12 @@ assess assembly, and make informed decisions with greater certainty.</p>
           production runs.
         </p>
         <div className="mt-10 flex flex-col flex-wrap items-center justify-center gap-4 sm:flex-row">
-          <InteractiveHoverButton className="button-primary">
-            Book a Consultation
-          </InteractiveHoverButton>
-          <button type="button" className="button-secondary">
+          <Link href={quotePageUrl("prototyping")} className="button-primary inline-block">
+            Request a Quote
+          </Link>
+          <Link href="/contact" className="button-secondary inline-block">
             Upload a File
-          </button>
+          </Link>
         </div>
         <div className="mt-10 font-mono text-xs tracking-wider text-white/40">
           Prototyping · High-resolution prints · Engineering materials · DFM

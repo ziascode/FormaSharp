@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
@@ -10,11 +11,11 @@ import {
   PackageSearch,
   RulerDimensionLine,
 } from "lucide-react";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { DotPattern } from "@/components/ui/DotPatternProps";
 import ImageMasking1 from "@/components/ui/image-masking-1";
 import { DfmShowcase } from "@/components/ui/dfm-showcase";
 import { cn } from "@/lib/utils";
+import { quotePageUrl } from "@/lib/quoteForm";
 import ExtraBadges from "@/components/ExtraBadges";
 
 type CapabilityItem = {
@@ -246,10 +247,10 @@ function DesignForManufacturing() {
 
             </h3>
             <div className="flex flex-col items-start gap-4 sm:flex-row">
-              <InteractiveHoverButton className="button-primary">
+              <Link href={quotePageUrl("dfm")} className="button-primary inline-block">
                 Optimize Your Design for Manufacturing
-              </InteractiveHoverButton>
-              <button className="button-secondary">Discuss Your Project</button>
+              </Link>
+              <Link href="/contact" className="button-secondary inline-block">Discuss Your Project</Link>
             </div>
           </div>
         </div>
@@ -389,7 +390,7 @@ function DesignForManufacturing() {
                   </ul>
                   <div className="mt-auto pt-8">
                     <a
-                      href="#cta"
+                      href={quotePageUrl("dfm")}
                       className="group/cta inline-flex w-fit items-center gap-3 rounded-full bg-[#121926] py-2 pl-5 pr-2 text-sm font-semibold text-white shadow-sm transition-colors duration-300 hover:bg-[#ff6726]"
                     >
                       <span>Book a Free Consultation</span>
@@ -556,10 +557,10 @@ function DesignForManufacturing() {
             recommend the most effective path forward.
           </p>
           <div className="mt-10 flex flex-col flex-wrap items-center justify-center gap-4 sm:flex-row">
-            <InteractiveHoverButton className="button-primary">
+            <Link href={quotePageUrl("dfm")} className="button-primary inline-block">
               Optimize Your Design for Manufacturing
-            </InteractiveHoverButton>
-            <button className="button-secondary">Book a Free Consultation</button>
+            </Link>
+            <Link href="/contact" className="button-secondary inline-block">Book a Free Consultation</Link>
           </div>
           <div className="mt-10 font-mono text-xs tracking-wider text-white/40">
             Tolerance · Part Count · Materials · Assembly · Supplier Feedback

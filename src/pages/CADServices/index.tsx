@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
@@ -10,11 +11,11 @@ import {
   ListChecks,
   Ruler,
 } from "lucide-react";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { DotPattern } from "@/components/ui/DotPatternProps";
 import ImageMasking1 from "@/components/ui/image-masking-1";
 import { CadShowcase } from "@/components/ui/cad-showcase";
 import { cn } from "@/lib/utils";
+import { quotePageUrl } from "@/lib/quoteForm";
 import ExtraBadges from "@/components/ExtraBadges";
 
 type CapabilityItem = {
@@ -232,12 +233,12 @@ function CADServices() {
               essential.
             </h3>
             <div className="flex flex-col sm:flex-row gap-4 items-start">
-              <InteractiveHoverButton className="button-primary">
+              <Link href={quotePageUrl("cad")} className="button-primary inline-block">
                 Start Your CAD Project
-              </InteractiveHoverButton>
-              <button className="button-secondary">
+              </Link>
+              <Link href="/contact" className="button-secondary inline-block">
                 Request a Consultation
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -394,7 +395,7 @@ function CADServices() {
                   </ul>
                   <div className="mt-auto pt-8">
                     <a
-                      href="#cta"
+                      href={quotePageUrl("cad")}
                       className="group/cta inline-flex w-fit items-center gap-3 rounded-full bg-[#121926] py-2 pl-5 pr-2 text-sm font-semibold text-white shadow-sm transition-colors duration-300 hover:bg-[#ff6726]"
                     >
                       <span>Discuss this capability</span>
@@ -577,10 +578,10 @@ function CADServices() {
             determine the most efficient way to support your project.
           </p>
           <div className="mt-10 flex flex-col flex-wrap items-center justify-center gap-4 sm:flex-row">
-            <InteractiveHoverButton className="button-primary">
+            <Link href={quotePageUrl("cad")} className="button-primary inline-block">
               Start Your CAD Project
-            </InteractiveHoverButton>
-            <button className="button-secondary">Request a Consultation</button>
+            </Link>
+            <Link href="/contact" className="button-secondary inline-block">Request a Consultation</Link>
           </div>
           <div className="mt-10 font-mono text-xs tracking-wider text-white/40">
             3D Modeling · Assemblies · Drawings · BOMs · Revisions · Renderings

@@ -5,6 +5,7 @@ import {
   IconUsers,
 } from "@tabler/icons-react";
 import { ServiceHelpShowcase } from "@/components/ui/service-help-showcase";
+import { quotePageUrl } from "@/lib/quoteForm";
 
 export function SimulationShowcase() {
   return (
@@ -20,6 +21,7 @@ export function SimulationShowcase() {
         "Whether you need to verify structural strength, improve cooling, or investigate a design concern, FormaSharp can provide the analysis needed to support better decisions.",
       ]}
       ctaLabel="Start your analysis project ↗"
+      ctaHref={quotePageUrl("simulation")}
       cards={[
         {
           title: "Decision-Focused Reporting",

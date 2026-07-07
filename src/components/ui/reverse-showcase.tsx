@@ -5,6 +5,7 @@ import {
   IconTopologyRing,
 } from "@tabler/icons-react";
 import { ServiceHelpShowcase } from "@/components/ui/service-help-showcase";
+import { quotePageUrl } from "@/lib/quoteForm";
 
 export function ReverseShowcase() {
   return (
@@ -20,6 +21,7 @@ export function ReverseShowcase() {
         "FormaSharp combines measurement, CAD development, and mechanical engineering to deliver design files that are practical and dependable.",
       ]}
       ctaLabel="Start your reverse engineering project ↗"
+      ctaHref={quotePageUrl("reverse-engineering")}
       cards={[
         {
           title: "Editable CAD Models",

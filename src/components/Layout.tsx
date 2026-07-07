@@ -195,6 +195,16 @@ export default function Layout({ children }: LayoutProps) {
                 </div>
               );
             })}
+            <Link
+              href="/request-a-quote"
+              className={`relative inline-flex items-center gap-1 transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-[#ff6726] after:transition-transform after:duration-300 hover:after:scale-x-100 ${
+                isSolidNav
+                  ? "text-neutral-700 hover:text-neutral-950"
+                  : "text-white/85 hover:text-white"
+              }`}
+            >
+              Request a Quote
+            </Link>
             <button
               type="button"
               onClick={openContactPopup}

@@ -298,3 +298,124 @@ p {
   width: 100%;
   height: 100%;
 }
+
+@keyframes forma-radial-drift-1 {
+  0% {
+    transform: translate(-20%, -15%) scale(1);
+  }
+  33% {
+    transform: translate(55%, 10%) scale(1.08);
+  }
+  66% {
+    transform: translate(15%, 65%) scale(0.95);
+  }
+  100% {
+    transform: translate(-20%, -15%) scale(1);
+  }
+}
+
+@keyframes forma-radial-drift-2 {
+  0% {
+    transform: translate(70%, 60%) scale(1.05);
+  }
+  33% {
+    transform: translate(10%, 40%) scale(0.92);
+  }
+  66% {
+    transform: translate(45%, -10%) scale(1.1);
+  }
+  100% {
+    transform: translate(70%, 60%) scale(1.05);
+  }
+}
+
+@keyframes forma-radial-drift-3 {
+  0% {
+    transform: translate(40%, 80%) scale(0.9);
+  }
+  50% {
+    transform: translate(75%, 25%) scale(1.05);
+  }
+  100% {
+    transform: translate(40%, 80%) scale(0.9);
+  }
+}
+
+.animated-forma-gradient {
+  background-color: #121926;
+  overflow: hidden;
+}
+
+.animated-forma-gradient::before,
+.animated-forma-gradient::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.animated-forma-gradient::before {
+  width: 75vmax;
+  height: 75vmax;
+  top: -10%;
+  left: -15%;
+  background: radial-gradient(
+    circle,
+    rgba(1, 98, 138, 0.95) 0%,
+    rgba(1, 98, 138, 0.45) 35%,
+    transparent 68%
+  );
+  animation: forma-radial-drift-1 22s ease-in-out infinite;
+}
+
+.animated-forma-gradient::after {
+  width: 65vmax;
+  height: 65vmax;
+  bottom: -15%;
+  right: -10%;
+  background: radial-gradient(
+    circle,
+    rgba(1, 148, 184, 0.85) 0%,
+    rgba(1, 79, 110, 0.4) 40%,
+    transparent 70%
+  );
+  animation: forma-radial-drift-2 26s ease-in-out infinite;
+}
+
+.animated-forma-gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  width: 55vmax;
+  height: 55vmax;
+  top: 35%;
+  left: 30%;
+  background: radial-gradient(
+    circle,
+    rgba(1, 79, 110, 0.75) 0%,
+    rgba(1, 98, 138, 0.35) 38%,
+    transparent 65%
+  );
+  animation: forma-radial-drift-3 30s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-forma-gradient::before,
+  .animated-forma-gradient::after,
+  .animated-forma-gradient-orb {
+    animation: none;
+  }
+
+  .animated-forma-gradient::before {
+    transform: translate(10%, 10%);
+  }
+
+  .animated-forma-gradient::after {
+    transform: translate(-10%, -10%);
+  }
+
+  .animated-forma-gradient-orb {
+    transform: translate(20%, 20%);
+  }
+}

@@ -1,10 +1,11 @@
+import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import { Archive, Box, Boxes, FileText, Scan, Wrench } from "lucide-react";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { DotPattern } from "@/components/ui/DotPatternProps";
 import { ReverseShowcase } from "@/components/ui/reverse-showcase";
 import { cn } from "@/lib/utils";
+import { quotePageUrl } from "@/lib/quoteForm";
 import ExtraBadges from "@/components/ExtraBadges";
 
 type CapabilityItem = {
@@ -327,10 +328,10 @@ function ReverseEngineering() {
             Not every component comes with a complete set of design files. When original drawings are missing, outdated, or never created, reverse engineering provides a reliable way to recover the technical data needed to reproduce and improve a part.
             </h3>
             <div className="flex flex-col sm:flex-row gap-4 items-start">
-            <InteractiveHoverButton className="button-primary">
+            <Link href={quotePageUrl("reverse-engineering")} className="button-primary inline-block">
             Start Your Reverse Engineering Project
-            </InteractiveHoverButton>
-            <button className="button-secondary">Request a Consultation</button>
+            </Link>
+            <Link href="/contact" className="button-secondary inline-block">Request a Consultation</Link>
             </div>
         </div>
       </div>
@@ -642,10 +643,10 @@ function ReverseEngineering() {
           Tell us about the component, assembly, or equipment you need to recreate, and our team will recommend the most effective approach.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <InteractiveHoverButton className="button-primary">
+          <Link href={quotePageUrl("reverse-engineering")} className="button-primary inline-block">
             Start Your Reverse Engineering Project
-          </InteractiveHoverButton>
-          <button className="button-secondary">Request a Consultation</button>
+          </Link>
+          <Link href="/contact" className="button-secondary inline-block">Request a Consultation</Link>
         </div>
         <div className="mt-10 font-mono text-xs tracking-wider text-white/40">
           Measurement · CAD Reconstruction · Drawings · Assemblies · Legacy Documentation

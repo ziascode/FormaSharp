@@ -1,10 +1,11 @@
+import Link from "next/link";
 import React, { useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import { Box, Microscope, Minimize2, Thermometer, Wind } from "lucide-react";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { DotPattern } from "@/components/ui/DotPatternProps";
 import { SimulationShowcase } from "@/components/ui/simulation-showcase";
 import { cn } from "@/lib/utils";
+import { quotePageUrl } from "@/lib/quoteForm";
 import ExtraBadges from "@/components/ExtraBadges";
 
 type CapabilityItem = {
@@ -182,9 +183,9 @@ function Simulation() {
             Formasharp uses thermal analysis, structural optimization, and failure investigation to reveal crucial fail points in your design, before manufacturing locks you in. Fewer prototypes. No surprises at production.
             </h3>
             <div>
-            <InteractiveHoverButton className="button-primary">
+            <Link href={quotePageUrl("simulation")} className="button-primary inline-block">
             Request Engineering Analysis
-            </InteractiveHoverButton>
+            </Link>
             </div>
         </div>
         
@@ -451,10 +452,10 @@ improvement.</p>
           project.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <InteractiveHoverButton className="button-primary">
+          <Link href={quotePageUrl("simulation")} className="button-primary inline-block">
             Request Engineering Analysis
-          </InteractiveHoverButton>
-          <button className="button-secondary">Speak With an Engineer</button>
+          </Link>
+          <Link href="/contact" className="button-secondary inline-block">Speak With an Engineer</Link>
         </div>
         <div className="mt-10 font-mono text-xs tracking-wider text-white/40">
           Structural Optimization · Aerodynamic Optimization · Failure Investigation

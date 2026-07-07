@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import Link from "next/link";
+import React, { useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
@@ -9,10 +9,10 @@ import {
   Palette,
   Sparkles,
 } from "lucide-react";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { DotPattern } from "@/components/ui/DotPatternProps";
 import { IndustrialDesignShowcase } from "@/components/ui/industrial-design-showcase";
 import { cn } from "@/lib/utils";
+import { quotePageUrl } from "@/lib/quoteForm";
 import ExtraBadges from "@/components/ExtraBadges";
 
 type CapabilityItem = {
@@ -246,9 +246,9 @@ function IndustrialDesign() {
               right, and performs in the real world.
             </h3>
             <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row">
-              <InteractiveHoverButton className="button-primary">
+              <Link href={quotePageUrl("industrial-design")} className="button-primary inline-block">
                 Discuss Your Product Concept
-              </InteractiveHoverButton>
+              </Link>
               <a href="#capabilities" className="button-secondary inline-block">
                 View Our Design Services
               </a>
@@ -487,7 +487,7 @@ function IndustrialDesign() {
                   </ul>
                   <div className="mt-auto pt-8">
                     <a
-                      href="#cta"
+                      href={quotePageUrl("industrial-design")}
                       className="group/cta inline-flex w-fit items-center gap-3 rounded-full bg-[#121926] py-2 pl-5 pr-2 text-sm font-semibold text-white shadow-sm transition-colors duration-300 hover:bg-[#ff6726]"
                     >
                       <span>Discuss this capability</span>
@@ -599,12 +599,12 @@ function IndustrialDesign() {
             goals, target users, or current development stage.
           </p>
           <div className="mt-10 flex flex-col flex-wrap items-center justify-center gap-4 sm:flex-row">
-            <InteractiveHoverButton className="button-primary">
+            <Link href={quotePageUrl("industrial-design")} className="button-primary inline-block">
               Start Your Design Project
-            </InteractiveHoverButton>
-            <button type="button" className="button-secondary">
+            </Link>
+            <Link href="/contact" className="button-secondary inline-block">
               Schedule a Consultation
-            </button>
+            </Link>
           </div>
           <div className="mt-10 font-mono text-xs tracking-wider text-white/40">
             Form Development · Ergonomics · Visualization · Refinement ·

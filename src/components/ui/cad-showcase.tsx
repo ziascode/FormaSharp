@@ -5,6 +5,7 @@ import {
   IconPlugConnected,
 } from "@tabler/icons-react";
 import { ServiceHelpShowcase } from "@/components/ui/service-help-showcase";
+import { quotePageUrl } from "@/lib/quoteForm";
 
 export function CadShowcase() {
   return (
@@ -20,6 +21,7 @@ export function CadShowcase() {
         "FormaSharp combines engineering knowledge with disciplined documentation practices to create design files that are organized, dependable, and easy to use.",
       ]}
       ctaLabel="Start your CAD project ↗"
+      ctaHref={quotePageUrl("cad")}
       cards={[
         {
           title: "Drawings your manufacturer can build from",

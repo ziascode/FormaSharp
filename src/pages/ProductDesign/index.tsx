@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
@@ -10,11 +11,11 @@ import {
   Lightbulb,
   Minimize2,
 } from "lucide-react";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { DotPattern } from "@/components/ui/DotPatternProps";
 import ImageMasking1 from "@/components/ui/image-masking-1";
 import { ProductDesignShowcase } from "@/components/ui/product-design-showcase";
 import { cn } from "@/lib/utils";
+import { quotePageUrl } from "@/lib/quoteForm";
 import ExtraBadges from "@/components/ExtraBadges";
 import ScrollyVideo from "scrolly-video/dist/ScrollyVideo.cjs.jsx";
 
@@ -307,10 +308,10 @@ function ProductDesign() {
             FormaSharp turns concepts into well-defined products. From early concept development to detailed CAD models and technical documentation, we create designs that are built to perform, practical to produce, and aligned with your business goals.
             </h3>
             <div className="flex flex-col sm:flex-row gap-4 items-start">
-            <InteractiveHoverButton className="button-primary">
+            <Link href={quotePageUrl("product-design")} className="button-primary inline-block">
             Start Your Product Design Project
-            </InteractiveHoverButton>
-            <button className="button-secondary">Discuss Your Concept</button>
+            </Link>
+            <Link href="/contact" className="button-secondary inline-block">Discuss Your Concept</Link>
             </div>
         </div>
         
@@ -800,10 +801,10 @@ function ProductDesign() {
           a practical and thoroughly engineered product.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <InteractiveHoverButton className="button-primary">
+          <Link href={quotePageUrl("product-design")} className="button-primary inline-block">
             Start Your Product Design Project
-          </InteractiveHoverButton>
-          <button className="button-secondary">Discuss Your Concept</button>
+          </Link>
+          <Link href="/contact" className="button-secondary inline-block">Discuss Your Concept</Link>
         </div>
         <div className="mt-10 font-mono text-xs tracking-wider text-white/40">
           Concept Development · Mechanical Systems · Material Selection · Architecture · Optimization · CAD Documentation

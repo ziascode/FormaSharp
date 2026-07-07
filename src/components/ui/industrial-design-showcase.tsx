@@ -5,6 +5,7 @@ import {
   IconSparkles,
 } from "@tabler/icons-react";
 import { ServiceHelpShowcase } from "@/components/ui/service-help-showcase";
+import { quotePageUrl } from "@/lib/quoteForm";
 
 export function IndustrialDesignShowcase() {
   return (
@@ -20,6 +21,7 @@ export function IndustrialDesignShowcase() {
         "This integrated perspective helps reduce conflicts between aesthetics and technical requirements later in the project.",
       ]}
       ctaLabel="Start your design project ↗"
+      ctaHref={quotePageUrl("industrial-design")}
       cards={[
         {
           title: "Balanced design thinking",
