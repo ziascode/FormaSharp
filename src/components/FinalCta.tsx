@@ -1,21 +1,22 @@
 import Link from "next/link";
 import { DotPattern } from "@/components/ui/DotPatternProps";
+import { section } from "@/lib/sectionSpacing";
 
 function FinalCta() {
   return (
     <DotPattern className="bg-black/95">
       <div
         id="cta"
-        className="mx-auto flex max-w-4xl flex-col items-center justify-center px-6 py-24 text-center md:py-32"
+        className={`${section.container} flex max-w-4xl flex-col items-center justify-center py-24 text-center md:py-32`}
       >
-        <div className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
+        <div className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726] md:mb-6">
           Get Started
         </div>
-        <h1 className="!text-6xl !leading-none font-bold text-white">
+        <h1 className="!mb-6 !text-6xl !leading-none font-bold text-white md:!mb-8">
           Turn your ideas into products that can actually be{" "}
           <span className="italic text-[#ff6726]">built</span>
         </h1>
-        <p className="mt-6 max-w-2xl text-base leading-relaxed !text-white md:text-lg">
+        <p className="mb-0 max-w-2xl text-base leading-relaxed !text-white md:text-lg">
           Whether you are starting with a concept, refining a prototype, or
           preparing for production, FormaSharp can help move your project
           forward. Share a few details about your product and our team will be

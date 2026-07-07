@@ -3,6 +3,7 @@
 import React, { type ReactNode } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { section } from "@/lib/sectionSpacing";
 
 type HelpCardData = {
   title: string;
@@ -158,18 +159,18 @@ function HelpCard({ card, index }: { card: HelpCardData; index: number }) {
 
 function How() {
   return (
-    <div className="relative z-10 mb-0 mt-0">
-      <section className="bg-[#FAFAFA] pb-16 pt-24 md:pb-24 md:pt-36">
-        <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 sm:px-6 lg:flex-row lg:gap-16">
+    <div className="relative z-10">
+      <section className={`bg-[#FAFAFA] ${section.padding}`}>
+        <div className={`${section.container} flex flex-col gap-12 lg:flex-row lg:gap-16`}>
           {/* LEFT — sticky heading + description */}
           <div className="h-fit shrink-0 lg:sticky lg:top-[calc(7rem+5vh)] lg:w-[340px]">
             <h2
-              className="!mb-6 !text-4xl font-bold !leading-[1.1] text-neutral-900 md:!text-5xl"
+              className="!mb-4 !text-4xl font-bold !leading-[1.1] text-neutral-900 md:!mb-6 md:!text-5xl"
               style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
             >
               How we can <span className="text-[#ff6726]">help you</span>
             </h2>
-            <p className="!mb-8 !text-base text-neutral-600">
+            <p className={`${section.intro} !text-base text-neutral-600`}>
               Wherever you are in your product journey, whether a first sketch,
               a working concept, or a design headed for the production line, we
               bring the engineering, design, and prototyping expertise to move

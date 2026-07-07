@@ -2,11 +2,12 @@ import React from 'react';
 import ScrollyVideo from 'scrolly-video/dist/ScrollyVideo.cjs.jsx';
 import { TextReveal } from "@/components/ui/text-reveal";
 import ImageMasking1 from "@/components/ui/image-masking-1";
+import { section } from "@/lib/sectionSpacing";
 
 function Badges() {
   return (
-    <div className='bg-white -mb-[30vh]'>
-    <div className="bottom-section mx-auto max-w-7xl px-4 py-10">
+    <div className='bg-white -mb-[20vh]'>
+    <div className={`bottom-section ${section.container} py-16 md:py-20`}>
 
               {/* Top section */}
             <div className='flex flex-row items-center justify-center bg-cover bg-center py-24'>

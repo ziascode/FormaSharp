@@ -208,6 +208,8 @@ function ServiceRow({
   );
 }
 
+import { section } from "@/lib/sectionSpacing";
+
 export default function QuickService() {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -231,7 +233,7 @@ export default function QuickService() {
     <section
       id="services"
       ref={sectionRef}
-      className="scroll-mt-28 overflow-hidden bg-white py-16 md:py-24"
+      className={`scroll-mt-28 overflow-hidden bg-white ${section.padding}`}
     >
       <style>{`
         .fs-card {
@@ -297,9 +299,9 @@ export default function QuickService() {
         }
       `}</style>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <div className={section.container}>
         <h2
-          className="mb-10 !text-4xl font-bold !leading-[1.1] text-neutral-900 md:mb-14 md:!text-5xl"
+          className={`${section.heading} !text-4xl font-bold !leading-[1.1] text-neutral-900 md:!text-5xl`}
           style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
         >
           Our Services
