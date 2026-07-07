@@ -163,7 +163,7 @@ const PROCESS_STEPS: ProcessStep[] = [
     description:
       "Once a direction is selected, the design is refined into a more detailed and structured product concept. Proportions, ergonomics, surfaces, and component relationships are adjusted to improve both usability and visual quality.",
     detail:
-      "This stage often involves close collaboration between industrial design and engineering development.",
+      "This stage involves close collaboration between industrial design and engineering development.",
   },
   {
     title: "Visualization & Feedback",

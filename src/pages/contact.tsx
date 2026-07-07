@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import Script from "next/script";
 import {
   ArrowRight,
@@ -77,9 +78,8 @@ export default function Contact() {
         canonical="/contact/"
       />
 
-      {/* HERO */}
-      <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-[#0a0f1e]">
-        {/* Blue glow, top-right */}
+      {/* BOOK + CALENDLY */}
+      <section className="relative min-h-screen overflow-hidden bg-[#0a0f1e] pt-[18vh] pb-10 lg:pb-14">
         <div
           className="pointer-events-none absolute inset-0"
           style={{
@@ -88,28 +88,38 @@ export default function Contact() {
           }}
           aria-hidden
         />
-        <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-6 py-24 text-center">
-          <div className="mb-6 font-mono text-xs font-semibold uppercase tracking-[0.25em] text-blue-400/80">
-            // FormaSharp &middot; Strategy Call
-          </div>
-          <h1 className="!mb-6 !text-5xl !leading-[1.05] font-bold text-white md:!text-6xl">
-            Book your{" "}
-            <span className="text-[#ff6726]">free strategy call</span> today
-          </h1>
-          <p className="max-w-2xl text-lg !text-white/70">
-            Walk away with clarity, priorities, and practical next steps.
-          </p>
-        </div>
-      </section>
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-12 xl:gap-16">
+            <div className="text-left pt-6 lg:pt-14">
+              <h1 className="!mb-6 max-w-xl !text-4xl !leading-[1.05] font-bold text-white md:!text-5xl lg:!text-[3.25rem]">
+                Book your{" "}
+                <span className="text-[#ff6726]">free strategy call</span> today
+              </h1>
+              <p className="max-w-md text-lg !text-white/75">
+                Walk away with clarity, priorities, and practical next steps.
+              </p>
+              <p className="mt-6 max-w-md text-sm !text-white/55">
+                Pick a time that works for you. No obligation, just a focused
+                conversation about your project.
+              </p>
+              <Link
+                href="/request-a-quote"
+                className="mt-8 inline-flex max-w-lg items-center gap-2 border-b border-white/30 pb-0.5 text-lg font-medium !text-white transition-colors hover:border-[#ff6726] hover:!text-[#ff6726]"
+              >
+                Or request a detailed quote to start your project
+                <span aria-hidden>&rarr;</span>
+              </Link>
+            </div>
 
-      {/* CALENDLY EMBED */}
-      <section className="bg-white py-16 md:py-24 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div
-            className="calendly-inline-widget overflow-hidden rounded-2xl border border-black/10 shadow-sm"
-            data-url={CALENDLY_URL}
-            style={{ minWidth: "320px", height: "700px" }}
-          />
+            <div
+              className="calendly-inline-widget w-full overflow-hidden rounded-2xl border border-white/10 bg-white shadow-[0_12px_48px_rgba(0,0,0,0.35)]"
+              data-url={CALENDLY_URL}
+              style={{
+                minWidth: "280px",
+                height: "min(680px, calc(100svh - 11rem))",
+              }}
+            />
+          </div>
           <Script
             src="https://assets.calendly.com/assets/external/widget.js"
             strategy="lazyOnload"
@@ -205,7 +215,7 @@ export default function Contact() {
             })}
           </div>
 
-          <p className="mt-14 text-center font-mono text-sm uppercase tracking-[0.3em] text-white/40">
+          <p className="mt-14 text-center font-mono text-sm uppercase tracking-[0.3em] !text-white">
             Designs That Shape Possibility
           </p>
         </div>
