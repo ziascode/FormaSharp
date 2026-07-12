@@ -16,6 +16,7 @@ type NavChild = { href: string; label: string; description?: string };
 type NavItem = {
   href: string;
   label: string;
+  menuHeading?: string;
   children?: NavChild[];
 };
 
@@ -57,9 +58,25 @@ const SERVICE_LINKS: NavChild[] = [
   },
 ];
 
+const RESOURCE_LINKS: NavChild[] = [
+  { href: "/blog", label: "Blog" },
+  { href: "#", label: "Patent & IP" },
+];
+
 const NAV_ITEMS: NavItem[] = [
   { href: "/", label: "Home" },
-  { href: "/services", label: "Services", children: SERVICE_LINKS },
+  {
+    href: "/services",
+    label: "Services",
+    menuHeading: "Engineering Services",
+    children: SERVICE_LINKS,
+  },
+  {
+    href: "#",
+    label: "Resources",
+    menuHeading: "Resources",
+    children: RESOURCE_LINKS,
+  },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -136,10 +153,11 @@ export default function Layout({ children }: LayoutProps) {
                   key={item.href}
                   className="group/nav relative"
                 >
-                  <Link
-                    href={item.href}
+                  <button
+                    type="button"
                     aria-haspopup="menu"
-                    className={triggerClasses}
+                    aria-expanded="false"
+                    className={`${triggerClasses} cursor-pointer bg-transparent border-0 p-0 font-inherit`}
                   >
                     {item.label}
                     <ChevronDown
@@ -147,7 +165,7 @@ export default function Layout({ children }: LayoutProps) {
                       strokeWidth={2.5}
                       aria-hidden
                     />
-                  </Link>
+                  </button>
 
                   {/* Hover bridge so the dropdown doesn't close as cursor leaves the trigger */}
                   <div
@@ -161,36 +179,37 @@ export default function Layout({ children }: LayoutProps) {
                     className="invisible absolute left-1/2 top-full z-50 mt-3 w-[24rem] max-w-[calc(100vw-2rem)] -translate-x-1/2 translate-y-1 rounded-2xl border border-white/10 bg-[#121926]/95 p-2.5 opacity-0 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl transition-all duration-200 ease-out group-hover/nav:visible group-hover/nav:translate-y-0 group-hover/nav:opacity-100 group-focus-within/nav:visible group-focus-within/nav:translate-y-0 group-focus-within/nav:opacity-100"
                   >
                     <div className="px-3 pt-2 pb-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#ff6726]">
-                      Engineering Services
+                      {item.menuHeading ?? item.label}
                     </div>
                     <ul className="flex flex-col py-1">
                       {item.children.map((child) => (
-                        <li key={child.href}>
-                          <Link
-                            href={child.href}
-                            role="menuitem"
-                            className="group/item flex flex-col gap-0.5 rounded-xl px-3 py-3 transition-colors duration-200 hover:bg-white/5 focus-visible:bg-white/5 focus-visible:outline-none"
-                          >
-                            <span className="text-[0.9375rem] font-semibold leading-snug text-white">
+                        <li key={child.label}>
+                          {child.href === "#" ? (
+                            <span
+                              role="menuitem"
+                              className="flex flex-col gap-0.5 rounded-xl px-3 py-3 text-[0.9375rem] font-semibold leading-snug text-white/70"
+                            >
                               {child.label}
                             </span>
-                            {child.description ? (
-                              <span className="text-sm leading-snug text-white/55">
-                                {child.description}
+                          ) : (
+                            <Link
+                              href={child.href}
+                              role="menuitem"
+                              className="group/item flex flex-col gap-0.5 rounded-xl px-3 py-3 transition-colors duration-200 hover:bg-white/5 focus-visible:bg-white/5 focus-visible:outline-none"
+                            >
+                              <span className="text-[0.9375rem] font-semibold leading-snug text-white">
+                                {child.label}
                               </span>
-                            ) : null}
-                          </Link>
+                              {child.description ? (
+                                <span className="text-sm leading-snug text-white/55">
+                                  {child.description}
+                                </span>
+                              ) : null}
+                            </Link>
+                          )}
                         </li>
                       ))}
                     </ul>
-                    <Link
-                      href={item.href}
-                      role="menuitem"
-                      className="mt-1 flex items-center justify-between rounded-xl border-t border-white/10 px-3 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-[#ff6726] transition-colors hover:bg-white/5"
-                    >
-                      View all services
-                      <span aria-hidden>&rarr;</span>
-                    </Link>
                   </div>
                 </div>
               );

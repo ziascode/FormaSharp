@@ -419,3 +419,326 @@ p {
     transform: translate(20%, 20%);
   }
 }
+
+/* ---------------------------------------------------------------------------
+   WordPress / Gutenberg content — scoped so global h1/h2/p rules don't win
+--------------------------------------------------------------------------- */
+.blog-content {
+  max-width: none;
+  color: #2f3540;
+  font-family: "Poppins", var(--font-poppins), system-ui, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.75;
+  letter-spacing: 0;
+  word-spacing: normal;
+}
+
+.blog-content > *:first-child {
+  margin-top: 0;
+}
+
+.blog-content > *:last-child {
+  margin-bottom: 0;
+}
+
+.blog-content p {
+  margin-top: 0;
+  margin-bottom: 1.5em;
+  font-size: inherit;
+  font-weight: 400;
+  line-height: inherit;
+  font-family: inherit;
+  color: inherit;
+  word-spacing: normal;
+}
+
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4,
+.blog-content h5,
+.blog-content h6 {
+  margin-top: 1.75em;
+  margin-bottom: 0.6em;
+  color: #121926;
+  font-family: "Clash Grotesk", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  scroll-margin-top: 7rem;
+}
+
+.blog-content h1 {
+  font-size: 2.25rem;
+}
+
+.blog-content h2 {
+  font-size: 1.75rem;
+}
+
+.blog-content h3 {
+  font-size: 1.375rem;
+  font-family: "Clash Grotesk", sans-serif;
+  font-weight: 600;
+}
+
+.blog-content h4 {
+  font-size: 1.125rem;
+}
+
+.blog-content h5,
+.blog-content h6 {
+  font-size: 1rem;
+}
+
+.blog-content a {
+  color: #01628a;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.blog-content a:hover {
+  color: #ff6726;
+}
+
+.blog-content strong,
+.blog-content b {
+  font-weight: 600;
+  color: #121926;
+}
+
+.blog-content em,
+.blog-content i {
+  font-style: italic;
+}
+
+.blog-content ul,
+.blog-content ol {
+  margin-top: 0;
+  margin-bottom: 1.5em;
+  padding-left: 1.5em;
+}
+
+.blog-content ul {
+  list-style: disc;
+}
+
+.blog-content ol {
+  list-style: decimal;
+}
+
+.blog-content li {
+  margin-bottom: 0.5em;
+  line-height: 1.7;
+}
+
+.blog-content li > ul,
+.blog-content li > ol {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.blog-content blockquote {
+  margin: 0 0 1.5em;
+  padding: 0.25em 0 0.25em 1.25em;
+  border-left: 3px solid #ff6726;
+  color: #4c5564;
+  font-style: italic;
+}
+
+.blog-content blockquote p {
+  margin-bottom: 0.75em;
+}
+
+.blog-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.blog-content hr {
+  margin: 2.5em 0;
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.blog-content figure {
+  margin: 0 0 1.75em;
+}
+
+.blog-content img,
+.blog-content .wp-block-image img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 0.75em;
+}
+
+.blog-content figcaption,
+.blog-content .wp-element-caption {
+  margin-top: 0.5em;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #6b7280;
+  text-align: center;
+}
+
+.blog-content pre,
+.blog-content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.blog-content code {
+  font-size: 0.9em;
+  padding: 0.15em 0.35em;
+  border-radius: 0.25rem;
+  background: #f3f4f6;
+  color: #121926;
+}
+
+.blog-content pre {
+  margin: 0 0 1.5em;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  background: #121926;
+  color: #f3f4f6;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.blog-content pre code {
+  padding: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.blog-content table {
+  width: 100%;
+  margin: 0 0 1.5em;
+  border-collapse: collapse;
+  font-size: 0.95em;
+}
+
+.blog-content th,
+.blog-content td {
+  padding: 0.65em 0.85em;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.blog-content th {
+  background: #f9fafb;
+  font-weight: 600;
+  color: #121926;
+}
+
+/* Gutenberg alignment */
+.blog-content .alignleft {
+  float: left;
+  margin: 0.35em 1.5em 1em 0;
+}
+
+.blog-content .alignright {
+  float: right;
+  margin: 0.35em 0 1em 1.5em;
+}
+
+.blog-content .aligncenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.blog-content .has-text-align-left {
+  text-align: left;
+}
+
+.blog-content .has-text-align-center {
+  text-align: center;
+}
+
+.blog-content .has-text-align-right {
+  text-align: right;
+}
+
+/* Gutenberg font sizes (common presets) */
+.blog-content .has-small-font-size {
+  font-size: 0.875rem;
+}
+
+.blog-content .has-regular-font-size,
+.blog-content .has-normal-font-size,
+.blog-content .has-medium-font-size {
+  font-size: 1.125rem;
+}
+
+.blog-content .has-large-font-size {
+  font-size: 1.375rem;
+  line-height: 1.5;
+}
+
+.blog-content .has-x-large-font-size,
+.blog-content .has-huge-font-size {
+  font-size: 1.75rem;
+  line-height: 1.35;
+}
+
+.blog-content .wp-block-quote,
+.blog-content .wp-block-pullquote {
+  margin-bottom: 1.5em;
+}
+
+.blog-content .wp-block-separator {
+  margin: 2.5em auto;
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.blog-content .wp-block-list {
+  margin-bottom: 1.5em;
+}
+
+/* Dark / marketing rich text (non-blog) */
+.rich-text-content {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.rich-text-content p {
+  margin-bottom: 1.25em;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.rich-text-content h1,
+.rich-text-content h2,
+.rich-text-content h3 {
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.rich-text-content h2 {
+  font-size: 1.75rem;
+  margin-top: 1.5em;
+  margin-bottom: 0.6em;
+}
+
+.rich-text-content h3 {
+  font-size: 1.25rem;
+  margin-top: 1.25em;
+  margin-bottom: 0.5em;
+  font-family: "Clash Grotesk", sans-serif;
+  font-weight: 600;
+}
+
+.rich-text-content ul {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin-bottom: 1.25em;
+}
+
+.rich-text-content li {
+  margin-bottom: 0.4em;
+}

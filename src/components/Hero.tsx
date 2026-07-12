@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { ArrowRight } from "lucide-react";
+import ExtraBadges from "@/components/ExtraBadges";
 
 const HERO_VIDEO_SRC = "/videos/decon2-scrub.mp4";
 
@@ -52,7 +53,7 @@ export default function Hero() {
         aria-hidden
       />
 
-      <div className="relative z-10 flex h-full flex-col justify-center px-6 sm:px-10 lg:px-16 xl:px-24">
+      <div className="relative z-10 flex flex-1 flex-col justify-center px-6 sm:px-10 lg:px-16 xl:px-24">
         <div className="mx-auto w-full max-w-7xl">
           <div className="max-w-2xl text-left text-white">
             <span className="mb-6 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-white/90">
@@ -85,6 +86,12 @@ export default function Hero() {
               </a>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="relative z-10 py-8">
+        <div className="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-16 xl:px-24">
+          <ExtraBadges contentAlign="start" className="[&>div]:!mt-0" />
         </div>
       </div>
     </div>

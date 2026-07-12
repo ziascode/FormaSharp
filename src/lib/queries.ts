@@ -59,6 +59,24 @@ export const GET_POST_SLUGS = /* GraphQL */ `
   }
 `;
 
+/** Lightweight URLs for sitemap generation */
+export const GET_SITEMAP_ENTRIES = /* GraphQL */ `
+  query GetSitemapEntries($first: Int = 100) {
+    posts(first: $first, where: { status: PUBLISH }) {
+      nodes {
+        slug
+        modified
+      }
+    }
+    pages(first: $first, where: { status: PUBLISH }) {
+      nodes {
+        uri
+        modified
+      }
+    }
+  }
+`;
+
 export const GET_SERVICES_LIST = /* GraphQL */ `
   ${CORE_SERVICE_FIELDS}
   query GetServicesList($first: Int = 100) {

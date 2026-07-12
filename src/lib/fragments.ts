@@ -1,4 +1,9 @@
+import { SEO_FIELDS } from "./seo";
+
+export { SEO_FIELDS };
+
 export const CORE_PAGE_FIELDS = /* GraphQL */ `
+  ${SEO_FIELDS}
   fragment CorePageFields on Page {
     id
     title
@@ -15,10 +20,14 @@ export const CORE_PAGE_FIELDS = /* GraphQL */ `
         altText
       }
     }
+    seo {
+      ...SeoFields
+    }
   }
 `;
 
 export const CORE_POST_FIELDS = /* GraphQL */ `
+  ${SEO_FIELDS}
   fragment CorePostFields on Post {
     id
     title
@@ -27,12 +36,20 @@ export const CORE_POST_FIELDS = /* GraphQL */ `
     content
     excerpt
     date
+    author {
+      node {
+        name
+      }
+    }
     featuredImage {
       node {
         id
         sourceUrl
         altText
       }
+    }
+    seo {
+      ...SeoFields
     }
   }
 `;
@@ -72,4 +89,3 @@ export const CORE_PORTFOLIO_FIELDS = /* GraphQL */ `
     }
   }
 `;
-
