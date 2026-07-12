@@ -15,7 +15,7 @@ import { section } from "@/lib/sectionSpacing";
 import { cn } from "@/lib/utils";
 
 const HERO_IMAGE =
-  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/cad-design.jpg";
+  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/patent3.jpg";
 
 const WHEN_ITEMS = [
   {
