@@ -49,6 +49,7 @@ const STATIC_PATHS = [
   "/about",
   "/contact",
   "/request-a-quote",
+  "/patent-ip",
   "/Simulation",
   "/ProductDesign",
   "/IndustrialDesign",
