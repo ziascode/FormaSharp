@@ -32,7 +32,7 @@ const CARDS: HelpCardData[] = [
     description:
       "We help transform initial ideas into structured product concepts by defining functionality, evaluating feasibility, and identifying the most effective design approach.",
     image:
-      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/cad-early-stage-design.jpg",
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/3d-printing-toronto.jpg",
     href: "/contact",
     icon: (
       <svg {...svgProps} strokeWidth={0.7}>

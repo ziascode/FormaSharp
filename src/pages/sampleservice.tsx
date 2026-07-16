@@ -104,7 +104,7 @@ export default function SampleService({ service }: SampleServicePageProps) {
             <li>Clear communication and alignment with your goals</li>
           </ul>
           <Link
-            href="/about"
+            href="/contact"
             className="inline-flex items-center rounded-lg border border-amber-500 px-6 py-3 text-sm font-semibold text-amber-500 transition hover:bg-amber-500/10"
           >
             Book a consultation

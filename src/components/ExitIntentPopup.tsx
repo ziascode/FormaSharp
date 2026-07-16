@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Mail, Phone, User, X } from "lucide-react";
+import { Building2, Mail, Phone, User, X } from "lucide-react";
 
 const EXIT_INTENT_STORAGE_KEY = "formasharp-exit-intent-shown";
 export const OPEN_CONTACT_POPUP_EVENT = "formasharp:open-contact-popup";
@@ -31,6 +31,7 @@ export default function ExitIntentPopup() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [form, setForm] = useState({
     fullName: "",
+    company: "",
     email: "",
     contactNumber: "",
     message: "",
@@ -175,6 +176,14 @@ export default function ExitIntentPopup() {
                   required
                 />
                 <Field
+                  label="Company Name"
+                  name="company"
+                  value={form.company}
+                  onChange={handleChange}
+                  icon={<Building2 className="size-4" />}
+                  autoComplete="organization"
+                />
+                <Field
                   label="Email"
                   name="email"
                   type="email"
@@ -232,6 +241,7 @@ type FieldProps = {
   type?: string;
   icon?: React.ReactNode;
   required?: boolean;
+  autoComplete?: string;
 };
 
 function Field({
@@ -242,6 +252,7 @@ function Field({
   type = "text",
   icon,
   required,
+  autoComplete,
 }: FieldProps) {
   const id = `exit-${name}`;
   return (
@@ -262,6 +273,7 @@ function Field({
           value={value}
           onChange={onChange}
           required={required}
+          autoComplete={autoComplete}
           className={`w-full rounded-lg border border-neutral-300 py-2.5 text-sm text-neutral-900 outline-none transition-colors focus:border-[#01628a] focus:ring-2 focus:ring-[#01628a]/30 ${
             icon ? "pl-10 pr-4" : "px-4"
           }`}

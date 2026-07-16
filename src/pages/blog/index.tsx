@@ -5,7 +5,8 @@ import RichText from "@/components/RichText";
 import { wpFetch } from "@/lib/wpFetch";
 import { GET_PAGE_BY_URI, GET_POSTS_LIST } from "@/lib/queries";
 import { normalizePageType } from "@/lib/normalizePageType";
-import { stripHtml, type YoastSeo } from "@/lib/seo";
+import { type YoastSeo } from "@/lib/seo";
+import { section } from "@/lib/sectionSpacing";
 
 type FeaturedImage = {
   node?: {
@@ -82,70 +83,46 @@ export default function BlogIndex({ page, pageType, posts }: BlogIndexProps) {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-20">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {posts.map((post) => {
-            const image = post.featuredImage?.node;
-            const excerptText = stripHtml(post.excerpt);
+      <section className={`w-full bg-white ${section.padding}`}>
+        <div className={section.container}>
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+            {posts.map((post) => {
+              const image = post.featuredImage?.node;
 
-            return (
-              <article
-                key={post.id}
-                className="flex flex-col overflow-hidden border border-black/10 bg-white transition-colors duration-300 hover:border-[#01628a]/35"
-              >
-                <Link href={`/blog/${post.slug}`} className="group block">
-                  <div className="overflow-hidden bg-neutral-100">
-                    {image?.sourceUrl ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={image.sourceUrl}
-                        alt={image.altText || post.title}
-                        className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                      />
-                    ) : (
-                      <div className="aspect-[16/10] w-full bg-gradient-to-br from-[#121926] to-[#01628a]" />
-                    )}
-                  </div>
-                </Link>
-
-                <div className="flex flex-1 flex-col border-t border-black/10 p-5">
+              return (
+                <article key={post.id}>
                   <Link href={`/blog/${post.slug}`} className="group block">
-                    <h2 className="!mb-2 !text-lg !font-semibold !leading-snug !tracking-tight !text-[#121926] transition-colors group-hover:!text-[#01628a]">
+                    <div className="overflow-hidden bg-neutral-100">
+                      {image?.sourceUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={image.sourceUrl}
+                          alt={image.altText || post.title}
+                          className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                        />
+                      ) : (
+                        <div className="aspect-[16/10] w-full bg-gradient-to-br from-[#121926] to-[#01628a]" />
+                      )}
+                    </div>
+                    <h2
+                      className="!mb-3 !mt-5 !text-2xl !font-bold !leading-tight !text-[#121926] transition-colors group-hover:!text-[#01628a]"
+                      style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
+                    >
                       {post.title}
                     </h2>
+                    <span className="text-base !text-[#121926] transition-colors group-hover:!text-[#ff6726]">
+                      Learn More →
+                    </span>
                   </Link>
+                </article>
+              );
+            })}
+          </div>
 
-                  {post.date && (
-                    <p className="!mb-3 !text-[0.7rem] !font-medium !uppercase !tracking-[0.12em] !text-[#ff6726]">
-                      {new Date(post.date).toLocaleDateString(undefined, {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </p>
-                  )}
-
-                  {excerptText && (
-                    <p className="!mb-4 line-clamp-3 flex-1 !text-sm !leading-relaxed !text-[#4c5564]">
-                      {excerptText}
-                    </p>
-                  )}
-
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="mt-auto text-sm font-semibold text-[#01628a] underline-offset-4 transition-colors hover:text-[#ff6726] hover:underline"
-                  >
-                    Read more
-                  </Link>
-                </div>
-              </article>
-            );
-          })}
+          {posts.length === 0 && (
+            <p className="text-[#4c5564]">No posts published yet.</p>
+          )}
         </div>
-
-        {posts.length === 0 && (
-          <p className="text-[#4c5564]">No posts published yet.</p>
-        )}
       </section>
     </>
   );

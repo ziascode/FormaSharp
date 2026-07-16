@@ -204,6 +204,11 @@ const RELATED_SERVICES = [
 const WHO_WE_CARD_SCRIM =
   "bg-[linear-gradient(to_top,#242c37_0%,#242c37_60%,transparent_100%)]";
 
+const HERO_IMAGE_REAL =
+  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/real.jpg"
+const HERO_IMAGE_SCAN =
+  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/scan.jpg";
+
 /** Same 800ms + easing on every capability card surface and text node. */
 const CAPABILITY_MOTION =
   "duration-[800ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)]";
@@ -214,111 +219,94 @@ function ReverseEngineering() {
   const highlightedIndex = hoveredIndex ?? activeIndex;
 
   const featureVideoRef = useRef<HTMLVideoElement>(null);
-  const dirRef = useRef<"fwd" | "rev">("fwd");
-  const rafRef = useRef<number | null>(null);
-  const lastTsRef = useRef<number | null>(null);
+  const featureVideoWrapRef = useRef<HTMLDivElement>(null);
+  const featureVideoPlayedRef = useRef(false);
+  const heroHoverRef = useRef(false);
+  const [heroScanOpacity, setHeroScanOpacity] = useState(0);
 
   useEffect(() => {
+    const wrap = featureVideoWrapRef.current;
     const video = featureVideoRef.current;
-    if (!video) return;
+    if (!wrap || !video) return;
 
-    const EPS = 0.08;
-    const reverseSpeed = 1;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (
+          entry.isIntersecting &&
+          entry.intersectionRatio >= 0.5 &&
+          !featureVideoPlayedRef.current
+        ) {
+          featureVideoPlayedRef.current = true;
+          void video.play();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
 
-    const clearRaf = () => {
-      if (rafRef.current != null) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
-      }
-      lastTsRef.current = null;
+    observer.observe(wrap);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const scrollProgress = () => {
+      if (heroHoverRef.current) return;
+      const vh = window.innerHeight || 1;
+      const progress = Math.min(Math.max(window.scrollY / (vh * 0.85), 0), 1);
+      setHeroScanOpacity(progress);
     };
 
-    const revFrame = (ts: number) => {
-      if (dirRef.current !== "rev") return;
-      const last = lastTsRef.current ?? ts;
-      lastTsRef.current = ts;
-      const dt = Math.min((ts - last) / 1000, 0.05) * reverseSpeed;
-      video.currentTime = Math.max(0, video.currentTime - dt);
-
-      if (video.currentTime <= EPS) {
-        video.currentTime = 0;
-        clearRaf();
-        dirRef.current = "fwd";
-        void video.play();
-        return;
-      }
-      rafRef.current = requestAnimationFrame(revFrame);
-    };
-
-    const startReverse = () => {
-      if (dirRef.current !== "fwd") return;
-      video.pause();
-      if (Number.isFinite(video.duration) && video.duration > 0) {
-        video.currentTime = Math.min(
-          video.currentTime,
-          Math.max(EPS * 2, video.duration - EPS * 2)
-        );
-      }
-      dirRef.current = "rev";
-      lastTsRef.current = null;
-      clearRaf();
-      rafRef.current = requestAnimationFrame(revFrame);
-    };
-
-    const onTimeUpdate = () => {
-      if (dirRef.current !== "fwd" || !Number.isFinite(video.duration)) return;
-      if (video.currentTime >= video.duration - EPS) {
-        startReverse();
-      }
-    };
-
-    const onEnded = () => {
-      if (dirRef.current === "fwd") {
-        startReverse();
-      }
-    };
-
-    const kickoff = () => {
-      dirRef.current = "fwd";
-      void video.play();
-    };
-
-    video.addEventListener("timeupdate", onTimeUpdate);
-    video.addEventListener("ended", onEnded);
-
-    if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
-      kickoff();
-    } else {
-      video.addEventListener("loadeddata", kickoff, { once: true });
-    }
-
+    scrollProgress();
+    window.addEventListener("scroll", scrollProgress, { passive: true });
+    window.addEventListener("resize", scrollProgress);
     return () => {
-      clearRaf();
-      video.removeEventListener("timeupdate", onTimeUpdate);
-      video.removeEventListener("ended", onEnded);
-      video.removeEventListener("loadeddata", kickoff);
-      video.pause();
+      window.removeEventListener("scroll", scrollProgress);
+      window.removeEventListener("resize", scrollProgress);
     };
   }, []);
+
+  const handleHeroMouseEnter = () => {
+    heroHoverRef.current = true;
+    setHeroScanOpacity(1);
+  };
+
+  const handleHeroMouseLeave = () => {
+    heroHoverRef.current = false;
+    const vh = window.innerHeight || 1;
+    setHeroScanOpacity(Math.min(Math.max(window.scrollY / (vh * 0.85), 0), 1));
+  };
 
   return (
     <div>
 
     {/* HERO — S1 */}
-    <div className="relative min-h-[100vh] overflow-hidden bg-[#121926]">
+    <div
+      className="relative min-h-[100vh] overflow-hidden bg-[#121926]"
+      onMouseEnter={handleHeroMouseEnter}
+      onMouseLeave={handleHeroMouseLeave}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         className="absolute inset-0 z-0 h-full w-full object-cover object-center"
-        src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/re8hd-1.jpg"
+        src={HERO_IMAGE_REAL}
         alt=""
         fetchPriority="high"
         aria-hidden
       />
-      {/* Diagonal scrim: darker bottom-left for hero copy, fading transparent toward top-right */}
-      <div
-        className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(to_top_right,rgba(18,25,38,0.92)_20%,rgba(18,25,38,0.72)_45%,rgba(18,25,38,0.42)_70%,rgba(18,25,38,0.18)_82%,transparent_92%,transparent_100%)]"
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        className="absolute inset-0 z-[1] h-full w-full object-cover object-center transition-opacity duration-[900ms] ease-in-out"
+        src={HERO_IMAGE_SCAN}
+        alt=""
+        style={{ opacity: heroScanOpacity }}
         aria-hidden
       />
-      <div className="relative z-10 mx-auto !pt-[40vh] flex flex-row items-center justify-start max-w-7xl flex-col gap-6 px-4 py-8 md:py-16 lg:py-24">
+      {/* Light scrim for hero copy readability */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(to_top_right,rgba(18,25,38,0.15)_25%,rgba(18,25,38,0.10)_50%,rgba(18,25,38,0.05)_75%,transparent_90%)]"
+        aria-hidden
+      />
+      <div className="relative z-10 mx-auto !pt-[25vh] flex flex-row items-center justify-start max-w-7xl flex-col gap-6 px-4 py-8 md:py-16 lg:py-24">
         <div>
             <h4>REVERSE ENGINEERING <span className="text-[#ff6726]">SERVICES</span></h4>
             <h1 className="max-w-3xl !text-6xl !leading-none font-bold text-white pt-5">
@@ -335,7 +323,7 @@ function ReverseEngineering() {
             </div>
         </div>
       </div>
-      <div className="relative z-10 py-8">
+      <div className="relative z-10 pb-6">
         <ExtraBadges/>
       </div>
     </div>
@@ -345,7 +333,7 @@ function ReverseEngineering() {
 
 
     {/* S3 — WHAT WE DELIVER (centered intro variation) */}
-    <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
+    <div className="max-w-7xl mx-auto px-6 py-24 md:py-32">
       <div className="text-black/90 flex flex-col justify-center text-center">
         <h2 className="max-w-3xl mx-auto">
           Digital Engineering Data <span className="text-[#ff6726]">Reconstructed from Physical Components</span>
@@ -364,7 +352,7 @@ function ReverseEngineering() {
     {/* S4 — CAPABILITIES (Simulation grid pattern) */}
     <section
       id="capabilities"
-      className="border-y border-black/5 bg-stone-50 py-16 md:py-24 !mb-[-35vh]"
+      className="border-y border-black/5 bg-stone-50 py-24 md:py-32 !mb-[-35vh]"
     >
       <div className="mx-auto max-w-7xl px-6">
 
@@ -477,24 +465,20 @@ function ReverseEngineering() {
       </div>
     </section>
 
-    {/* Feature video — between Capabilities and Process */}
-    <div className="relative z-20 mx-auto flex h-[70vh] max-w-7xl translate-y-[35vh] items-center justify-center">
+    {/* Feature video — half overlaps Process section below */}
+    <div className="relative z-20 mx-auto h-[70vh] max-w-7xl translate-y-[35vh] px-6">
       <div
-        className="pointer-events-none relative h-[70vh] w-[80vw] overflow-hidden rounded-2xl bg-black shadow-2xl"
-        aria-hidden
+        ref={featureVideoWrapRef}
+        className="h-full w-full overflow-hidden rounded-2xl bg-black"
       >
-        <div className="absolute inset-0 overflow-hidden rounded-2xl">
-          <div className="absolute inset-x-0 top-[-8%] h-[116%] w-full">
-            <video
-              ref={featureVideoRef}
-              className="h-full w-full object-cover object-top"
-              src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/refinal.mp4"
-              muted
-              playsInline
-              preload="auto"
-            />
-          </div>
-        </div>
+        <video
+          ref={featureVideoRef}
+          className="h-full w-full object-cover"
+          src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/refinal.mp4"
+          muted
+          playsInline
+          preload="auto"
+        />
       </div>
     </div>
 
@@ -539,7 +523,7 @@ function ReverseEngineering() {
     {/* S6 — APPLICATIONS & INDUSTRIES (image cards, Simulation pattern) */}
     <section
       aria-labelledby="re-industries-heading"
-      className="bg-[linear-gradient(to_bottom_right,#121926,#01628a)] py-16 md:py-32 "
+      className="bg-[linear-gradient(to_bottom_right,#121926,#01628a)] py-24 md:py-32 "
     >
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-10 max-w-3xl md:mb-14">
@@ -599,7 +583,7 @@ function ReverseEngineering() {
     <ReverseShowcase />
 
     {/* S8 — RELATED SERVICES (chip row) */}
-    <section className="bg-stone-50 border-y border-black/5 py-16 md:py-20">
+    <section className="bg-stone-50 border-y border-black/5 py-24 md:py-32">
       <div className="mx-auto max-w-5xl px-6 text-center">
         <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
           Related Services

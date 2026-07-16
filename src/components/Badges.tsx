@@ -7,7 +7,7 @@ import { section } from "@/lib/sectionSpacing";
 function Badges() {
   return (
     <div className='bg-white -mb-[20vh]'>
-    <div className={`bottom-section ${section.container} py-16 md:py-20`}>
+    <div className={`bottom-section ${section.container} py-24 md:py-32`}>
 
               {/* Top section */}
             <div className='flex flex-row items-center justify-center bg-cover bg-center py-24'>

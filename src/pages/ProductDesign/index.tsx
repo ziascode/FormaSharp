@@ -127,45 +127,46 @@ type IndustryItem = {
   imageAlt: string;
 };
 
-// TODO: swap per-industry image
-const CARD_IMAGE_PLACEHOLDER =
-  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/ecommerce-engi.jpg";
-
 const INDUSTRIES: IndustryItem[] = [
   {
     title: "Consumer Products",
     description:
       "Products that balance usability, visual appeal, and reliable function across everyday applications.",
-    imageSrc: CARD_IMAGE_PLACEHOLDER,
-    imageAlt: "Consumer product design context",
+    imageSrc:
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/premium_photo-1710962439403-a35fbc684b15.jpeg",
+    imageAlt: "Engineering workspace representing consumer product development",
   },
   {
     title: "Industrial Equipment",
     description:
       "Robust components and assemblies used in machinery, tools, and production environments.",
-    imageSrc: CARD_IMAGE_PLACEHOLDER,
-    imageAlt: "Industrial equipment design context",
+    imageSrc:
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/6indus-scaled.jpg",
+    imageAlt: "Industrial equipment and structural engineering context",
   },
   {
     title: "Medical & Technical Devices",
     description:
       "Products that require precise integration, thoughtful ergonomics, and dependable performance.",
-    imageSrc: CARD_IMAGE_PLACEHOLDER,
-    imageAlt: "Medical and technical device design context",
+    imageSrc:
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/2cars-scaled.jpg",
+    imageAlt: "Automotive engineering and vehicle systems analysis",
   },
   {
     title: "Custom Tools & Fixtures",
     description:
       "Specialized equipment tailored to unique production, testing, or service requirements.",
-    imageSrc: CARD_IMAGE_PLACEHOLDER,
-    imageAlt: "Custom tooling and fixture design context",
+    imageSrc:
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/3med-scaled.jpg",
+    imageAlt: "Medical device engineering and precision validation",
   },
   {
     title: "Startup Hardware Products",
     description:
       "Helping innovators move from sketches and ideas to fully defined products ready for prototyping and market validation.",
-    imageSrc: CARD_IMAGE_PLACEHOLDER,
-    imageAlt: "Startup hardware product design context",
+    imageSrc:
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/randd.jpg",
+    imageAlt: "Research and development engineering workspace",
   },
 ];
 
@@ -284,7 +285,7 @@ function ProductDesign() {
         aria-hidden
       >
         <ScrollyVideo
-          src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/watch.mp4"
+          src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/w2.mp4"
           videoPercentage={heroScrollPercent}
           trackScroll={false}
           transitionSpeed={8}
@@ -294,17 +295,17 @@ function ProductDesign() {
         />
       </div>
       <div
-        className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(to_top_right,rgba(18,25,38,0.92)_0%,rgba(18,25,38,0.72)_25%,rgba(18,25,38,0.42)_50%,rgba(18,25,38,0.18)_72%,transparent_92%,transparent_100%)]"
+        className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(to_top_right,rgba(18,25,38,0.5)_0%,rgba(18,25,38,0.28)_35%,rgba(18,25,38,0.12)_65%,transparent_100%)]"
         aria-hidden
       />
 
       <div className="relative z-10 mx-auto !pt-[20vh] flex flex-row items-center justify-start max-w-7xl flex-col gap-6 px-4 py-12 md:py-16 lg:py-24">
-        <div>
+        <div className="-20">
             <h4>PRODUCT DESIGN <span className="text-[#ff6726]">SERVICES</span></h4>
-            <h1 className="max-w-3xl !text-6xl !leading-none font-bold text-white pt-5">
-            Transform product ideas into <span className="text-[#ff6726]">production-ready</span> designs.
+            <h1 className="max-w-2xl !text-6xl !leading-none font-bold text-white pt-5">
+            Transform product ideas into <span className="text-[#ff6726]">production ready</span> designs.
             </h1>
-            <h3 className="max-w-2xl text-lg text-white/80">
+            <h3 className="max-w-xl text-lg text-white/80">
             FormaSharp turns concepts into well-defined products. From early concept development to detailed CAD models and technical documentation, we create designs that are built to perform, practical to produce, and aligned with your business goals.
             </h3>
             <div className="flex flex-col sm:flex-row gap-4 items-start">
@@ -327,7 +328,7 @@ function ProductDesign() {
     {/* CAPABILITIES — Product Design */}
     <section
       id="capabilities"
-      className=" py-16 md:py-24"
+      className="py-24 md:py-32"
     >
       <div className="mx-auto max-w-7xl px-6">
         
@@ -443,7 +444,7 @@ function ProductDesign() {
     </section>
 
   {/* PROBLEM RECOGNITION — Great Ideas Need a Clear Engineering Strategy */}
-    <div className="max-w-7xl mx-auto px-6 py-32 !mb-[10vh]">
+    <div className="max-w-7xl mx-auto px-6 py-24 md:py-32 !mb-[10vh]">
        <div className="text-black/90 flex flex-col justify-center text-center">
         <h2 className=" max-w-3xl mx-auto">Great ideas need a clear<span className="text-[#ff6726]"> engineering strategy</span></h2>
         {/* <p className=" max-w-3xl mx-auto">Many products begin with strong ideas but stall when technical decisions become more complex. Questions around functionality, material selection, assembly, and production can quickly slow progress if the design is not approached systematically. Product design provides the structure needed to turn an idea into a technically sound, clearly documented product concept.</p> */}
@@ -456,7 +457,9 @@ function ProductDesign() {
           <li>Missing technical documentation required for manufacturing</li>
         </ul> */}
 
-        <button className="button-tertiary mx-auto">Book a Consultation →</button>
+        <Link href="/contact" className="button-tertiary mx-auto inline-block">
+          Book a Consultation →
+        </Link>
        </div>
     </div>
 
@@ -685,7 +688,7 @@ function ProductDesign() {
     {/* INDUSTRIES & APPLICATIONS */}
     <section
       aria-labelledby="industries-heading"
-      className="bg-[linear-gradient(to_bottom_right,#121926,#01628a)] py-16 md:py-32 "
+      className="bg-[linear-gradient(to_bottom_right,#121926,#01628a)] py-24 md:py-32 "
     >
       <div className="mx-auto max-w-7xl px-6 pt-[0vh]">
         <div className="mb-10 max-w-3xl md:mb-14">

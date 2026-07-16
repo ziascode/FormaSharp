@@ -78,11 +78,26 @@ export const CORE_PORTFOLIO_FIELDS = /* GraphQL */ `
     title
     uri
     slug
-    content
     excerpt
     featuredImage {
       node {
         id
+        sourceUrl
+        altText
+      }
+    }
+    portfolioPage {
+      heroTitle
+      heroImage {
+        sourceUrl
+        altText
+      }
+      overview
+      highlights {
+        title
+        description
+      }
+      gallery {
         sourceUrl
         altText
       }

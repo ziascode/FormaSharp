@@ -26,6 +26,9 @@ type CapabilityItem = {
   icon: LucideIcon;
 };
 
+const CAPABILITY_CARD_IMAGE =
+  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/dfm3.jpg";
+
 const CAPABILITIES: CapabilityItem[] = [
   {
     tag: "Process",
@@ -264,24 +267,22 @@ function DesignForManufacturing() {
         </div> */}
 
       {/* PROBLEM — S2 */}
-      <div className="max-w-7xl mx-auto px-6 py-26">
+      <div className="max-w-7xl mx-auto px-6 py-24 md:py-32">
       <div className="max-w-7xl mx-auto px-6 flex flex-row items-start justify-around gap-8 large:gap-8  py-12">
             <h2 className=" font-bold text-black w-[40%]">What our DFM services deliver</h2>
             <p className="text-lg text-black w-[60%]">Design for Manufacturing is the process of evaluating how a product will be made and
             identifying opportunities to simplify production without compromising performance. Our recommendations are tailored to the intended manufacturing method, production volume, and project objectives. Whether your product will be machined, fabricated, molded, or assembled from multiple components, DFM helps align design decisions with efficient production practices.</p>
 
         </div>
-        <div className="bd mx-auto min-h-[100px] flex items-center justify-center w-full max-w-7xl px-4 py-8 md:px-6 bg-blue-900/90">
-          <ExtraBadges contentAlign="center" />
-        </div>
+       
       </div>
 
      
 
-      {/* CAPABILITIES — S4 */}
+      {/* CAPABILITIES — S4 */} 
       <section
         id="capabilities"
-        className="border-y border-black/5 bg-stone-50  py-16 md:py-24"
+        className="border-y border-black/5 bg-stone-50 py-24 md:py-32"
       >
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-12 max-w-3xl md:mb-16 ">
@@ -289,14 +290,8 @@ function DesignForManufacturing() {
               Capabilities
             </div>
             <h2 className="text-3xl font-bold tracking-tight text-black md:text-4xl">
-              Design for manufacturing:
-              <br />
               Six areas of review, tailored to your process and volume.
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-black/70 md:text-lg">
-              FormaSharp's DFM review covers the dimensions most likely to affect production cost, lead time, and quality. This may involve CNC machining, sheet metal fabrication, welding, injection molding, casting, or
-              additive manufacturing.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-10">
@@ -389,8 +384,8 @@ function DesignForManufacturing() {
                     ))}
                   </ul>
                   <div className="mt-auto pt-8">
-                    <a
-                      href={quotePageUrl("dfm")}
+                    <Link
+                      href="/contact"
                       className="group/cta inline-flex w-fit items-center gap-3 rounded-full bg-[#121926] py-2 pl-5 pr-2 text-sm font-semibold text-white shadow-sm transition-colors duration-300 hover:bg-[#ff6726]"
                     >
                       <span>Book a Free Consultation</span>
@@ -403,15 +398,14 @@ function DesignForManufacturing() {
                           strokeWidth={2.5}
                         />
                       </span>
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <div className="lg:col-span-2">
-                  {/* TODO: per-capability image */}
                   <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl bg-stone-100 shadow-sm">
                     <img
-                      src={CARD_IMAGE_PLACEHOLDER}
-                      alt=""
+                      src={CAPABILITY_CARD_IMAGE}
+                      alt={activeCapability.title}
                       className="absolute inset-0 size-full object-cover"
                     />
                   </div>
@@ -436,7 +430,7 @@ function DesignForManufacturing() {
       {/* APPLICATIONS & INDUSTRIES — S6 */}
       {/* <section
         aria-labelledby="dfm-industries-heading"
-        className="bg-[linear-gradient(to_bottom_right,#121926,#01628a)] py-16 md:py-32 "
+        className="bg-[linear-gradient(to_bottom_right,#121926,#01628a)] py-24 md:py-32 "
       >
         <div className="mx-auto max-w-7xl px-6 pt-[35vh]">
           <div className="mb-10 max-w-3xl md:mb-14">

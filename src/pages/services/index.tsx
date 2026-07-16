@@ -44,7 +44,7 @@ export default function ServicesIndex({
         description={pageType ? `${pageType} page` : undefined}
         canonical={page?.uri ?? undefined}
       />
-      <section className="mx-auto max-w-6xl px-6 py-20">
+      <section className="mx-auto max-w-6xl px-6 py-24 md:py-32">
         <div className="mb-12">
           <h1 className="mb-4 text-4xl font-semibold tracking-tight">
             {page?.title ?? "Services"}

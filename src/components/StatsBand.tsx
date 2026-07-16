@@ -114,8 +114,8 @@ export default function StatsBand({ variant = "dark" }: StatsBandProps) {
       className={cn(
         "relative z-20 w-full overflow-x-hidden",
         isDark
-          ? "bg-[linear-gradient(to_bottom_right,#121926,#01628a)] py-16 md:py-20 lg:py-24"
-          : "bg-white py-16 md:py-20 lg:py-24",
+          ? "bg-[linear-gradient(to_bottom_right,#121926,#01628a)] py-24 md:py-32"
+          : "bg-white py-24 md:py-32",
       )}
     >
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">

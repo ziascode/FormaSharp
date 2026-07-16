@@ -12,7 +12,7 @@ function ThreeDPrinting() {
     <DotPattern className="min-h-[100vh] bg-black/95">
       <div className=" mx-auto flex flex-row items-center justify-center max-w-7xl flex-col gap-6 px-4 py-12 md:py-16 lg:py-24">
         <div>
-            <h1 className="max-w-3xl text-4xl font-bold text-white uppercase">
+            <h1 className="max-w-3xl !text-6xl !leading-none font-bold text-white pt-5">
             RAPID PROTOTYPING & <span className="text-[#ff6726]">3D PRINTING</span>
             </h1>
             <h3 className="max-w-2xl text-lg text-white/80">
@@ -35,7 +35,7 @@ function ThreeDPrinting() {
     </DotPattern>
 
     {/* intro section */}
-    <div className="max-w-7xl mx-auto px-6 py-26 ">
+    <div className="max-w-7xl mx-auto px-6 py-24 md:py-32">
        <div className="text-black/90 flex flex-col justify-center text-center">
         <h2 className=" max-w-2xl mx-auto">CAD files to physical<span className="text-[#ff6726]"> prototypes</span></h2>
         <h3 className="!text-4xl !font-bold">Bring Your Design Off the Screen and Into Your Hands</h3>
@@ -64,7 +64,7 @@ assess assembly, and make informed decisions with greater certainty.</p>
         </div>
     </div>
 
-    <div className="vh-100 relative z-10 px-6 pt-[35vh] pb-28 bg-primary flex flex-col items-center justify-center -translate-y-[35vh] ">
+    <div className="vh-100 relative z-10 -mb-[35vh] px-6 pt-[35vh] pb-24 md:pb-32 bg-primary flex flex-col items-center justify-center -translate-y-[35vh] ">
       <h3 className="pt-26">How it works</h3>
       <hr className="w-1/2 border-white/50 pb-12 -translate-y-[1vh] border-top-[#ff6726]" /> 
       <div className="max-w-7xl mx-auto flex flex-row items-center text-center justify-center gap-12 ">

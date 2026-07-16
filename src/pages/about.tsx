@@ -148,7 +148,7 @@ export default function About() {
       <StatsBand variant="light" />
 
       {/* ABOUT THE FOUNDER */}
-      <section className="bg-[#f8f9fa] py-16 md:py-24 lg:py-28">
+      <section className="bg-[#f8f9fa] py-24 md:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
@@ -255,7 +255,7 @@ export default function About() {
       </section>
 
       {/* WHAT WE DO */}
-      <section className="bg-white py-16 md:py-24 lg:py-28">
+      <section className="bg-white py-24 md:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="mb-12 max-w-3xl md:mb-16">
             <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
@@ -319,7 +319,9 @@ export default function About() {
             <InteractiveHoverButton className="button-primary">
               Start Your Project
             </InteractiveHoverButton>
-            <button className="button-secondary">Book a Consultation</button>
+            <Link href="/contact" className="button-secondary inline-block">
+              Book a Consultation
+            </Link>
           </div>
 
           <div className="mt-12 flex flex-col flex-wrap items-center justify-center gap-x-8 gap-y-3 font-mono text-xs tracking-wider text-white/50 sm:flex-row">

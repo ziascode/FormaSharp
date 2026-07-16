@@ -115,43 +115,48 @@ type IndustryItem = {
   imageAlt: string;
 };
 
-const CARD_IMAGE_PLACEHOLDER =
-  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/ecommerce-engi.jpg";
+const CAPABILITY_CARD_IMAGE =
+  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/photo-1715498886689-c6aaf5d7601d.jpeg";
 
 const INDUSTRIES: IndustryItem[] = [
   {
     title: "Product Development",
     description:
       "Convert concepts into detailed digital models that support engineering, prototyping, and supplier communication.",
-    imageSrc: CARD_IMAGE_PLACEHOLDER,
+    imageSrc:
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/premium_photo-1710962439403-a35fbc684b15.jpeg",
     imageAlt: "Product development CAD modeling context",
   },
   {
     title: "Manufacturing and Fabrication",
     description:
       "Prepare precise drawings and assemblies for machining, sheet metal fabrication, welding, and assembly operations.",
-    imageSrc: CARD_IMAGE_PLACEHOLDER,
+    imageSrc:
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/6indus-scaled.jpg",
     imageAlt: "Manufacturing and fabrication documentation context",
   },
   {
     title: "Industrial Equipment",
     description:
       "Document complex parts and systems used in machinery and production environments.",
-    imageSrc: CARD_IMAGE_PLACEHOLDER,
+    imageSrc:
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/2cars-scaled.jpg",
     imageAlt: "Industrial equipment CAD documentation context",
   },
   {
     title: "Consumer Products",
     description:
       "Develop organized design files for products requiring frequent revisions and rapid iteration.",
-    imageSrc: CARD_IMAGE_PLACEHOLDER,
+    imageSrc:
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/3med-scaled.jpg",
     imageAlt: "Consumer product CAD modeling context",
   },
   {
     title: "Engineering Departments",
     description:
       "Provide additional modeling capacity for internal teams facing tight deadlines or specialized tasks.",
-    imageSrc: CARD_IMAGE_PLACEHOLDER,
+    imageSrc:
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/randd.jpg",
     imageAlt: "Engineering department CAD support context",
   },
 ];
@@ -215,8 +220,26 @@ function CADServices() {
   return (
     <div>
       {/* HERO — S1 */}
-      <DotPattern className="min-h-[100vh] bg-black/95">
-        <div className="mx-auto !pt-[20vh] flex flex-row items-center justify-start max-w-7xl flex-col gap-6 px-4 py-12 md:py-16 lg:py-24">
+      <DotPattern className="relative min-h-[100vh] overflow-hidden bg-black/95">
+        <div
+          className="pointer-events-none absolute right-0 top-1/2 z-0 w-[50vw] max-w-[50vw] -translate-y-1/2 translate-x-[8%] md:translate-x-[4%]"
+          aria-hidden
+        >
+          <div className="relative aspect-square w-full">
+            <div className="absolute inset-0 z-0 overflow-hidden">
+              <div className="cad-hero-glow-orb-1 absolute left-[5%] top-[15%] h-[58%] w-[62%] rounded-full bg-[radial-gradient(circle,rgba(0,200,255,0.7)_0%,rgba(0,140,255,0.35)_45%,transparent_70%)] blur-3xl" />
+              <div className="cad-hero-glow-orb-2 absolute bottom-[10%] right-[0%] h-[48%] w-[52%] rounded-full bg-[radial-gradient(circle,rgba(0,160,255,0.55)_0%,rgba(0,100,255,0.2)_50%,transparent_72%)] blur-[48px]" />
+              <div className="cad-hero-glow-orb-3 absolute bottom-[28%] left-[28%] h-[32%] w-[36%] rounded-full bg-[radial-gradient(circle,rgba(80,220,255,0.5)_0%,transparent_68%)] blur-2xl" />
+            </div>
+            <img
+              src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/ip4-1.png"
+              alt=""
+              className="relative z-10 h-full w-full object-contain opacity-50 sm:opacity-70"
+            />
+          </div>
+        </div>
+
+        <div className="relative z-10 mx-auto !pt-[20vh] flex max-w-7xl flex-col gap-6 px-4 py-12 md:py-16 lg:py-24">
           <div>
             <h4>
               CAD <span className="text-[#ff6726]">SERVICES</span>
@@ -242,13 +265,13 @@ function CADServices() {
             </div>
           </div>
         </div>
-        <div className="py-8">
+        <div className="relative z-10 py-8">
           <ExtraBadges />
         </div>
       </DotPattern>
 
       {/* PROBLEM RECOGNITION — S2 */}
-      <section className="bg-[#f8f9fa] py-16 text-left md:py-24 lg:py-28">
+      <section className="bg-[#f8f9fa] py-24 text-left md:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16 xl:gap-20">
             <div className="text-left lg:col-span-5 lg:col-start-1 xl:col-span-5">
@@ -262,15 +285,15 @@ function CADServices() {
             easy for internal teams, suppliers, and manufacturers to use.
           </p>
 
-              <button type="button" className="button-tertiary mt-10 w-fit">
+              <Link href="/contact" className="button-tertiary mt-10 inline-block w-fit">
                 Book a Consultation →
-              </button>
+              </Link>
             </div>
 
             <div className="w-full lg:col-span-7 lg:col-start-6 xl:col-span-7 xl:col-start-6">
               <div className="aspect-[4/3] w-full overflow-hidden bg-neutral-200 lg:aspect-[5/4] lg:min-h-[min(520px,55vh)]">
                 <img
-                  src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/cad-design.jpg"
+                  src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/photo-1730266681489-12825532acb2.jpeg"
                   alt="Engineering and CAD documentation"
                   className="h-full w-full object-cover object-center"
                   loading="lazy"
@@ -285,10 +308,10 @@ function CADServices() {
       {/* CAPABILITIES — S4 (tabs) */}
       <section
         id="capabilities"
-        className="border-y border-black/5 bg-stone-50 py-16 md:py-24"
+        className="border-y border-black/5 bg-stone-50 py-24 md:py-32"
       >
         <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-12 max-w-3xl md:mb-16">
+          <div className="mb-12 max-w-4xl md:mb-16">
             <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
               CAD Capabilities
             </div>
@@ -412,11 +435,10 @@ function CADServices() {
                   </div>
                 </div>
                 <div className="lg:col-span-2">
-                  {/* TODO: per-capability image */}
                   <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl bg-stone-100 shadow-sm">
                     <img
-                      src={CARD_IMAGE_PLACEHOLDER}
-                      alt=""
+                      src={CAPABILITY_CARD_IMAGE}
+                      alt={activeCapability.title}
                       className="absolute inset-0 size-full object-cover"
                     />
                   </div>
@@ -467,10 +489,10 @@ function CADServices() {
       {/* APPLICATIONS & INDUSTRIES — S6 */}
       <section
         aria-labelledby="cad-industries-heading"
-        className="bg-[linear-gradient(to_bottom_right,#121926,#01628a)] py-16 md:py-32"
+        className="bg-[linear-gradient(to_bottom_right,#121926,#01628a)] py-24 md:py-32"
       >
         <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-10 max-w-3xl md:mb-14">
+          <div className="mb-10 max-w-5xl md:mb-14">
             <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
               Applications & Industries
             </div>
@@ -530,7 +552,7 @@ function CADServices() {
       <CadShowcase />
 
       {/* RELATED SERVICES — S8 (chip row)
-      <section className="bg-stone-50 border-y border-black/5 py-16 md:py-20">
+      <section className="bg-stone-50 border-y border-black/5 py-24 md:py-32">
         <div className="mx-auto max-w-5xl px-6 text-center">
           <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
             Related Services

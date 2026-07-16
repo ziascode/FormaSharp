@@ -69,6 +69,31 @@ const APPROACH = [
   },
 ];
 
+const SOCIAL_LINKS = [
+  {
+    href: "https://www.instagram.com/formasharp",
+    label: "Instagram",
+    value: "@formasharp",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="size-5" aria-hidden>
+        <rect x="2" y="2" width="20" height="20" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+      </svg>
+    ),
+  },
+  {
+    href: "https://www.linkedin.com/company/formasharp/",
+    label: "LinkedIn",
+    value: "FormaSharp",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="size-5" aria-hidden>
+        <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z" />
+      </svg>
+    ),
+  },
+];
+
 export default function Contact() {
   return (
     <div>
@@ -128,7 +153,7 @@ export default function Contact() {
       </section>
 
       {/* CONTACT INFO */}
-      <section className="bg-[#f8f9fa] py-16 md:py-24 lg:py-28">
+      <section className="bg-[#f8f9fa] py-24 md:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="mb-10 max-w-3xl text-center md:mx-auto md:mb-14">
             <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
@@ -177,6 +202,35 @@ export default function Contact() {
                 </div>
               );
             })}
+          </div>
+
+          <div className="mt-10 flex flex-col items-center gap-5 md:mt-14">
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-black/50">
+              Follow us
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              {SOCIAL_LINKS.map((social) => (
+                <a
+                  key={social.href}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 rounded-2xl border border-black/10 bg-white px-5 py-3.5 shadow-sm transition-colors hover:border-[#ff6726]/40 hover:bg-[#ff6726]/5"
+                >
+                  <span className="flex size-10 items-center justify-center rounded-xl bg-[#ff6726]/10 text-[#ff6726] transition-colors group-hover:bg-[#ff6726]/15">
+                    {social.icon}
+                  </span>
+                  <span className="text-left">
+                    <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-black/50">
+                      {social.label}
+                    </span>
+                    <span className="block text-sm font-semibold text-neutral-950">
+                      {social.value}
+                    </span>
+                  </span>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </section>

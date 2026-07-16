@@ -201,7 +201,7 @@ function Simulation() {
     {/* SERVICES — Capabilities (from static HTML → JSX) */}
     <section
       id="services"
-      className="border-y border-black/5 bg-stone-50 py-16 md:py-24"
+      className="border-y border-black/5 bg-stone-50 py-24 md:py-32"
     >
       <div className="mx-auto max-w-7xl px-6">
         
@@ -317,7 +317,7 @@ function Simulation() {
     </section>
 
   {/* intro section for engineering analysis */}
-    <div className="max-w-7xl mx-auto px-6 py-26 !mb-[-35vh]">
+    <div className="max-w-7xl mx-auto px-6 py-24 md:py-32 !mb-[-35vh]">
        {/* <ExtraBadges /> */}
        <div className="text-black/90 flex flex-col justify-center text-center">
         <h2 className=" max-w-2xl mx-auto"> Engineering analysis<span className="text-[#ff6726]"> for early-stage design</span></h2>
@@ -327,7 +327,9 @@ FormaSharp provides mechanical engineering and simulation services that help sta
 manufacturers, and engineering teams evaluate designs before committing to tooling or
 production. We uncover performance issues early and identify opportunities for
 improvement.</p>
-        <button className="button-tertiary mx-auto">Book a Consultation →</button>
+        <Link href="/contact" className="button-tertiary mx-auto inline-block">
+          Book a Consultation →
+        </Link>
        </div>
     </div>
 
@@ -336,14 +338,14 @@ improvement.</p>
         <img
           className="h-full w-full rounded-2xl object-cover"
           alt="Engineering analysis for early-stage design"
-          src="https://cf-images.us-east-1.prod.boltdns.net/v1/static/1532789042001/15289edf-06a6-4ba1-b93c-ae6b104c0de9/c9aea21f-44e3-4083-8b33-993a42a89e71/1280x720/match/image.jpg"   
+          src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/mechanical-1.jpg"
         />
         </div>
     </div>
 
     <section
       aria-labelledby="who-we-work-with-heading"
-      className="bg-[linear-gradient(to_bottom_right,#121926,#01628a)] py-16 md:py-32 "
+      className="bg-[linear-gradient(to_bottom_right,#121926,#01628a)] py-24 md:py-32 "
     >
       <div className="mx-auto max-w-7xl px-6 pt-[35vh]">
         <div className="mb-10 max-w-3xl md:mb-14">

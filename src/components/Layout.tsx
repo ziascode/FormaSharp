@@ -124,7 +124,7 @@ export default function Layout({ children }: LayoutProps) {
               src={isSolidNav ? LOGO_SOLID : LOGO_TRANSPARENT}
               alt="FormaSharp"
               className={`w-auto transition-all duration-500 ease-out  ${
-                isSolidNav ? "h-14 md:h-16" : "h-16 md:h-18"
+                isSolidNav ? "h-[2.8rem] md:h-[3.2rem]" : "h-[3.2rem] md:h-[3.6rem]"
               }`}
             />
           </Link>

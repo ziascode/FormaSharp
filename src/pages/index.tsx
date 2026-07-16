@@ -4,9 +4,10 @@ import Layout from "@/components/Layout";
 import Seo from "@/components/Seo";
 import RichText from "@/components/RichText";
 import { wpFetch } from "@/lib/wpFetch";
-import { GET_PAGE_BY_URI, GET_SERVICES_LIST } from "@/lib/queries";
+import { GET_PAGE_BY_URI, GET_POSTS_LIST, GET_SERVICES_LIST } from "@/lib/queries";
 import { normalizePageType } from "@/lib/normalizePageType";
 import Hero from "@/components/Hero";
+import CofABanner from "@/components/CofABanner";
 import ServiceCards from "@/components/ServiceCards";
 import Video from "@/components/Video";
 import EngineeringBento from "@/components/BentoSection";
@@ -19,6 +20,9 @@ import Process from "@/components/Process";
 import StatsBand from "@/components/StatsBand";
 import How from "@/components/How";
 import FinalCta from "@/components/FinalCta";
+import HomeBlogSlider, {
+  type HomeBlogPost,
+} from "@/components/HomeBlogSlider";
 
 type ServiceNode = {
   id: string;
@@ -38,6 +42,7 @@ type HomePageProps = {
   } | null;
   pageType: string | null;
   services: ServiceNode[];
+  posts: HomeBlogPost[];
 };
 
 const HERO_TITLE_FALLBACK = "Engineering Ideas into Real-World Products";
@@ -78,7 +83,7 @@ const STATS = [
   { value: "Credential 3", label: "Details" },
 ];
 
-export default function Home({ page, pageType, services }: HomePageProps) {
+export default function Home({ page, pageType, services, posts }: HomePageProps) {
   const title = page?.title || "Home";
   const heroTitle = page?.title || HERO_TITLE_FALLBACK;
   const heroDescription = page?.content
@@ -97,12 +102,14 @@ export default function Home({ page, pageType, services }: HomePageProps) {
 
       <Hero />
       <QuickService />
+      <CofABanner />
       <Badges />
       <StatsBand />
       <How />
       {/* <ServiceCards /> */}
       <Video />
       <WhyChooseUs />
+      <HomeBlogSlider posts={posts} />
       <FinalCta />
       {/* <Process /> */}
 
@@ -112,22 +119,27 @@ export default function Home({ page, pageType, services }: HomePageProps) {
 }
 
 export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
-  const [pageData, servicesData] = await Promise.all([
+  const [pageData, servicesData, postsData] = await Promise.all([
     wpFetch<{ page: HomePageProps["page"] }>(GET_PAGE_BY_URI, {
       uri: "/",
     }),
     wpFetch<{ services: { nodes: ServiceNode[] } }>(GET_SERVICES_LIST),
+    wpFetch<{ posts: { nodes: HomeBlogPost[] } }>(GET_POSTS_LIST, {
+      first: 12,
+    }),
   ]);
 
   const page = pageData.page ?? null;
   const pageType = normalizePageType(page?.pageSettings?.pageType);
   const services = servicesData.services?.nodes ?? [];
+  const posts = postsData.posts?.nodes ?? [];
 
   return {
     props: {
       page,
       pageType,
       services,
+      posts,
     },
     revalidate: 60,
   };

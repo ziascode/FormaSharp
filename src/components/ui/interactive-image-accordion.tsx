@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 // --- Data for the image accordion ---
 const accordionItems = [
@@ -100,12 +101,9 @@ export function LandingAccordionItem() {
             Our process is designed to help you bring your ideas to life. We start with a conversation to understand your needs and goals. Then we create a detailed plan for the project. We then execute the plan and deliver the final product.
             </p>
             <div className="mt-8">
-              <a
-                href="#contact"
-                
-              >
-                <button className='button-primary'>Book a Consultation</button>
-              </a>
+              <Link href="/contact" className="button-primary inline-block">
+                Book a Consultation
+              </Link>
             </div>
           </div>
 

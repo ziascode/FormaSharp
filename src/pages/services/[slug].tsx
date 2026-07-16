@@ -32,7 +32,7 @@ export default function ServiceDetail({ service }: ServicePageProps) {
         description={service.excerpt ?? undefined}
         canonical={service.uri}
       />
-      <article className="mx-auto max-w-3xl px-6 py-20">
+      <article className="mx-auto max-w-3xl px-6 py-24 md:py-32">
         <h1 className="mb-6 text-4xl font-semibold tracking-tight">
           {service.title}
         </h1>

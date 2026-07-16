@@ -519,7 +519,7 @@ export default function PatentIpPage() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="relative overflow-hidden bg-[linear-gradient(to_bottom_right,#121926,#01628a)] px-6 py-20 md:py-28">
+      <section className="relative overflow-hidden bg-[linear-gradient(to_bottom_right,#121926,#01628a)] px-6 py-24 md:py-32">
         <div className="relative z-10 mx-auto max-w-3xl text-center">
           <h2 className="!mb-4 !text-3xl !font-bold !leading-tight !tracking-tight !text-white md:!text-4xl">
             Continue Developing Your Product With FormaSharp

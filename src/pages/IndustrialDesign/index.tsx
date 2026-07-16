@@ -261,7 +261,7 @@ function IndustrialDesign() {
       </div>
 
       {/* PROBLEM RECOGNITION */}
-      <section className="bg-[#f8f9fa] py-16 text-left md:py-24 lg:py-28">
+      <section className="bg-[#f8f9fa] py-24 text-left md:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16 xl:gap-20">
             <div className="text-left lg:col-span-5">
@@ -279,9 +279,9 @@ function IndustrialDesign() {
                 it feels, and how effectively it communicates value to the end
                 user.
               </p>
-              <button type="button" className="button-tertiary mt-10 w-fit">
+              <Link href="/contact" className="button-tertiary mt-10 inline-block w-fit">
                 Book a Consultation →
-              </button>
+              </Link>
             </div>
 
             <div className="w-full lg:col-span-7">
@@ -325,7 +325,7 @@ function IndustrialDesign() {
       </section>
 
       {/* WHAT SERVICES INCLUDE */}
-      <section className="border-y border-black/5 bg-stone-50 py-16 md:py-24">
+      <section className="border-y border-black/5 bg-stone-50 py-24 md:py-32">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
             <div>
@@ -381,7 +381,7 @@ function IndustrialDesign() {
       {/* CAPABILITIES */}
       <section
         id="capabilities"
-        className="border-y border-black/5 bg-white py-16 md:py-24"
+        className="border-y border-black/5 bg-white py-24 md:py-32"
       >
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-12 max-w-3xl md:mb-16">

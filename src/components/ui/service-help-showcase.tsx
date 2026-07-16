@@ -90,8 +90,8 @@ export function ServiceHelpShowcase({
   cards,
 }: ServiceHelpShowcaseProps) {
   return (
-    <section className="bg-[#FAFAFA] pb-16 pt-12 md:pb-24 md:pt-16">
-      <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 sm:px-6 lg:flex-row lg:gap-16">
+    <section className="bg-[#FAFAFA] px-6 py-24 md:py-32">
+      <div className="mx-auto flex max-w-7xl flex-col gap-10 lg:flex-row lg:gap-16">
         <div className="h-fit shrink-0 lg:sticky lg:top-[calc(7rem+5vh)] lg:w-[340px]">
           <h2
             className="!mb-6 !text-4xl font-bold !leading-[1.1] text-neutral-900 md:!text-5xl"

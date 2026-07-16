@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ArrowLeft, ArrowRight, Check, Mail, Phone, User } from "lucide-react";
+import { ArrowLeft, ArrowRight, Building2, Check, Mail, Phone, User } from "lucide-react";
 import Seo from "@/components/Seo";
 import {
   BUDGET_OPTIONS,
@@ -227,11 +227,12 @@ export default function RequestAQuotePage() {
                           autoComplete="tel"
                         />
                         <Field
-                          label="Company"
+                          label="Company Name"
                           name="company"
                           value={form.company}
                           onChange={handleChange}
                           optional
+                          icon={<Building2 className="size-4" />}
                           autoComplete="organization"
                         />
                       </div>
