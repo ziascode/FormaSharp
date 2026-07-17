@@ -88,12 +88,14 @@ const LOGO_SOLID =
 
 export default function Layout({ children }: LayoutProps) {
   const [isSolidNav, setIsSolidNav] = useState(false);
+  const [showMobileCta, setShowMobileCta] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMobileMenu, setOpenMobileMenu] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => {
       setIsSolidNav(window.scrollY > window.innerHeight * 0.5);
+      setShowMobileCta(window.scrollY > window.innerHeight * 0.6);
     };
 
     onScroll();
@@ -388,12 +390,14 @@ export default function Layout({ children }: LayoutProps) {
       </header>
       <main className="flex-1">{children}</main>
       <Footer />
-      <Link
-        href="/contact#book-consultation"
-        className="fixed bottom-5 right-5 z-40 rounded-full bg-[#ff6726] px-5 py-3 text-xs font-bold uppercase tracking-[0.08em] text-white shadow-[0_10px_30px_rgba(0,0,0,0.28)] transition-transform active:scale-95 md:hidden"
-      >
-        Book a consultation
-      </Link>
+      {showMobileCta && (
+        <Link
+          href="/contact#book-consultation"
+          className="fixed bottom-5 right-5 z-40 rounded-full bg-[#ff6726] px-6 py-4 text-[0.8rem] font-bold uppercase tracking-[0.08em] text-white shadow-[0_10px_30px_rgba(0,0,0,0.28)] transition-transform active:scale-95 md:hidden"
+        >
+          Book a consultation
+        </Link>
+      )}
       <ExitIntentPopup />
     </div>
   );
