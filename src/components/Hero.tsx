@@ -14,17 +14,56 @@ export default function Hero() {
     const video = videoRef.current;
     if (!video) return;
 
+    // iOS requires these as live properties (not just JSX attrs) before play().
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+
+    let cancelled = false;
+
     const tryPlay = () => {
-      video.play().catch(() => {});
+      if (cancelled) return;
+      const playPromise = video.play();
+      if (playPromise === undefined) return;
+      playPromise.catch(() => {
+        // Autoplay blocked (Low Power Mode, etc.) — unlock on first gesture.
+        const unlock = () => {
+          video.muted = true;
+          video.play().catch(() => {});
+          window.removeEventListener("touchstart", unlock);
+          window.removeEventListener("click", unlock);
+        };
+        window.addEventListener("touchstart", unlock, { once: true, passive: true });
+        window.addEventListener("click", unlock, { once: true });
+      });
     };
 
     if (video.readyState >= 2) {
       tryPlay();
     } else {
       video.addEventListener("loadeddata", tryPlay, { once: true });
+      video.addEventListener("canplay", tryPlay, { once: true });
+      video.load();
     }
 
-    return () => video.removeEventListener("loadeddata", tryPlay);
+    // Retry when the hero scrolls into view (e.g. back-navigation).
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) tryPlay();
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(video);
+
+    return () => {
+      cancelled = true;
+      observer.disconnect();
+      video.removeEventListener("loadeddata", tryPlay);
+      video.removeEventListener("canplay", tryPlay);
+    };
   }, []);
 
   const scrollToServices = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -44,14 +83,16 @@ export default function Hero() {
     <div className="relative isolate m-0 flex min-h-[100svh] flex-col overflow-hidden bg-[#111] md:h-[110vh] md:min-h-0">
       <video
         ref={videoRef}
-        className="pointer-events-none absolute inset-0 h-full w-full origin-center object-cover object-left scale-[1.35] translate-x-[18%] md:translate-x-0 md:scale-100 md:object-center"
-        src={HERO_VIDEO_SRC}
+        className="pointer-events-none absolute inset-0 h-full w-full origin-center object-cover object-left scale-[1.35] translate-x-[0%] md:translate-x-0 md:scale-100 md:object-center"
         autoPlay
         muted
         playsInline
         preload="auto"
+        loop
         aria-hidden
-      />
+      >
+        <source src={HERO_VIDEO_SRC} type="video/mp4" />
+      </video>
 
       <div className="relative z-10 flex flex-1 flex-col justify-center px-6 sm:px-10 lg:px-16 xl:px-24">
         <div className="mx-auto w-full max-w-7xl">
