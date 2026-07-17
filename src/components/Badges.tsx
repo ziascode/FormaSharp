@@ -1,42 +1,63 @@
-import React from 'react';
-import ScrollyVideo from 'scrolly-video/dist/ScrollyVideo.cjs.jsx';
+import React from "react";
+import ScrollyVideo from "scrolly-video/dist/ScrollyVideo.cjs.jsx";
 import { TextReveal } from "@/components/ui/text-reveal";
 import ImageMasking1 from "@/components/ui/image-masking-1";
 import { section } from "@/lib/sectionSpacing";
 
-function Badges() {
+const COPY =
+  "We are an engineering partner focused on developing products that can actually be built.";
+const IMAGE_SRC =
+  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/3dproduct-opt.jpg";
+const VIDEO_SRC =
+  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/hero-animation.mov";
+
+function ScrollVideo({ className }: { className?: string }) {
   return (
-    <div className='bg-white -mb-[20vh]'>
-    <div className={`bottom-section ${section.container} py-24 md:py-32`}>
-
-              {/* Top section */}
-            <div className='flex flex-row items-center justify-center bg-cover bg-center py-24'>
-
-                {/* Hero Title Text*/}
-                <div className='w-1/2 -translate-y-[200px]'>
-                    <TextReveal className='color-black!important'>We are an engineering partner focused on developing products that can actually be built.</TextReveal>
-                    {/* <TextReveal className='color-black!important'>Every project is approached with a focus on performance, manufacturability, and long-term reliability.</TextReveal> */}
-                    <ImageMasking1 imageSrc="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/3dproduct-opt.jpg" alt="3D printed product" />
-                
-                </div>
-                
-
-                {/* Hero Scroll Video */}
-                <div className='w-1/2 h-[130vh]  -translate-y-[150px] '>
-                    <ScrollyVideo 
-                    videoPercentage={0}
-                    transitionSpeed={16}
-                    frameThreshold={0.05}
-                    useWebCodecs
-                    full
-                    src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/hero-animation.mov" />
-                </div>
-            </div>
-
-            
-        </div>
-        </div>
-  )
+    <div className={className}>
+      <ScrollyVideo
+        videoPercentage={0}
+        transitionSpeed={16}
+        frameThreshold={0.05}
+        useWebCodecs
+        full
+        src={VIDEO_SRC}
+      />
+    </div>
+  );
 }
 
-export default Badges
+function Badges() {
+  return (
+    <div className="bg-white -mb-[20vh]">
+      {/* Mobile: image flush to section above → text → video */}
+      <div className="md:hidden">
+        <img
+          src={IMAGE_SRC}
+          alt="3D printed product"
+          className="block h-auto w-full object-cover"
+        />
+        <div className={`${section.container} pt-24 pb-12`}>
+          <TextReveal className="!h-auto !translate-y-0 !overflow-visible !px-0 pb-6">
+            {COPY}
+          </TextReveal>
+          <ScrollVideo className="-mt-2 h-[70vh] w-full -translate-y-[45%]" />
+        </div>
+      </div>
+
+      {/* Desktop: side-by-side (unchanged) */}
+      <div
+        className={`bottom-section ${section.container} hidden py-24 md:block md:py-32`}
+      >
+        <div className="flex flex-row items-center justify-center bg-cover bg-center py-24">
+          <div className="w-1/2 -translate-y-[200px]">
+            <TextReveal className="color-black!important">{COPY}</TextReveal>
+            <ImageMasking1 imageSrc={IMAGE_SRC} alt="3D printed product" />
+          </div>
+          <ScrollVideo className="h-[130vh] w-1/2 -translate-y-[150px]" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Badges;

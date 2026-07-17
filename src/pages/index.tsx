@@ -107,7 +107,7 @@ export default function Home({ page, pageType, services, posts }: HomePageProps)
       <StatsBand />
       <How />
       {/* <ServiceCards /> */}
-      <Video />
+      {/* <Video /> */}
       <WhyChooseUs />
       <HomeBlogSlider posts={posts} />
       <FinalCta />

@@ -44,7 +44,7 @@ export default function Hero() {
     <div className="relative isolate m-0 flex min-h-[100svh] flex-col overflow-hidden bg-[#111] md:h-[110vh] md:min-h-0">
       <video
         ref={videoRef}
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        className="pointer-events-none absolute inset-0 h-full w-full origin-center object-cover object-left scale-[1.35] translate-x-[18%] md:translate-x-0 md:scale-100 md:object-center"
         src={HERO_VIDEO_SRC}
         autoPlay
         muted
@@ -56,12 +56,12 @@ export default function Hero() {
       <div className="relative z-10 flex flex-1 flex-col justify-center px-6 sm:px-10 lg:px-16 xl:px-24">
         <div className="mx-auto w-full max-w-7xl">
           <div className="max-w-2xl text-left text-white">
-            <span className="mb-6 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-white/90">
+            <span className="mb-4 inline-flex whitespace-nowrap border-0 bg-transparent px-0 py-0 text-[10px] font-medium uppercase tracking-[0.14em] text-white/90 md:mb-6 md:rounded-full md:border md:border-white/20 md:bg-white/10 md:px-4 md:py-2 md:text-xs md:tracking-[0.18em]">
               Mechanical engineering & product development
             </span>
 
             <h1
-              className="!mb-5 max-w-xl !text-4xl !leading-[1.05] font-bold text-white md:!text-5xl lg:!text-6xl"
+              className="!mb-5 max-w-[60vw] !text-4xl !leading-[1.05] font-bold text-white md:max-w-xl md:!text-5xl lg:!text-6xl"
               style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
             >
               Engineering ideas into products.
@@ -89,8 +89,8 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 py-8">
-        <div className="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-16 xl:px-24">
+      <div className="relative z-10 mt-auto p-0 md:py-8">
+        <div className="w-full max-w-none px-0 md:mx-auto md:max-w-7xl md:px-10 lg:px-16 xl:px-24">
           <ExtraBadges contentAlign="start" className="[&>div]:!mt-0" />
         </div>
       </div>

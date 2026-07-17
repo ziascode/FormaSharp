@@ -11,6 +11,7 @@ import {
   useSpring,
   useTransform,
 } from "motion/react"
+import { cn } from "@/lib/utils"
 
 export interface TextRevealProps extends ComponentPropsWithoutRef<"div"> {
   children: string
@@ -40,7 +41,10 @@ export const TextReveal: FC<TextRevealProps> = ({ children, className }) => {
   return (
     <section
       ref={sectionRef}
-      className="relative z-0 flex h-[30vh] items-start justify-start overflow-hidden bg-transparent px-4 -translate-y-[10vh] "
+      className={cn(
+        "relative z-0 flex h-[30vh] items-start justify-start overflow-hidden bg-transparent px-4 -translate-y-[10vh]",
+        className
+      )}
     >
       <div className="mx-auto w-full max-w-5xl">
         <span className="flex flex-wrap justify-start whitespace-pre-wrap text-center text-3xl font-semibold tracking-tight text-black/12 md:text-4xl lg:text-5xl dark:text-white/12">

@@ -25,6 +25,21 @@ const itemVariants: Variants = {
   },
 };
 
+const BADGES = [
+  {
+    src: "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/03/credibility-badge-for-certified-solidworks-associate.jpeg",
+    label: "Certified SolidWorks Associate",
+  },
+  {
+    src: "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/03/credibility-logo-for-certificate-of-authorization-designation-from-peo.jpeg",
+    label: "CofA from Professional Engineers Ontario",
+  },
+  {
+    src: "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/03/credibility-badge-for-NX-design-associate.jpeg",
+    label: "NX Design Associate from Siemens",
+  },
+] as const;
+
 interface ExtraBadgesProps {
   className?: string;
   /** When "start", badge row aligns left (e.g. under left-aligned hero). */
@@ -43,62 +58,60 @@ export default function ExtraBadges({
       viewport={{ once: true, amount: 0.3 }}
       variants={containerVariants}
     >
-      {/* Credibility Badges */}
+      {/* Mobile: full-bleed 3-col strip — logos aligned across columns */}
+      <div className="mt-0 grid w-full grid-cols-3 items-stretch gap-0 border border-white/15 md:hidden">
+        {BADGES.map((badge, index) => (
+          <motion.div
+            key={badge.label}
+            variants={itemVariants}
+            className={cn(
+              "flex flex-col items-center bg-black/25 px-2 pb-4 pt-4 text-center backdrop-blur-sm",
+              index > 0 && "border-l border-white/15"
+            )}
+          >
+            <div className="mb-2 flex h-11 w-full shrink-0 items-center justify-center">
+              <div className="flex h-10 w-10 items-center justify-center overflow-hidden bg-white">
+                <img
+                  className="h-full w-full object-contain p-1"
+                  src={badge.src}
+                  alt=""
+                />
+              </div>
+            </div>
+            <span className="w-full text-[10px] font-medium leading-tight text-white/80">
+              {badge.label}
+            </span>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Desktop: rounded pills */}
       <div
         className={cn(
-          "mt-16 flex max-w-5xl flex-row flex-wrap items-center gap-2 sm:gap-4",
+          "mt-16 hidden max-w-5xl flex-row flex-wrap items-center gap-4 md:flex",
           contentAlign === "start"
             ? "mx-0 justify-start"
             : "mx-auto justify-center"
         )}
       >
-        <motion.div
-          variants={itemVariants}
-          className="flex max-w-full flex-row items-center gap-2 rounded-full border border-white/10 bg-white/5 py-1.5 pl-1.5 pr-3 backdrop-blur-sm sm:gap-4 sm:py-2 sm:pl-2 sm:pr-5"
-        >
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white sm:h-12 sm:w-12">
-            <img
-              className="h-full w-full object-contain p-1"
-              src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/03/credibility-badge-for-certified-solidworks-associate.jpeg"
-              alt=""
-            />
-          </div>
-          <span className="text-xs font-medium leading-tight text-white/80 sm:text-sm">
-            Certified SolidWorks Associate
-          </span>
-        </motion.div>
-
-        <motion.div
-          variants={itemVariants}
-          className="flex max-w-full flex-row items-center gap-2 rounded-full border border-white/10 bg-white/5 py-1.5 pl-1.5 pr-3 backdrop-blur-sm sm:gap-4 sm:py-2 sm:pl-2 sm:pr-5"
-        >
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white sm:h-12 sm:w-12">
-            <img
-              className="h-full w-full object-contain p-1"
-              src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/03/credibility-logo-for-certificate-of-authorization-designation-from-peo.jpeg"
-              alt=""
-            />
-          </div>
-          <span className="text-xs font-medium leading-tight text-white/80 sm:text-sm">
-            CofA from Professional Engineers Ontario
-          </span>
-        </motion.div>
-
-        <motion.div
-          variants={itemVariants}
-          className="flex max-w-full flex-row items-center gap-2 rounded-full border border-white/10 bg-white/5 py-1.5 pl-1.5 pr-3 backdrop-blur-sm sm:gap-4 sm:py-2 sm:pl-2 sm:pr-5"
-        >
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white sm:h-12 sm:w-12">
-            <img
-              className="h-full w-full object-contain p-1"
-              src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/03/credibility-badge-for-NX-design-associate.jpeg"
-              alt=""
-            />
-          </div>
-          <span className="text-xs font-medium leading-tight text-white/80 sm:text-sm">
-            NX Design Associate from Siemens
-          </span>
-        </motion.div>
+        {BADGES.map((badge) => (
+          <motion.div
+            key={badge.label}
+            variants={itemVariants}
+            className="flex max-w-full flex-row items-center gap-4 rounded-full border border-white/10 bg-white/5 py-2 pl-2 pr-5 backdrop-blur-sm"
+          >
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white">
+              <img
+                className="h-full w-full object-contain p-1"
+                src={badge.src}
+                alt=""
+              />
+            </div>
+            <span className="text-sm font-medium leading-tight text-white/80">
+              {badge.label}
+            </span>
+          </motion.div>
+        ))}
       </div>
     </motion.div>
   );

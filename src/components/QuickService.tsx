@@ -286,13 +286,9 @@ export default function QuickService() {
         .fs-mobile-grid .fs-card {
           width: 100%;
           flex: none;
-          min-height: 0;
-          aspect-ratio: 1 / 1;
-          padding: 14px 14px;
-        }
-        .fs-mobile-grid .fs-card.fs-card-span {
           aspect-ratio: auto;
           min-height: 160px;
+          padding: 14px 14px;
         }
         .fs-mobile-grid .fs-icontile {
           width: 40px; height: 40px;
@@ -319,12 +315,11 @@ export default function QuickService() {
           Our Services
         </h2>
 
-        {/* Mobile: 2-col grid, 7th spans full width, appear-on-scroll */}
-        <div className="fs-mobile-grid grid grid-cols-2 gap-3 md:hidden">
+        {/* Mobile: single-column stack, appear-on-scroll */}
+        <div className="fs-mobile-grid grid grid-cols-1 gap-3 md:hidden">
           {SERVICES.map((service, i) => (
             <motion.div
               key={service.title}
-              className={i === 6 ? "col-span-2" : undefined}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
@@ -334,10 +329,7 @@ export default function QuickService() {
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-              <Link
-                href={service.href}
-                className={`fs-card${i === 6 ? " fs-card-span" : ""}`}
-              >
+              <Link href={service.href} className="fs-card">
                 <div className="fs-icontile">{service.icon}</div>
                 <div style={{ flex: 1 }} />
                 <h3 className="fs-title">{service.title}</h3>
