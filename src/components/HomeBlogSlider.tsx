@@ -87,7 +87,7 @@ export default function HomeBlogSlider({ posts }: HomeBlogSliderProps) {
           <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
             Insights
           </div>
-          <h2 className="!mb-0 text-3xl font-bold tracking-tight text-black md:text-4xl">
+          <h2 className="!mb-0 !text-3xl font-bold tracking-tight text-black md:!text-4xl">
             From the <span className="text-[#ff6726]">blog</span>
           </h2>
         </div>
@@ -108,7 +108,7 @@ export default function HomeBlogSlider({ posts }: HomeBlogSliderProps) {
               <article
                 key={`${post.id}-${i}`}
                 data-blog-card
-                className="w-[85%] shrink-0 sm:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-4rem)/3)]"
+                className="w-[min(85%,20rem)] shrink-0 sm:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-4rem)/3)]"
               >
                 <Link href={`/blog/${post.slug}`} className="group block">
                   <div className="overflow-hidden bg-neutral-100">
@@ -124,12 +124,12 @@ export default function HomeBlogSlider({ posts }: HomeBlogSliderProps) {
                     )}
                   </div>
                   <h3
-                    className="!mb-3 !mt-5 !text-2xl !font-bold !leading-tight !text-[#121926] transition-colors group-hover:!text-[#01628a]"
+                    className="!mb-3 !mt-5 !text-xl !font-bold !leading-tight !text-[#121926] transition-colors group-hover:!text-[#01628a] md:!text-2xl"
                     style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
                   >
                     {post.title}
                   </h3>
-                  <span className="text-base !text-[#121926] transition-colors group-hover:!text-[#ff6726]">
+                  <span className="text-sm !text-[#121926] transition-colors group-hover:!text-[#ff6726] md:text-base">
                     Learn More →
                   </span>
                 </Link>

@@ -165,7 +165,7 @@ function How() {
           {/* LEFT — sticky heading + description */}
           <div className="h-fit shrink-0 lg:sticky lg:top-[calc(7rem+5vh)] lg:w-[340px]">
             <h2
-              className="!mb-4 !text-4xl font-bold !leading-[1.1] text-neutral-900 md:!mb-6 md:!text-5xl"
+              className="!mb-4 !text-3xl font-bold !leading-[1.1] text-neutral-900 md:!mb-6 md:!text-5xl"
               style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
             >
               How we can <span className="text-[#ff6726]">help you</span>

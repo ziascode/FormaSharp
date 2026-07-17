@@ -283,31 +283,95 @@ export default function QuickService() {
         .fs-row {
           display: flex; gap: 20px; justify-content: center;
         }
-        @media (max-width: 900px) {
-          .fs-row {
-            justify-content: flex-start;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            padding-bottom: 8px;
-            scrollbar-width: none;
-          }
-          .fs-row::-webkit-scrollbar { display: none; }
-          .fs-card {
-            flex: 0 0 min(320px, 85vw);
-            scroll-snap-align: start;
-          }
+        .fs-mobile-grid .fs-card {
+          width: 100%;
+          flex: none;
+          min-height: 0;
+          aspect-ratio: 1 / 1;
+          padding: 14px 14px;
+        }
+        .fs-mobile-grid .fs-card.fs-card-span {
+          aspect-ratio: auto;
+          min-height: 160px;
+        }
+        .fs-mobile-grid .fs-icontile {
+          width: 40px; height: 40px;
+        }
+        .fs-mobile-grid .fs-icontile svg {
+          width: 24px; height: 24px;
+        }
+        .fs-mobile-grid .fs-title {
+          font-size: 15px; margin-bottom: 6px; line-height: 1.15;
+        }
+        .fs-mobile-grid .fs-desc {
+          font-size: 12px; line-height: 1.4;
+        }
+        .fs-mobile-grid .fs-see {
+          font-size: 9px; letter-spacing: 0.08em;
         }
       `}</style>
 
       <div className={section.container}>
         <h2
-          className={`${section.heading} !text-4xl font-bold !leading-[1.1] text-neutral-900 md:!text-5xl`}
+          className={`${section.heading} !text-3xl font-bold !leading-[1.1] text-neutral-900 md:!text-5xl`}
           style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
         >
           Our Services
         </h2>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+        {/* Mobile: 2-col grid, 7th spans full width, appear-on-scroll */}
+        <div className="fs-mobile-grid grid grid-cols-2 gap-3 md:hidden">
+          {SERVICES.map((service, i) => (
+            <motion.div
+              key={service.title}
+              className={i === 6 ? "col-span-2" : undefined}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{
+                duration: 0.55,
+                delay: Math.min(i, 5) * 0.05,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              <Link
+                href={service.href}
+                className={`fs-card${i === 6 ? " fs-card-span" : ""}`}
+              >
+                <div className="fs-icontile">{service.icon}</div>
+                <div style={{ flex: 1 }} />
+                <h3 className="fs-title">{service.title}</h3>
+                <p className="fs-desc">{service.description}</p>
+                <div style={{ flex: 1 }} />
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-end",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <span className="fs-see">[ LEARN MORE&nbsp;&nbsp;+ ]</span>
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "7px 7px",
+                      gridTemplateRows: "7px 7px",
+                      gap: 4,
+                    }}
+                  >
+                    <div />
+                    <div className="fs-sq fs-sq-half" />
+                    <div className="fs-sq" />
+                    <div className="fs-sq" />
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Desktop: scroll-linked rows — unchanged */}
+        <div className="hidden flex-col gap-5 md:flex">
           <ServiceRow services={TOP_ROW} style={{ x: topX }} />
           <ServiceRow services={BOTTOM_ROW} style={{ x: bottomX }} />
         </div>

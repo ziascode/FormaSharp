@@ -12,7 +12,7 @@ function FinalCta() {
         <div className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726] md:mb-6">
           Get Started
         </div>
-        <h1 className="!mb-6 !text-6xl !leading-none font-bold text-white md:!mb-8">
+        <h1 className="!mb-6 !text-4xl !leading-[1.05] font-bold text-white md:!mb-8 md:!text-6xl md:!leading-none">
           Turn your ideas into products that can actually be{" "}
           <span className="italic text-[#ff6726]">built</span>
         </h1>

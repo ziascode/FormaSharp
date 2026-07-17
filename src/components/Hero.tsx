@@ -41,7 +41,7 @@ export default function Hero() {
   };
 
   return (
-    <div className="relative isolate m-0 flex h-[110vh] flex-col overflow-hidden bg-[#111]">
+    <div className="relative isolate m-0 flex min-h-[100svh] flex-col overflow-hidden bg-[#111] md:h-[110vh] md:min-h-0">
       <video
         ref={videoRef}
         className="pointer-events-none absolute inset-0 h-full w-full object-cover"
@@ -61,25 +61,25 @@ export default function Hero() {
             </span>
 
             <h1
-              className="!mb-5 max-w-xl !text-4xl !leading-[1.05] font-bold text-white sm:!text-5xl lg:!text-6xl"
+              className="!mb-5 max-w-xl !text-4xl !leading-[1.05] font-bold text-white md:!text-5xl lg:!text-6xl"
               style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
             >
               Engineering ideas into products.
             </h1>
 
-            <p className="!mb-8 max-w-lg !text-base !text-white/85 sm:!text-lg">
+            <p className="!mb-8 max-w-lg !text-base !text-white/85 md:!text-lg">
               Mechanical design, DFM, and 3D prototyping for startups and
               manufacturers who need parts that work the first time on the line.
             </p>
 
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link href="/contact" className="button-primary inline-block text-center">
+            <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center">
+              <Link href="/contact" className="button-primary inline-block w-full text-center sm:w-auto">
                 Request quote
               </Link>
               <a
                 href="#services"
                 onClick={scrollToServices}
-                className="button-secondary inline-flex items-center justify-center gap-2 text-center"
+                className="button-secondary inline-flex w-full items-center justify-center gap-2 text-center sm:w-auto"
               >
                 Explore Our Services
                 <ArrowRight className="size-4" aria-hidden />

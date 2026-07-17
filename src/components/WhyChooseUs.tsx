@@ -8,7 +8,7 @@ function WhyChooseUs() {
         <div className={section.container}>
             <div className="mx-auto mb-12 max-w-4xl text-center md:mb-16">
             <span className="pill-badge">Why choose us</span>
-            <h2 className='!mb-0 !text-4xl font-bold !leading-[1.2] text-white md:!text-5xl'>Choosing the right engineering partner can determine whether a product succeeds or struggles during development and production</h2>
+            <h2 className='!mb-0 !text-3xl font-bold !leading-[1.2] text-white md:!text-5xl'>Choosing the right engineering partner can determine whether a product succeeds or struggles during development and production</h2>
             </div>
         <FeaturesSectionDemo2 />
         </div>

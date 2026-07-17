@@ -86,9 +86,9 @@ function StatCell({
           isDark ? "text-white" : "text-neutral-950",
         )}
       >
-        <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">{count}</span>
+        <span className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl">{count}</span>
         {stat.suffix && (
-          <span className="text-xl text-[#ff6726] sm:text-2xl md:text-3xl lg:text-4xl">
+          <span className="text-lg text-[#ff6726] sm:text-2xl md:text-3xl lg:text-4xl">
             {stat.suffix}
           </span>
         )}

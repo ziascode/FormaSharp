@@ -8,7 +8,7 @@ import Seo from "@/components/Seo";
 import StatsBand from "@/components/StatsBand";
 
 const LOGO_SRC =
-  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/formasharp-logo.webp";
+  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/logo-light2.png";
 
 const IMG = {
   pGraphic:
@@ -118,7 +118,7 @@ export default function About() {
       />
 
       {/* HERO */}
-      <section className="relative flex min-h-[60vh] items-center justify-center overflow-hidden bg-[#0a0f1e]">
+      <section className="relative overflow-hidden bg-[#0a0f1e]">
         {/* Blue glow, top-right */}
         <div
           className="pointer-events-none absolute inset-0"
@@ -128,24 +128,34 @@ export default function About() {
           }}
           aria-hidden
         />
-        <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-6 py-24 text-center">
-          <div className="mb-8 inline-flex items-center gap-3 font-mono text-xs font-semibold uppercase tracking-[0.25em] text-[#ff6726]">
-            <span aria-hidden>&#9670;</span>
-            About Us
-          </div>
-          <div className="flex flex-col items-center gap-5 md:flex-row md:gap-7">
-            
+        <div className="relative z-10  mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-6 pb-16 pt-24 md:grid-cols-2 md:gap-16 md:pb-20 md:pt-[30vh] lg:px-10">
+          <div className="flex flex-col items-start text-left">
+            <h1 className="!mb-4 !text-2xl !font-light !leading-none !text-white md:!text-3xl">
+              About Us
+            </h1>
             <img
               src={LOGO_SRC}
               alt="FormaSharp"
-              className="h-18 w-auto md:h-32"
+              className="h-24 w-auto md:h-36 lg:h-44"
               loading="eager"
             />
+          </div>
+
+          <div className="justify-self-end text-left md:max-w-xl">
+            <p className="!mb-0 !text-base !leading-relaxed !text-white/80 md:!text-lg">
+              FormaSharp Product Design Inc. is a proudly Canadian dedicated
+              product design company specializing in CAD services and end-to-end
+              design support. With a strong foundation in SolidWorks and
+              real-world experience, we help innovators, startups, and
+              manufacturers bring ideas to life—efficiently and accurately.
+            </p>
           </div>
         </div>
       </section>
 
-      <StatsBand variant="light" />
+      <div className="-mt-px">
+        <StatsBand variant="light" />
+      </div>
 
       {/* ABOUT THE FOUNDER */}
       <section className="bg-[#f8f9fa] py-24 md:py-32">
