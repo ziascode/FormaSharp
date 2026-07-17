@@ -83,7 +83,7 @@ export default function Hero() {
     <div className="relative isolate m-0 flex min-h-[100svh] flex-col overflow-hidden bg-[#111] md:h-[110vh] md:min-h-0">
       <video
         ref={videoRef}
-        className="pointer-events-none absolute inset-0 h-full w-full origin-center object-cover object-[52%_center] scale-[1.15] md:translate-x-0 md:scale-100 md:object-center"
+        className="pointer-events-none absolute inset-0 h-full w-full origin-center object-cover object-[48%_center] scale-[1.15] md:translate-x-0 md:scale-100 md:object-center"
         autoPlay
         muted
         playsInline

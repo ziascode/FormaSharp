@@ -1,9 +1,10 @@
 "use client";
 
-import React, { type ReactNode } from "react";
+import React, { type ReactNode, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { section } from "@/lib/sectionSpacing";
+import { cn } from "@/lib/utils";
 
 type HelpCardData = {
   title: string;
@@ -105,6 +106,19 @@ const CARDS: HelpCardData[] = [
 ];
 
 function HelpCard({ card, index }: { card: HelpCardData; index: number }) {
+  const [expanded, setExpanded] = useState(false);
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // On touch devices, first tap expands; second navigates
+    const canHover = window.matchMedia(
+      "(hover: hover) and (pointer: fine)",
+    ).matches;
+    if (!canHover && !expanded) {
+      e.preventDefault();
+      setExpanded(true);
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 60 }}
@@ -118,38 +132,75 @@ function HelpCard({ card, index }: { card: HelpCardData; index: number }) {
     >
       <Link
         href={card.href}
-        className="group relative block min-h-[340px] overflow-hidden rounded-3xl"
+        onClick={handleClick}
+        onMouseLeave={() => setExpanded(false)}
+        className={cn(
+          "group relative block min-h-[340px] overflow-hidden rounded-3xl",
+          expanded && "is-expanded",
+        )}
       >
-        {/* Background image with zoom on hover */}
         <img
           src={card.image}
           alt=""
-          className="absolute inset-0 size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-110"
+          className="absolute inset-0 size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-110 group-[.is-expanded]:scale-110"
         />
 
-        {/* Navy scrim for legibility */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#121926]/90 via-[#121926]/65 to-[#121926]/25" />
+        {/* Default: soft scrim only under bottom-left (logo + title) */}
+        <div
+          className={cn(
+            "pointer-events-none absolute bottom-0 left-0 h-[55%] w-[75%] bg-[radial-gradient(ellipse_at_bottom_left,rgba(18,25,38,0.94)_0%,rgba(18,25,38,0.55)_42%,transparent_72%)] transition-opacity duration-500",
+            "group-hover:opacity-0 group-[.is-expanded]:opacity-0",
+          )}
+          aria-hidden
+        />
 
-        {/* Content */}
-        <div className="relative z-10 flex min-h-[340px] flex-col justify-center gap-3 px-8 py-14 lg:px-14">
+        {/* Hover: stronger full-card gradient for all text */}
+        <div
+          className={cn(
+            "pointer-events-none absolute inset-0 bg-gradient-to-t from-[#121926]/95 via-[#121926]/70 to-[#121926]/25 opacity-0 transition-opacity duration-500",
+            "group-hover:opacity-100 group-[.is-expanded]:opacity-100",
+          )}
+          aria-hidden
+        />
+
+        {/* Content anchored bottom-left — expands upward on hover */}
+        <div className="relative z-10 flex min-h-[340px] flex-col justify-end px-8 pb-8 pt-14 lg:px-12 lg:pb-10">
           <div>{card.icon}</div>
 
           <h3
-            className="!mb-0 max-w-xl !text-2xl font-semibold !text-white md:!text-3xl"
+            className="!mb-0 mt-3 max-w-xl !text-2xl font-semibold !text-white md:!text-3xl"
             style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
           >
             {card.title}
           </h3>
 
-          <p className="!mb-0 max-w-xl !text-base !text-white/85">
-            <span className="font-semibold !text-white">{card.question}</span>
-            <br />
-            {card.description}
-          </p>
+          <div
+            className={cn(
+              "grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out",
+              "group-hover:grid-rows-[1fr] group-[.is-expanded]:grid-rows-[1fr]",
+            )}
+          >
+            <div className="overflow-hidden">
+              <p
+                className={cn(
+                  "!mb-0 max-w-xl pt-3 !text-base !text-white/85 opacity-0 transition-opacity duration-300 delay-75",
+                  "group-hover:opacity-100 group-[.is-expanded]:opacity-100",
+                )}
+              >
+                <span className="font-semibold !text-white">{card.question}</span>
+                <br />
+                {card.description}
+              </p>
+            </div>
+          </div>
         </div>
 
-        {/* CTA revealed on hover */}
-        <span className="absolute bottom-6 right-6 z-10 inline-flex translate-y-3 items-center gap-2 rounded-full bg-[#ff6726] px-6 py-3 text-sm font-semibold text-[#202020] opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100">
+        <span
+          className={cn(
+            "absolute bottom-6 right-6 z-10 inline-flex translate-y-3 items-center gap-2 rounded-full bg-[#ff6726] px-6 py-3 text-sm font-semibold text-[#202020] opacity-0 transition-all duration-500 ease-out",
+            "group-hover:translate-y-0 group-hover:opacity-100 group-[.is-expanded]:translate-y-0 group-[.is-expanded]:opacity-100",
+          )}
+        >
           Start your project ↗
         </span>
       </Link>
