@@ -93,9 +93,9 @@ export default function Hero() {
         <source src={HERO_VIDEO_SRC} type="video/mp4" />
       </video>
 
-      {/* Mobile-only scrim for text contrast */}
+      {/* Mobile-only scrim — very light in top-left text area */}
       <div
-        className="pointer-events-none absolute inset-0 z-[1] bg-black/45 md:hidden"
+        className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_85%_75%_at_0%_15%,rgba(0,0,0,0.06)_0%,rgba(0,0,0,0.1)_40%,rgba(0,0,0,0.4)_100%)] md:hidden"
         aria-hidden
       />
 
