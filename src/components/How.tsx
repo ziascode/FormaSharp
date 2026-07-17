@@ -201,7 +201,7 @@ function HelpCard({ card, index }: { card: HelpCardData; index: number }) {
             "group-hover:translate-y-0 group-hover:opacity-100 group-[.is-expanded]:translate-y-0 group-[.is-expanded]:opacity-100",
           )}
         >
-          Start your project ↗
+          Start your project
         </span>
       </Link>
     </motion.div>
@@ -224,8 +224,7 @@ function How() {
             <p className={`${section.intro} !text-base text-neutral-600`}>
               Wherever you are in your product journey, whether a first sketch,
               a working concept, or a design headed for the production line, we
-              bring the engineering, design, and prototyping expertise to move
-              it forward.
+              bring the engineering expertise to move your project forward.
             </p>
             <Link href="/contact" className="button-primary inline-block">
               Start your project ↗
