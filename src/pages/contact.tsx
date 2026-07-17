@@ -104,7 +104,10 @@ export default function Contact() {
       />
 
       {/* BOOK + CALENDLY */}
-      <section className="relative min-h-screen overflow-hidden bg-[#0a0f1e] pt-[18vh] pb-10 lg:pb-14">
+      <section
+        id="book-consultation"
+        className="relative min-h-screen scroll-mt-20 overflow-hidden bg-[#0a0f1e] pt-[18vh] pb-10 lg:pb-14"
+      >
         <div
           className="pointer-events-none absolute inset-0"
           style={{

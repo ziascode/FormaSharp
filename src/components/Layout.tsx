@@ -3,7 +3,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import ExitIntentPopup, { openContactPopup } from "@/components/ExitIntentPopup";
 import Footer from "@/components/Footer";
 
@@ -88,6 +88,8 @@ const LOGO_SOLID =
 
 export default function Layout({ children }: LayoutProps) {
   const [isSolidNav, setIsSolidNav] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openMobileMenu, setOpenMobileMenu] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => {
@@ -99,36 +101,63 @@ export default function Layout({ children }: LayoutProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMobileMenuOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [isMobileMenuOpen]);
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+    setOpenMobileMenu(null);
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-white text-neutral-50">
       <header
-        className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-500 ease-out ${
+        className={`fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-white transition-all duration-500 ease-out ${
           isSolidNav
-            ? "border-black/10 bg-white/90 backdrop-blur-xl shadow-[0_14px_40px_rgba(18,25,38,0.12)]"
-            : "border-transparent bg-transparent"
+            ? "md:border-black/10 md:bg-white/90 md:backdrop-blur-xl md:shadow-[0_14px_40px_rgba(18,25,38,0.12)]"
+            : "md:border-transparent md:bg-transparent"
         }`}
       >
         <nav
-          className={`max-w-7xl mx-auto flex max-w-6xl items-center justify-between px-6 md:px-8 transition-all duration-500 ease-out ${
-            isSolidNav ? "py-6" : "py-4"
+          className={`mx-auto flex max-w-7xl items-center justify-between px-5 py-3 transition-all duration-500 ease-out md:px-8 ${
+            isSolidNav ? "md:py-6" : "md:py-4"
           }`}
         >
           <Link
             href="/"
             aria-label="FormaSharp — home"
+            onClick={closeMobileMenu}
             className={`flex items-center transition-opacity duration-300 ${
               isSolidNav ? "opacity-100" : "opacity-95 hover:opacity-100"
             }`}
           >
             <img
-              src={isSolidNav ? LOGO_SOLID : LOGO_TRANSPARENT}
+              src={LOGO_SOLID}
               alt="FormaSharp"
-              className={`w-auto transition-all duration-500 ease-out  ${
+              className="h-10 w-auto md:hidden"
+            />
+            <img
+              src={isSolidNav ? LOGO_SOLID : LOGO_TRANSPARENT}
+              alt=""
+              className={`hidden w-auto transition-all duration-500 ease-out md:block ${
                 isSolidNav ? "h-[2.8rem] md:h-[3.2rem]" : "h-[3.2rem] md:h-[3.6rem]"
               }`}
             />
           </Link>
-          <div className="flex items-center gap-7 md:gap-8 text-base font-medium">
+
+          {/* Desktop navigation */}
+          <div className="hidden items-center gap-7 text-base font-medium md:flex md:gap-8">
             {NAV_ITEMS.map((item) => {
               const triggerClasses = `relative inline-flex items-center gap-1 transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-[#ff6726] after:transition-transform after:duration-300 hover:after:scale-x-100 ${
                 isSolidNav
@@ -236,10 +265,135 @@ export default function Layout({ children }: LayoutProps) {
               Get Started
             </button>
           </div>
+
+          {/* Mobile actions */}
+          <div className="flex items-center gap-2 md:hidden">
+            <Link
+              href="/contact"
+              onClick={closeMobileMenu}
+              className="px-2 py-2 text-[0.7rem] font-bold uppercase tracking-[0.1em] text-[#121926]"
+            >
+              Contact
+            </Link>
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              className="inline-flex size-11 items-center justify-center bg-transparent text-[#121926]"
+            >
+              {isMobileMenuOpen ? (
+                <X className="size-6" strokeWidth={2} aria-hidden />
+              ) : (
+                <Menu className="size-6" strokeWidth={2} aria-hidden />
+              )}
+            </button>
+          </div>
         </nav>
+
+        {/* Mobile menu */}
+        <div
+          id="mobile-navigation"
+          className={`absolute inset-x-0 top-full h-[calc(100dvh-68px)] overflow-y-auto bg-white transition-all duration-300 md:hidden ${
+            isMobileMenuOpen
+              ? "visible translate-y-0 opacity-100"
+              : "invisible -translate-y-3 opacity-0"
+          }`}
+        >
+          <div className="flex min-h-full flex-col px-5 pb-8 pt-5 text-[#121926]">
+            <div className="border-t border-black/15">
+              {NAV_ITEMS.map((item) => {
+                if (!item.children) {
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={closeMobileMenu}
+                      className="flex min-h-16 items-center border-b border-black/15 py-4 text-2xl font-semibold leading-none"
+                      style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                }
+
+                const isOpen = openMobileMenu === item.label;
+                return (
+                  <div key={item.label} className="border-b border-black/15">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setOpenMobileMenu(isOpen ? null : item.label)
+                      }
+                      aria-expanded={isOpen}
+                      className="flex min-h-16 w-full items-center justify-between py-4 text-left text-2xl font-semibold leading-none"
+                      style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
+                    >
+                      {item.label}
+                      <ChevronDown
+                        className={`size-6 transition-transform duration-300 ${
+                          isOpen ? "rotate-180" : ""
+                        }`}
+                        aria-hidden
+                      />
+                    </button>
+
+                    <div
+                      className={`grid transition-[grid-template-rows] duration-300 ${
+                        isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                      }`}
+                    >
+                      <div className="overflow-hidden">
+                        <div className="pb-5">
+                          <Link
+                            href={item.href}
+                            onClick={closeMobileMenu}
+                            className="block py-2 text-xs font-bold uppercase tracking-[0.14em] text-[#ff6726]"
+                          >
+                            Explore all {item.label}
+                          </Link>
+                          {item.children.map((child) => (
+                            <Link
+                              key={child.label}
+                              href={child.href}
+                              onClick={closeMobileMenu}
+                              className="block border-t border-black/10 py-3 text-base font-medium"
+                            >
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="mt-auto pt-8">
+              <button
+                type="button"
+                onClick={() => {
+                  closeMobileMenu();
+                  openContactPopup();
+                }}
+                className="flex w-full items-center justify-center bg-[#ff6726] px-6 py-4 text-sm font-bold uppercase tracking-[0.1em] text-[#121926]"
+              >
+                Get Started
+              </button>
+            </div>
+          </div>
+        </div>
       </header>
       <main className="flex-1">{children}</main>
       <Footer />
+      <Link
+        href="/contact#book-consultation"
+        className="fixed bottom-5 right-5 z-40 rounded-full bg-[#ff6726] px-5 py-3 text-xs font-bold uppercase tracking-[0.08em] text-white shadow-[0_10px_30px_rgba(0,0,0,0.28)] transition-transform active:scale-95 md:hidden"
+      >
+        Book a consultation
+      </Link>
       <ExitIntentPopup />
     </div>
   );

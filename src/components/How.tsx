@@ -197,7 +197,7 @@ function HelpCard({ card, index }: { card: HelpCardData; index: number }) {
 
         <span
           className={cn(
-            "absolute bottom-6 right-6 z-10 inline-flex translate-y-3 items-center gap-2 rounded-full bg-[#ff6726] px-6 py-3 text-sm font-semibold text-[#202020] opacity-0 transition-all duration-500 ease-out",
+            "absolute bottom-6 right-6 z-10 hidden translate-y-3 items-center gap-2 rounded-full bg-[#ff6726] px-6 py-3 text-sm font-semibold text-[#202020] opacity-0 transition-all duration-500 ease-out md:inline-flex",
             "group-hover:translate-y-0 group-hover:opacity-100 group-[.is-expanded]:translate-y-0 group-[.is-expanded]:opacity-100",
           )}
         >
