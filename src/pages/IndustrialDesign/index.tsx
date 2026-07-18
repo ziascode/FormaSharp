@@ -4,6 +4,7 @@ import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
   Check,
+  ChevronDown,
   Hand,
   Image as ImageIcon,
   Palette,
@@ -214,12 +215,13 @@ const CAPABILITY_MOTION =
 
 function IndustrialDesign() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [accordionOpenIndex, setAccordionOpenIndex] = useState<number | null>(null);
   const activeCapability = CAPABILITIES[activeIndex];
 
   return (
     <div>
-      {/* HERO */}
-      <div className="relative min-h-[100vh] overflow-hidden bg-[#121926]">
+      {/* HERO — mobile BD type; md+ restores current desktop */}
+      <div className="relative flex min-h-[100svh] flex-col overflow-hidden bg-[#121926] md:block md:min-h-[100vh]">
         <img
           className="absolute inset-0 z-0 h-full w-full object-cover object-center"
           src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/ergo-obj-1.jpg"
@@ -231,32 +233,32 @@ function IndustrialDesign() {
           className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(to_top_right,rgba(18,25,38,0.46)_20%,rgba(18,25,38,0.36)_45%,rgba(18,25,38,0.21)_70%,rgba(18,25,38,0.09)_82%,transparent_92%,transparent_100%)]"
           aria-hidden
         />
-        <div className="relative z-10 mx-auto !pt-[20vh] flex max-w-7xl flex-col gap-6 px-4 py-12 md:py-16 lg:py-24">
+        <div className="relative z-10 mx-auto flex max-w-7xl flex-1 flex-col justify-center gap-6 px-6 pb-10 pt-28 md:flex-none md:!pt-[20vh] md:px-4 md:py-16 lg:py-24">
           <div>
-            <h4>
+            <h4 className="!mb-0 !text-[0.6875rem] !font-medium !uppercase !tracking-[0.14em] !text-white/90 md:!text-[length:inherit] md:!font-[inherit] md:!tracking-[inherit] md:!text-inherit">
               INDUSTRIAL <span className="text-[#ff6726]">DESIGN</span>
             </h4>
-            <h1 className="max-w-4xl !text-6xl !leading-none font-bold text-white pt-5">
+            <h1 className="max-w-4xl !text-[2rem] !leading-[1.1] font-bold text-white pt-5 md:!text-6xl md:!leading-none">
               Industrial Design for Products People Want to{" "}
               <span className="text-[#ff6726]">Use</span>
             </h1>
-            <h3 className="max-w-2xl text-lg text-white/80">
+            <h3 className="max-w-2xl !text-[1.125rem] text-white/80 md:!text-lg">
               FormaSharp's industrial design practice balances usability,
               aesthetics, and engineering, so your product looks right, feels
               right, and performs in the real world.
             </h3>
-            <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row">
-              <Link href={quotePageUrl("industrial-design")} className="button-primary inline-block">
+            <div className="mt-8 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-start sm:gap-4">
+              <Link href={quotePageUrl("industrial-design")} className="button-primary inline-block w-full text-center sm:w-auto">
                 Discuss Your Product Concept
               </Link>
-              <a href="#capabilities" className="button-secondary inline-block">
+              <a href="#capabilities" className="button-secondary inline-block w-full text-center sm:w-auto">
                 View Our Design Services
               </a>
             </div>
           </div>
         </div>
-        <div className="relative z-10 py-8">
-          <ExtraBadges />
+        <div className="relative z-10 mt-auto p-0 md:mt-0 md:py-8">
+          <ExtraBadges className="[&>div]:!mt-0 md:[&>div]:!mt-16" />
         </div>
       </div>
 
@@ -265,15 +267,15 @@ function IndustrialDesign() {
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16 xl:gap-20">
             <div className="text-left lg:col-span-5">
-              <h2 className="max-w-xl text-left text-4xl font-bold leading-[1.08] tracking-tight text-neutral-950 md:text-5xl">
+              <h2 className="max-w-xl text-left !text-[1.875rem] font-bold !leading-[1.15] tracking-tight text-neutral-950 md:!text-5xl md:!leading-[1.08]">
                 Products Need More Than Functionality to Succeed
               </h2>
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-neutral-700 md:text-lg">
+              <p className="mt-6 max-w-xl !text-[1.125rem] leading-relaxed text-neutral-700 md:!text-lg">
                 A product may perform well technically, but if it feels awkward
                 to use, lacks visual appeal, or fails to connect with its
                 audience, it can struggle in the market.
               </p>
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-neutral-700 md:text-lg">
+              <p className="mt-4 max-w-xl !text-[1.125rem] leading-relaxed text-neutral-700 md:!text-lg">
                 Industrial design bridges the gap between engineering and user
                 experience. It shapes how a product is perceived, how intuitive
                 it feels, and how effectively it communicates value to the end
@@ -285,8 +287,8 @@ function IndustrialDesign() {
             </div>
 
             <div className="w-full lg:col-span-7">
-              <div className="rounded-2xl border border-black/5 bg-white p-6 shadow-sm md:p-8">
-                <p className="!mb-4 !text-base font-semibold text-neutral-900">
+              <div className="rounded-2xl border border-black/5 bg-white p-5 shadow-sm md:p-8">
+                <p className="!mb-4 !text-[1.125rem] font-semibold text-neutral-900 md:!text-base">
                   Companies often seek industrial design support when:
                 </p>
                 <ul className="space-y-3">
@@ -297,13 +299,13 @@ function IndustrialDesign() {
                         strokeWidth={2.5}
                         aria-hidden
                       />
-                      <span className="text-base leading-relaxed text-neutral-700">
+                      <span className="!text-[1.125rem] leading-relaxed text-neutral-700 md:!text-base">
                         {item}
                       </span>
                     </li>
                   ))}
                 </ul>
-                <p className="mt-6 !mb-0 !text-base leading-relaxed text-neutral-600">
+                <p className="mt-6 !mb-0 !text-[1.125rem] leading-relaxed text-neutral-600 md:!text-base">
                   FormaSharp approaches industrial design with a balance of
                   creativity and technical awareness. Every design decision
                   considers appearance, usability, manufacturing feasibility,
@@ -332,16 +334,16 @@ function IndustrialDesign() {
               <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
                 What We Include
               </div>
-              <h2 className="text-3xl font-bold tracking-tight text-black md:text-4xl">
+              <h2 className="!text-[1.875rem] font-bold !leading-[1.15] tracking-tight text-black md:!text-4xl">
                 Designing Products Around the User Experience
               </h2>
-              <p className="mt-4 text-base leading-relaxed text-black/70 md:text-lg">
+              <p className="mt-4 !text-[1.125rem] leading-relaxed text-black/70 md:!text-lg">
                 Industrial design influences nearly every aspect of how users
                 interact with a product. Shape, proportion, surface transitions,
                 tactile interaction, and usability all contribute to how a product
                 is experienced in the hands of the user.
               </p>
-              <p className="mt-4 text-base leading-relaxed text-black/70 md:text-lg">
+              <p className="mt-4 !text-[1.125rem] leading-relaxed text-black/70 md:!text-lg">
                 FormaSharp develops industrial design solutions that align product
                 functionality with human interaction and visual identity. Our team
                 works closely with engineering requirements while refining the
@@ -349,8 +351,8 @@ function IndustrialDesign() {
                 intentional, and user-focused.
               </p>
             </div>
-            <div className="rounded-2xl border border-black/5 bg-white p-6 shadow-sm md:p-8">
-              <p className="!mb-4 !text-base font-semibold text-neutral-900">
+            <div className="rounded-2xl border border-black/5 bg-white p-5 shadow-sm md:p-8">
+              <p className="!mb-4 !text-[1.125rem] font-semibold text-neutral-900 md:!text-base">
                 Our industrial design services support:
               </p>
               <ul className="space-y-3">
@@ -361,13 +363,13 @@ function IndustrialDesign() {
                       strokeWidth={2.5}
                       aria-hidden
                     />
-                    <span className="text-base leading-relaxed text-neutral-700">
+                    <span className="!text-[1.125rem] leading-relaxed text-neutral-700 md:!text-base">
                       {item}
                     </span>
                   </li>
                 ))}
               </ul>
-              <p className="mt-6 !mb-0 !text-base leading-relaxed text-neutral-600">
+              <p className="mt-6 !mb-0 !text-[1.125rem] leading-relaxed text-neutral-600 md:!text-base">
                 By combining industrial design thinking with engineering
                 awareness, we help ensure that product concepts remain practical
                 throughout development while still achieving a refined and
@@ -381,31 +383,108 @@ function IndustrialDesign() {
       {/* CAPABILITIES */}
       <section
         id="capabilities"
-        className="border-y border-black/5 bg-white py-24 md:py-32"
+        className="scroll-mt-28 border-y border-black/5 bg-white py-24 md:py-32"
       >
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-12 max-w-3xl md:mb-16">
             <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
               Industrial Design Capabilities
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-black md:text-4xl">
+            <h2 className="!text-[1.875rem] font-bold !leading-[1.15] tracking-tight text-black md:!text-4xl">
               Form, ergonomics, visualization, and refinement
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-black/70 md:text-lg">
+            <p className="mt-4 !text-[1.125rem] leading-relaxed text-black/70 md:!text-lg">
               From early concept exploration to refined product form development,
               we design products that are visually compelling while remaining
               practical to produce.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-10">
+          {/* Mobile: accordion with icons */}
+          <div className="flex flex-col border-t border-black/10 md:hidden">
+            {CAPABILITIES.map((item, index) => {
+              const isOpen = accordionOpenIndex === index;
+              const Icon = item.icon;
+              return (
+                <div key={item.title} className="border-b border-black/10">
+                  <button
+                    type="button"
+                    aria-expanded={isOpen}
+                    onClick={() =>
+                      setAccordionOpenIndex(isOpen ? null : index)
+                    }
+                    className="flex w-full items-center gap-3 py-4 text-left"
+                  >
+                    <Icon
+                      strokeWidth={1.5}
+                      className="size-6 shrink-0 text-[#ff6726]"
+                      aria-hidden
+                    />
+                    <span
+                      className={cn(
+                        "min-w-0 flex-1 text-base font-semibold leading-snug",
+                        isOpen ? "text-[#ff6726]" : "text-black"
+                      )}
+                    >
+                      {item.title}
+                    </span>
+                    <ChevronDown
+                      className={cn(
+                        "size-5 shrink-0 text-black/50 transition-transform duration-200",
+                        isOpen && "rotate-180"
+                      )}
+                      aria-hidden
+                    />
+                  </button>
+                  <div
+                    className={cn(
+                      "grid transition-[grid-template-rows] duration-300 ease-out",
+                      isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                    )}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="pb-5 pl-9 pr-1">
+                        <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
+                          {item.tag}
+                        </div>
+                        <p className="mt-2 !mb-0 !text-[1.125rem] leading-relaxed !text-black/70">
+                          {item.description}
+                        </p>
+                        <ul className="mt-4 space-y-2.5">
+                          {item.bullets.map((b) => (
+                            <li key={b} className="flex items-start gap-2.5">
+                              <Check
+                                className="mt-0.5 size-4 shrink-0 text-[#ff6726]"
+                                strokeWidth={2.5}
+                                aria-hidden
+                              />
+                              <span className="text-sm leading-relaxed text-black/80">
+                                {b}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                        <a
+                          href={quotePageUrl("industrial-design")}
+                          className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#ff6726]"
+                        >
+                          Discuss this capability
+                          <ArrowRight className="size-3.5" strokeWidth={2.5} />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Desktop: existing tabs + panel (unchanged) */}
+          <div className="hidden grid-cols-1 gap-6 md:grid md:grid-cols-12 md:gap-10">
             <div
               role="tablist"
               aria-label="Industrial design capabilities"
-              className={cn(
-                "-mx-6 flex flex-row gap-2 overflow-x-auto px-6 pb-2",
-                "md:mx-0 md:col-span-4 md:flex-col md:gap-1 md:overflow-visible md:px-0 md:pb-0"
-              )}
+              className="md:col-span-4 md:flex md:flex-col md:gap-1"
             >
               {CAPABILITIES.map((item, index) => {
                 const isActive = index === activeIndex;
@@ -420,19 +499,17 @@ function IndustrialDesign() {
                     id={`id-cap-tab-${index}`}
                     onClick={() => setActiveIndex(index)}
                     className={cn(
-                      "group relative shrink-0 whitespace-nowrap md:whitespace-normal",
-                      "flex items-center gap-3 rounded-full px-4 py-2 text-left transition-colors",
-                      "md:rounded-none md:border-l-2 md:px-5 md:py-3",
+                      "group relative flex items-center gap-3 whitespace-normal border-l-2 px-5 py-3 text-left transition-colors",
                       CAPABILITY_MOTION,
                       isActive
-                        ? "bg-[#ff6726]/10 md:bg-transparent md:border-[#ff6726]"
-                        : "bg-transparent md:border-transparent hover:bg-black/5"
+                        ? "border-[#ff6726] bg-transparent"
+                        : "border-transparent bg-transparent hover:bg-black/5"
                     )}
                   >
                     <Icon
                       strokeWidth={1.5}
                       className={cn(
-                        "size-8 shrink-0 transition-colors md:size-10",
+                        "size-10 shrink-0 transition-colors",
                         CAPABILITY_MOTION,
                         isActive ? "text-[#ff6726]" : "text-black/40"
                       )}
@@ -440,7 +517,7 @@ function IndustrialDesign() {
                     />
                     <span
                       className={cn(
-                        "text-sm font-semibold transition-colors md:text-base",
+                        "text-base font-semibold transition-colors",
                         CAPABILITY_MOTION,
                         isActive
                           ? "text-[#ff6726]"
@@ -458,14 +535,14 @@ function IndustrialDesign() {
               role="tabpanel"
               id={`id-cap-panel-${activeIndex}`}
               aria-labelledby={`id-cap-tab-${activeIndex}`}
-              className="rounded-2xl border border-black/5 bg-blue-900/10 p-6 shadow-sm md:col-span-8 md:p-8"
+              className="rounded-2xl border border-black/5 bg-blue-900/10 p-8 shadow-sm md:col-span-8"
             >
               <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
                 <div className="flex h-full flex-col lg:col-span-3">
                   <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
                     {activeCapability.tag}
                   </div>
-                  <h3 className="mt-2 !text-2xl !font-bold text-black md:!text-3xl">
+                  <h3 className="mt-2 !text-3xl !font-bold text-black">
                     {activeCapability.title}
                   </h3>
                   <p className="mt-4 !text-base leading-relaxed !text-black/70">
@@ -479,7 +556,7 @@ function IndustrialDesign() {
                           strokeWidth={2.5}
                           aria-hidden
                         />
-                        <span className="text-sm leading-relaxed text-black/80 md:text-base">
+                        <span className="text-base leading-relaxed text-black/80">
                           {b}
                         </span>
                       </li>
@@ -525,10 +602,10 @@ function IndustrialDesign() {
             <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
               Our Industrial Design Process
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+            <h2 className="!text-[1.875rem] font-bold !leading-[1.15] tracking-tight text-white md:!text-4xl">
               A Thoughtful Approach to Product Experience
             </h2>
-            <p className="mt-4 text-base leading-relaxed !text-white md:text-lg">
+            <p className="mt-4 !text-[1.125rem] leading-relaxed !text-white md:!text-lg">
               Industrial design is most effective when it follows a structured
               process that considers both user needs and technical limitations.
               Our workflow encourages exploration while keeping projects grounded
@@ -540,15 +617,15 @@ function IndustrialDesign() {
             {PROCESS_STEPS.map((step, i) => (
               <div
                 key={step.title}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm md:p-7"
+                className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm md:p-7"
               >
-                <div className="text-5xl font-bold text-[#ff6726]">
+                <div className="!text-4xl font-bold text-[#ff6726] md:!text-5xl">
                   {String(i + 1).padStart(2, "0")}
                 </div>
                 <h3 className="mt-3 !text-xl !font-bold text-white">
                   {step.title}
                 </h3>
-                <p className="!text-base !font-light !text-white/80">
+                <p className="!text-[1.125rem] !font-light !text-white/80 md:!text-base">
                   {step.description}
                 </p>
                 {step.detail ? (
@@ -587,22 +664,22 @@ function IndustrialDesign() {
           <div className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
             Get Started
           </div>
-          <h1 className="!text-6xl !leading-none font-bold text-white">
+          <h1 className="!text-[2rem] !leading-[1.1] font-bold text-white md:!text-6xl md:!leading-none">
             Create a Product Experience That Feels{" "}
             <span className="italic text-[#ff6726]">Thoughtfully Designed</span>
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed !text-white md:text-lg">
+          <p className="mt-6 max-w-2xl !text-[1.125rem] leading-relaxed !text-white md:!text-lg">
             Whether you are developing a new consumer product, refining usability,
             or improving the appearance of an existing concept, FormaSharp can
             help translate ideas into refined product experiences that balance
             design intent with technical practicality. Tell us about your product
             goals, target users, or current development stage.
           </p>
-          <div className="mt-10 flex flex-col flex-wrap items-center justify-center gap-4 sm:flex-row">
-            <Link href={quotePageUrl("industrial-design")} className="button-primary inline-block">
+          <div className="mt-10 flex w-full flex-col flex-wrap items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4">
+            <Link href={quotePageUrl("industrial-design")} className="button-primary inline-block w-full text-center sm:w-auto">
               Start Your Design Project
             </Link>
-            <Link href="/contact" className="button-secondary inline-block">
+            <Link href="/contact" className="button-secondary inline-block w-full text-center sm:w-auto">
               Schedule a Consultation
             </Link>
           </div>

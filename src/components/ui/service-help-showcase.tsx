@@ -74,7 +74,8 @@ function HelpShowcaseCard({
           </p>
         </div>
 
-        <span className="absolute bottom-6 right-6 z-10 inline-flex translate-y-3 items-center gap-2 rounded-full bg-[#ff6726] px-6 py-3 text-sm font-semibold text-[#202020] opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100">
+        {/* Mobile: hidden. Desktop: hover reveal. */}
+        <span className="absolute bottom-6 right-6 z-10 hidden items-center gap-2 rounded-full bg-[#ff6726] px-6 py-3 text-sm font-semibold text-[#202020] transition-all duration-500 ease-out md:inline-flex md:translate-y-3 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100">
           {ctaLabel}
         </span>
       </Link>
@@ -94,7 +95,7 @@ export function ServiceHelpShowcase({
       <div className="mx-auto flex max-w-7xl flex-col gap-10 lg:flex-row lg:gap-16">
         <div className="h-fit shrink-0 lg:sticky lg:top-[calc(7rem+5vh)] lg:w-[340px]">
           <h2
-            className="!mb-6 !text-4xl font-bold !leading-[1.1] text-neutral-900 md:!text-5xl"
+            className="!mb-6 !text-[1.875rem] font-bold !leading-[1.15] text-neutral-900 md:!text-5xl md:!leading-[1.1]"
             style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
           >
             {heading}
