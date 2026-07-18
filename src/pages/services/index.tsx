@@ -339,7 +339,7 @@ export default function ServicesIndex() {
             <span className="italic text-[#ff6726]">fits your project</span>?
           </h2>
           <p className="mt-6 max-w-2xl text-base leading-relaxed !text-white max-md:!text-[1.125rem] md:text-lg">
-            Tell us where you are — sketch, CAD, or concept — and we&apos;ll
+            Tell us where you are in your project and we&apos;ll
             recommend the right path forward.
           </p>
           <div className="mt-10 flex flex-col flex-wrap items-center justify-center gap-4 max-md:w-full max-md:items-stretch max-md:gap-3 sm:flex-row">
