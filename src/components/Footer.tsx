@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
+  { href: "/patent-ip", label: "Patent & IP" },
 ];
 
 const SOCIAL_LINKS = [
@@ -14,7 +15,16 @@ const SOCIAL_LINKS = [
     href: "https://www.instagram.com/formasharp",
     label: "Instagram",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="size-4" aria-hidden>
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="size-4"
+        aria-hidden
+      >
         <rect x="2" y="2" width="20" height="20" rx="5" />
         <circle cx="12" cy="12" r="4" />
         <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
@@ -37,20 +47,16 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-white/10 bg-[#121926]">
-      <div className="mx-auto max-w-7xl px-6 py-12 md:px-8 md:py-14">
-        <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
-          <Link href="/" aria-label="FormaSharp — home">
-            <img
-              src={LOGO_URL}
-              alt="FormaSharp"
-              className="h-12 w-auto"
-            />
+      <div className="mx-auto max-w-7xl px-6 py-10 md:px-8 md:py-12">
+        <div className="flex items-start justify-between gap-6 md:items-center">
+          <Link href="/" aria-label="FormaSharp — home" className="shrink-0">
+            <img src={LOGO_URL} alt="FormaSharp" className="h-10 w-auto md:h-12" />
           </Link>
 
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-10">
+          <div className="flex flex-col items-end gap-5 md:flex-row md:items-center md:gap-10">
             <nav
               aria-label="Footer"
-              className="flex flex-wrap gap-x-8 gap-y-2"
+              className="flex flex-col items-end gap-y-2 text-right md:flex-row md:flex-wrap md:items-center md:gap-x-8 md:gap-y-2 md:text-left"
             >
               {NAV_LINKS.map((link) => (
                 <Link
@@ -80,7 +86,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-8 text-xs text-white/80 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/80 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-white/90">&copy; {year} FormaSharp Product Design Inc.</p>
           <div className="flex flex-wrap gap-x-5 gap-y-1">
             <a

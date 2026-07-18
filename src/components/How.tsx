@@ -227,7 +227,7 @@ function How() {
               bring the engineering expertise to move your project forward.
             </p>
             <Link href="/contact" className="button-primary inline-block">
-              Start your project ↗
+              Start your project
             </Link>
           </div>
 
