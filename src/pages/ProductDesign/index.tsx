@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
+  Check,
+  ChevronDown,
   Clock,
   Cog,
   FileText,
@@ -255,6 +257,9 @@ const CAPABILITY_MOTION =
 function ProductDesign() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [accordionOpenIndex, setAccordionOpenIndex] = useState<number | null>(
+    null
+  );
   const highlightedIndex = hoveredIndex ?? activeIndex;
   const [activeStageIndex, setActiveStageIndex] = useState(0);
   const activeStage = PROCESS_STEPS[activeStageIndex];
@@ -278,54 +283,113 @@ function ProductDesign() {
   return (
     <div>
 
-    {/* HERO */}
-    <div className="relative isolate min-h-[100vh] overflow-hidden bg-[#121926]">
-      <div
-        className="pointer-events-none absolute inset-0 z-0 h-full w-full"
-        aria-hidden
-      >
-        <ScrollyVideo
-          src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/w2.mp4"
-          videoPercentage={heroScrollPercent}
-          trackScroll={false}
-          transitionSpeed={8}
-          frameThreshold={0.05}
-          useWebCodecs
-          full
-        />
-      </div>
-      <div
-        className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(to_top_right,rgba(18,25,38,0.5)_0%,rgba(18,25,38,0.28)_35%,rgba(18,25,38,0.12)_65%,transparent_100%)]"
-        aria-hidden
-      />
-
-      <div className="relative z-10 mx-auto !pt-[20vh] flex flex-row items-center justify-start max-w-7xl flex-col gap-6 px-4 py-12 md:py-16 lg:py-24">
-        <div className="-20">
-            <h4>PRODUCT DESIGN <span className="text-[#ff6726]">SERVICES</span></h4>
-            <h1 className="max-w-2xl !text-6xl !leading-none font-bold text-white pt-5">
-            Transform product ideas into <span className="text-[#ff6726]">production ready</span> designs.
+    {/* HERO — dual trees: mobile gradient + video box; desktop exact ScrollyVideo */}
+    <div className="relative isolate overflow-hidden bg-[#121926]">
+      {/* Mobile hero */}
+      <div className="relative z-10 flex min-h-[100svh] flex-col bg-[linear-gradient(to_bottom_right,#121926,#01628a)] md:hidden">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-start gap-5 px-6 pb-4 pt-36 text-left">
+          <div>
+            <h4 className="!mb-0 !text-[0.6875rem] !font-medium !uppercase !tracking-[0.14em] !text-white/90">
+              PRODUCT DESIGN{" "}
+              <span className="text-[#ff6726]">SERVICES</span>
+            </h4>
+            <h1 className="max-w-2xl !text-[2rem] !leading-[1.1] font-bold text-white pt-4">
+              Transform product ideas into{" "}
+              <span className="text-[#ff6726]">production ready</span> designs.
             </h1>
-            <h3 className="max-w-xl text-lg text-white/80">
-            FormaSharp turns concepts into well-defined products. From early concept development to detailed CAD models and technical documentation, we create designs that are built to perform, practical to produce, and aligned with your business goals.
+            <h3 className="max-w-xl !text-[1.125rem] text-white/80">
+              FormaSharp turns concepts into well-defined products. From early
+              concept development to detailed CAD models and technical
+              documentation, we create designs that are built to perform,
+              practical to produce, and aligned with your business goals.
             </h3>
-            <div className="flex flex-col sm:flex-row gap-4 items-start">
-            <Link href={quotePageUrl("product-design")} className="button-primary inline-block">
-            Start Your Product Design Project
-            </Link>
-            <Link href="/contact" className="button-secondary inline-block">Discuss Your Concept</Link>
+            <div className="mt-6 flex w-full flex-col items-stretch gap-3">
+              <Link
+                href={quotePageUrl("product-design")}
+                className="button-primary inline-block w-full text-center"
+              >
+                Start Your Product Design Project
+              </Link>
+              <Link
+                href="/contact"
+                className="button-secondary inline-block w-full text-center"
+              >
+                Discuss Your Concept
+              </Link>
             </div>
+          </div>
         </div>
-        
-        
+        <div className="relative mt-8 aspect-[16/10] w-full overflow-hidden bg-[#121926]">
+          <div
+            className="pointer-events-none absolute inset-0 scale-[1.02] [&_[data-scrolly-container]]:!absolute [&_[data-scrolly-container]]:!inset-0 [&_[data-scrolly-container]]:!h-full [&_[data-scrolly-container]]:!w-full [&_[data-scrolly-container]]:!overflow-hidden"
+            aria-hidden
+          >
+            <ScrollyVideo
+              src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/w2.mp4"
+              videoPercentage={heroScrollPercent}
+              trackScroll={false}
+              sticky={false}
+              full={false}
+              transitionSpeed={8}
+              frameThreshold={0.05}
+              useWebCodecs
+            />
+          </div>
+        </div>
+        <div className="relative z-10 mt-auto shrink-0 p-0">
+          <ExtraBadges className="[&>div]:!mt-0" />
+        </div>
       </div>
-      <div className="relative z-10 py-8">
-        <ExtraBadges/>
+
+      {/* Desktop hero — exact current markup */}
+      <div className="relative hidden min-h-[100vh] md:block">
+        <div
+          className="pointer-events-none absolute inset-0 z-0 h-full w-full"
+          aria-hidden
+        >
+          <ScrollyVideo
+            src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/w2.mp4"
+            videoPercentage={heroScrollPercent}
+            trackScroll={false}
+            transitionSpeed={8}
+            frameThreshold={0.05}
+            useWebCodecs
+            full
+          />
+        </div>
+        <div
+          className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(to_top_right,rgba(18,25,38,0.5)_0%,rgba(18,25,38,0.28)_35%,rgba(18,25,38,0.12)_65%,transparent_100%)]"
+          aria-hidden
+        />
+
+        <div className="relative z-10 mx-auto !pt-[20vh] flex flex-row items-center justify-start max-w-7xl flex-col gap-6 px-4 py-12 md:py-16 lg:py-24">
+          <div className="-20">
+              <h4>PRODUCT DESIGN <span className="text-[#ff6726]">SERVICES</span></h4>
+              <h1 className="max-w-2xl !text-6xl !leading-none font-bold text-white pt-5">
+              Transform product ideas into <span className="text-[#ff6726]">production ready</span> designs.
+              </h1>
+              <h3 className="max-w-xl text-lg text-white/80">
+              FormaSharp turns concepts into well-defined products. From early concept development to detailed CAD models and technical documentation, we create designs that are built to perform, practical to produce, and aligned with your business goals.
+              </h3>
+              <div className="flex flex-col sm:flex-row gap-4 items-start">
+              <Link href={quotePageUrl("product-design")} className="button-primary inline-block">
+              Start Your Product Design Project
+              </Link>
+              <Link href="/contact" className="button-secondary inline-block">Discuss Your Concept</Link>
+              </div>
+          </div>
+
+
+        </div>
+        <div className="relative z-10 py-8">
+          <ExtraBadges/>
+        </div>
       </div>
     </div>
 
   
 
-    {/* CAPABILITIES — Product Design */}
+    {/* CAPABILITIES — mobile accordion; desktop exact hover cards */}
     <section
       id="capabilities"
       className="py-24 md:py-32"
@@ -336,19 +400,99 @@ function ProductDesign() {
           <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
             Capabilities
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-black md:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-black max-md:!text-[1.875rem] max-md:!leading-[1.15] md:text-4xl">
             Structured product development
             <br />
             from concept to detailed design.
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-black/70 md:text-lg">
+          <p className="mt-4 text-base leading-relaxed text-black/70 max-md:!text-[1.125rem] md:text-lg">
             FormaSharp combines mechanical engineering, CAD development, and
             practical product planning to create designs that are both
             functional and commercially viable.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-6 md:gap-5">
+        {/* Mobile: accordion with icons */}
+        <div className="flex flex-col border-t border-black/10 md:hidden">
+          {CAPABILITIES.map((item, index) => {
+            const isOpen = accordionOpenIndex === index;
+            const Icon = item.icon;
+            return (
+              <div key={item.title} className="border-b border-black/10">
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  onClick={() =>
+                    setAccordionOpenIndex(isOpen ? null : index)
+                  }
+                  className="flex w-full items-center gap-3 py-4 text-left"
+                >
+                  <Icon
+                    strokeWidth={1.5}
+                    className="size-6 shrink-0 text-[#ff6726]"
+                    aria-hidden
+                  />
+                  <span
+                    className={cn(
+                      "min-w-0 flex-1 text-base font-semibold leading-snug",
+                      isOpen ? "text-[#ff6726]" : "text-black"
+                    )}
+                  >
+                    {item.title}
+                  </span>
+                  <ChevronDown
+                    className={cn(
+                      "size-5 shrink-0 text-black/50 transition-transform duration-200",
+                      isOpen && "rotate-180"
+                    )}
+                    aria-hidden
+                  />
+                </button>
+                <div
+                  className={cn(
+                    "grid transition-[grid-template-rows] duration-300 ease-out",
+                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  )}
+                >
+                  <div className="overflow-hidden">
+                    <div className="pb-5 pl-9 pr-1">
+                      <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
+                        {item.tag}
+                      </div>
+                      <p className="mt-2 !mb-0 !text-[1.125rem] leading-relaxed !text-black/70">
+                        {item.description}
+                      </p>
+                      <ul className="mt-4 space-y-2.5">
+                        {item.bullets.map((b) => (
+                          <li key={b} className="flex items-start gap-2.5">
+                            <Check
+                              className="mt-0.5 size-4 shrink-0 text-[#ff6726]"
+                              strokeWidth={2.5}
+                              aria-hidden
+                            />
+                            <span className="text-sm leading-relaxed text-black/80">
+                              {b}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                      <Link
+                        href="/contact"
+                        className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#ff6726]"
+                      >
+                        Discuss Your Concept
+                        <ArrowRight className="size-3.5" strokeWidth={2.5} />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Desktop: exact hover card grid */}
+        <div className="hidden grid-cols-1 gap-4 md:grid md:grid-cols-6 md:gap-5">
           {CAPABILITIES.map((item, index) => {
             const isOrange = index === highlightedIndex;
             const Icon = item.icon;
@@ -444,9 +588,12 @@ function ProductDesign() {
     </section>
 
   {/* PROBLEM RECOGNITION — Great Ideas Need a Clear Engineering Strategy */}
-    <div className="max-w-7xl mx-auto px-6 py-24 md:py-32 !mb-[10vh]">
+    <div className="max-w-7xl mx-auto px-6 py-12 md:py-32 !mb-[10vh]">
        <div className="text-black/90 flex flex-col justify-center text-center">
-        <h2 className=" max-w-3xl mx-auto">Great ideas need a clear<span className="text-[#ff6726]"> engineering strategy</span></h2>
+        <h2 className="mx-auto max-w-3xl max-md:!text-[1.875rem] max-md:!leading-[1.15]">
+          Great ideas need a clear
+          <span className="text-[#ff6726]"> engineering strategy</span>
+        </h2>
         {/* <p className=" max-w-3xl mx-auto">Many products begin with strong ideas but stall when technical decisions become more complex. Questions around functionality, material selection, assembly, and production can quickly slow progress if the design is not approached systematically. Product design provides the structure needed to turn an idea into a technically sound, clearly documented product concept.</p> */}
 
         {/* <ul className="mx-auto mt-2 mb-8 max-w-2xl list-disc space-y-2 pl-6 text-left text-base text-black/80 md:text-lg">
@@ -479,7 +626,7 @@ function ProductDesign() {
               <span aria-hidden className="inline-block h-px w-8 bg-[#ff6726]" />
               Our Process
             </div>
-            <h2 className="!text-4xl !font-bold !leading-[1.05] tracking-tight text-white md:!text-5xl">
+            <h2 className="!text-4xl !font-bold !leading-[1.05] tracking-tight text-white max-md:!text-[1.875rem] max-md:!leading-[1.15] md:!text-5xl">
               From rough concept to{" "}
               <span className="italic">production-ready</span> design.
             </h2>
@@ -670,8 +817,15 @@ function ProductDesign() {
       </div>
     </section>
 
-<div>
-  <video src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/cnc.mp4" autoPlay muted loop playsInline />
+<div className="max-md:w-full max-md:overflow-hidden max-md:bg-[#121926]">
+  <video
+    className="max-md:block max-md:aspect-video max-md:w-full max-md:object-cover"
+    src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/cnc.mp4"
+    autoPlay
+    muted
+    loop
+    playsInline
+  />
 </div>
 
     {/* TODO: swap product design hero shot
@@ -697,22 +851,28 @@ function ProductDesign() {
           </div>
           <h2
             id="industries-heading"
-            className="text-3xl font-bold tracking-tight text-white md:text-4xl"
+            className="text-3xl font-bold tracking-tight text-white max-md:!text-[1.875rem] max-md:!leading-[1.15] md:text-4xl"
           >
             Product design for diverse industries and product types.
           </h2>
-          <p className="mt-4 text-base leading-relaxed !text-white md:text-lg">
+          <p className="mt-4 text-base leading-relaxed !text-white max-md:!text-[1.125rem] md:text-lg">
             From early-stage concepts to highly specialized engineered
             components, we support a broad range of product development
             initiatives.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div
+          className={cn(
+            "-mx-6 flex gap-4 overflow-x-auto px-6 pb-2",
+            "md:mx-0 md:grid md:grid-cols-2 md:gap-4 md:overflow-visible md:px-0 md:pb-0",
+            "lg:grid-cols-3 xl:grid-cols-5"
+          )}
+        >
           {INDUSTRIES.map((item) => (
             <article
               key={item.title}
-              className="group relative flex min-h-[280px] flex-col justify-end overflow-hidden rounded-2xl md:min-h-[300px]"
+              className="group relative flex min-h-[280px] w-[min(72vw,280px)] shrink-0 flex-col justify-end overflow-hidden rounded-2xl md:w-auto md:min-h-[300px]"
             >
               <img
                 src={item.imageSrc}
@@ -793,21 +953,29 @@ function ProductDesign() {
         <div className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
           Get Started
         </div>
-        <h1 className="!text-6xl !leading-none font-bold text-white">
+        <h1 className="!text-6xl !leading-none font-bold text-white max-md:!text-[2rem] max-md:!leading-[1.1]">
           Turn your product concept
           <br />
           into a <span className="italic text-[#ff6726]">well-defined</span> design.
         </h1>
-        <p className="mt-6 max-w-2xl text-base leading-relaxed !text-white md:text-lg">
+        <p className="mt-6 max-w-2xl text-base leading-relaxed !text-white max-md:!text-[1.125rem] md:text-lg">
           Whether you are starting with an idea, refining a prototype, or
           preparing for production, FormaSharp can help shape your concept into
           a practical and thoroughly engineered product.
         </p>
-        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Link href={quotePageUrl("product-design")} className="button-primary inline-block">
+        <div className="mt-10 flex flex-col items-center justify-center gap-4 max-md:w-full max-md:items-stretch max-md:gap-3 sm:flex-row">
+          <Link
+            href={quotePageUrl("product-design")}
+            className="button-primary inline-block max-md:w-full max-md:text-center"
+          >
             Start Your Product Design Project
           </Link>
-          <Link href="/contact" className="button-secondary inline-block">Discuss Your Concept</Link>
+          <Link
+            href="/contact"
+            className="button-secondary inline-block max-md:w-full max-md:text-center"
+          >
+            Discuss Your Concept
+          </Link>
         </div>
         <div className="mt-10 font-mono text-xs tracking-wider text-white/40">
           Concept Development · Mechanical Systems · Material Selection · Architecture · Optimization · CAD Documentation

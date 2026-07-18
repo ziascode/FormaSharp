@@ -1,7 +1,17 @@
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import type { LucideIcon } from "lucide-react";
-import { Archive, Box, Boxes, FileText, Scan, Wrench } from "lucide-react";
+import {
+  Archive,
+  ArrowRight,
+  Box,
+  Boxes,
+  Check,
+  ChevronDown,
+  FileText,
+  Scan,
+  Wrench,
+} from "lucide-react";
 import { DotPattern } from "@/components/ui/DotPatternProps";
 import { ReverseShowcase } from "@/components/ui/reverse-showcase";
 import { cn } from "@/lib/utils";
@@ -216,6 +226,9 @@ const CAPABILITY_MOTION =
 function ReverseEngineering() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [accordionOpenIndex, setAccordionOpenIndex] = useState<number | null>(
+    null
+  );
   const highlightedIndex = hoveredIndex ?? activeIndex;
 
   const featureVideoRef = useRef<HTMLVideoElement>(null);
@@ -229,11 +242,14 @@ function ReverseEngineering() {
     const video = featureVideoRef.current;
     if (!wrap || !video) return;
 
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    const threshold = isMobile ? 1 : 0.5;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (
           entry.isIntersecting &&
-          entry.intersectionRatio >= 0.5 &&
+          entry.intersectionRatio >= threshold &&
           !featureVideoPlayedRef.current
         ) {
           featureVideoPlayedRef.current = true;
@@ -241,7 +257,7 @@ function ReverseEngineering() {
           observer.disconnect();
         }
       },
-      { threshold: 0.5 }
+      { threshold }
     );
 
     observer.observe(wrap);
@@ -279,52 +295,112 @@ function ReverseEngineering() {
   return (
     <div>
 
-    {/* HERO — S1 */}
-    <div
-      className="relative min-h-[100vh] overflow-hidden bg-[#121926]"
-      onMouseEnter={handleHeroMouseEnter}
-      onMouseLeave={handleHeroMouseLeave}
-    >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        className="absolute inset-0 z-0 h-full w-full object-cover object-center"
-        src={HERO_IMAGE_REAL}
-        alt=""
-        fetchPriority="high"
-        aria-hidden
-      />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        className="absolute inset-0 z-[1] h-full w-full object-cover object-center transition-opacity duration-[900ms] ease-in-out"
-        src={HERO_IMAGE_SCAN}
-        alt=""
-        style={{ opacity: heroScanOpacity }}
-        aria-hidden
-      />
-      {/* Light scrim for hero copy readability */}
-      <div
-        className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(to_top_right,rgba(18,25,38,0.15)_25%,rgba(18,25,38,0.10)_50%,rgba(18,25,38,0.05)_75%,transparent_90%)]"
-        aria-hidden
-      />
-      <div className="relative z-10 mx-auto !pt-[25vh] flex flex-row items-center justify-start max-w-7xl flex-col gap-6 px-4 py-8 md:py-16 lg:py-24">
-        <div>
-            <h4>REVERSE ENGINEERING <span className="text-[#ff6726]">SERVICES</span></h4>
-            <h1 className="max-w-3xl !text-6xl !leading-none font-bold text-white pt-5">
-            Rebuild <span className="text-[#ff6726]">Accurate CAD Models</span> from Existing Parts
+    {/* HERO — dual trees: mobile gradient + media; desktop exact */}
+    <div className="relative isolate overflow-hidden bg-[#121926]">
+      {/* Mobile hero */}
+      <div className="relative z-10 flex min-h-[100svh] flex-col bg-[linear-gradient(to_bottom_right,#121926,#01628a)] md:hidden">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-start gap-5 px-6 pb-4 pt-36 text-left">
+          <div>
+            <h4 className="!mb-0 !text-[0.6875rem] !font-medium !uppercase !tracking-[0.14em] !text-white/90">
+              REVERSE ENGINEERING{" "}
+              <span className="text-[#ff6726]">SERVICES</span>
+            </h4>
+            <h1 className="max-w-3xl !text-[2rem] !leading-[1.1] font-bold text-white pt-4">
+              Rebuild{" "}
+              <span className="text-[#ff6726]">Accurate CAD Models</span> from
+              Existing Parts
             </h1>
-            <h3 className="max-w-2xl text-lg text-white/80">
-            Not every component comes with a complete set of design files. When original drawings are missing, outdated, or never created, reverse engineering provides a reliable way to recover the technical data needed to reproduce and improve a part.
+            <h3 className="max-w-2xl !text-[1.125rem] text-white/80">
+              Not every component comes with a complete set of design files.
+              When original drawings are missing, outdated, or never created,
+              reverse engineering provides a reliable way to recover the
+              technical data needed to reproduce and improve a part.
             </h3>
-            <div className="flex flex-col sm:flex-row gap-4 items-start">
-            <Link href={quotePageUrl("reverse-engineering")} className="button-primary inline-block">
-            Start Your Reverse Engineering Project
-            </Link>
-            <Link href="/contact" className="button-secondary inline-block">Request a Consultation</Link>
+            <div className="mt-6 flex w-full flex-col items-stretch gap-3">
+              <Link
+                href={quotePageUrl("reverse-engineering")}
+                className="button-primary inline-block w-full text-center"
+              >
+                Start Your Reverse Engineering Project
+              </Link>
+              <Link
+                href="/contact"
+                className="button-secondary inline-block w-full text-center"
+              >
+                Request a Consultation
+              </Link>
             </div>
+          </div>
+        </div>
+        <div className="relative mt-8 aspect-video w-full overflow-hidden bg-[#121926]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className="absolute inset-0 h-full w-full origin-[75%_50%] -translate-x-[12%] scale-[2.1] object-cover"
+            src={HERO_IMAGE_REAL}
+            alt=""
+            aria-hidden
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className="absolute inset-0 h-full w-full origin-[75%_50%] -translate-x-[12%] scale-[2.1] object-cover transition-opacity duration-[900ms] ease-in-out"
+            src={HERO_IMAGE_SCAN}
+            alt=""
+            style={{ opacity: heroScanOpacity }}
+            aria-hidden
+          />
+        </div>
+        <div className="relative z-10 mt-auto shrink-0 p-0">
+          <ExtraBadges className="[&>div]:!mt-0" />
         </div>
       </div>
-      <div className="relative z-10 pb-6">
-        <ExtraBadges/>
+
+      {/* Desktop hero — exact current markup */}
+      <div
+        className="relative hidden min-h-[100vh] overflow-hidden bg-[#121926] md:block"
+        onMouseEnter={handleHeroMouseEnter}
+        onMouseLeave={handleHeroMouseLeave}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          className="absolute inset-0 z-0 h-full w-full object-cover object-center"
+          src={HERO_IMAGE_REAL}
+          alt=""
+          fetchPriority="high"
+          aria-hidden
+        />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          className="absolute inset-0 z-[1] h-full w-full object-cover object-center transition-opacity duration-[900ms] ease-in-out"
+          src={HERO_IMAGE_SCAN}
+          alt=""
+          style={{ opacity: heroScanOpacity }}
+          aria-hidden
+        />
+        {/* Light scrim for hero copy readability */}
+        <div
+          className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(to_top_right,rgba(18,25,38,0.15)_25%,rgba(18,25,38,0.10)_50%,rgba(18,25,38,0.05)_75%,transparent_90%)]"
+          aria-hidden
+        />
+        <div className="relative z-10 mx-auto !pt-[25vh] flex flex-row items-center justify-start max-w-7xl flex-col gap-6 px-4 py-8 md:py-16 lg:py-24">
+          <div>
+              <h4>REVERSE ENGINEERING <span className="text-[#ff6726]">SERVICES</span></h4>
+              <h1 className="max-w-3xl !text-6xl !leading-none font-bold text-white pt-5">
+              Rebuild <span className="text-[#ff6726]">Accurate CAD Models</span> from Existing Parts
+              </h1>
+              <h3 className="max-w-2xl text-lg text-white/80">
+              Not every component comes with a complete set of design files. When original drawings are missing, outdated, or never created, reverse engineering provides a reliable way to recover the technical data needed to reproduce and improve a part.
+              </h3>
+              <div className="flex flex-col sm:flex-row gap-4 items-start">
+              <Link href={quotePageUrl("reverse-engineering")} className="button-primary inline-block">
+              Start Your Reverse Engineering Project
+              </Link>
+              <Link href="/contact" className="button-secondary inline-block">Request a Consultation</Link>
+              </div>
+          </div>
+        </div>
+        <div className="relative z-10 pb-6">
+          <ExtraBadges/>
+        </div>
       </div>
     </div>
 
@@ -333,26 +409,33 @@ function ReverseEngineering() {
 
 
     {/* S3 — WHAT WE DELIVER (centered intro variation) */}
-    <div className="max-w-7xl mx-auto px-6 py-24 md:py-32">
-      <div className="text-black/90 flex flex-col justify-center text-center">
-        <h2 className="max-w-3xl mx-auto">
-          Digital Engineering Data <span className="text-[#ff6726]">Reconstructed from Physical Components</span>
+    <div className="mx-auto max-w-7xl px-6 py-12 md:py-32">
+      <div className="flex flex-col justify-center text-center text-black/90">
+        <h2 className="mx-auto max-w-3xl max-md:!text-[1.875rem] max-md:!leading-[1.15]">
+          Digital Engineering Data{" "}
+          <span className="text-[#ff6726]">
+            Reconstructed from Physical Components
+          </span>
         </h2>
-        <p className="max-w-3xl mx-auto">
-          Reverse engineering is the process of capturing the dimensions, features, and relationships of an existing part and rebuilding them as accurate digital models.
+        <p className="mx-auto max-w-3xl max-md:!text-[1.125rem]">
+          Reverse engineering is the process of capturing the dimensions,
+          features, and relationships of an existing part and rebuilding them as
+          accurate digital models.
         </p>
 
-        <p className="max-w-3xl mx-auto">
-          Whether you have a worn component, a supplier sample, or an assembled product, we can convert physical hardware into usable design documentation.
+        <p className="mx-auto max-w-3xl max-md:!text-[1.125rem]">
+          Whether you have a worn component, a supplier sample, or an assembled
+          product, we can convert physical hardware into usable design
+          documentation.
         </p>
       </div>
     </div>
 
 
-    {/* S4 — CAPABILITIES (Simulation grid pattern) */}
+    {/* S4 — CAPABILITIES — mobile accordion; desktop exact hover cards */}
     <section
       id="capabilities"
-      className="border-y border-black/5 bg-stone-50 py-24 md:py-32 !mb-[-35vh]"
+      className="border-y border-black/5 bg-stone-50 py-24 md:py-32 !mb-[-17vh] md:!mb-[-35vh]"
     >
       <div className="mx-auto max-w-7xl px-6">
 
@@ -360,17 +443,97 @@ function ReverseEngineering() {
           <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
             Capabilities
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-black md:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-black max-md:!text-[1.875rem] max-md:!leading-[1.15] md:text-4xl">
             Every detail you need
             <br />
             to reproduce a part.
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-black/70 md:text-lg">
+          <p className="mt-4 text-base leading-relaxed text-black/70 max-md:!text-[1.125rem] md:text-lg">
             From measurement and CAD reconstruction to legacy documentation, FormaSharp covers the full reverse engineering workflow.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-6 md:gap-5">
+        {/* Mobile: accordion with icons */}
+        <div className="flex flex-col border-t border-black/10 md:hidden">
+          {CAPABILITIES.map((item, index) => {
+            const isOpen = accordionOpenIndex === index;
+            const Icon = item.icon;
+            return (
+              <div key={item.title} className="border-b border-black/10">
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  onClick={() =>
+                    setAccordionOpenIndex(isOpen ? null : index)
+                  }
+                  className="flex w-full items-center gap-3 py-4 text-left"
+                >
+                  <Icon
+                    strokeWidth={1.5}
+                    className="size-6 shrink-0 text-[#ff6726]"
+                    aria-hidden
+                  />
+                  <span
+                    className={cn(
+                      "min-w-0 flex-1 text-base font-semibold leading-snug",
+                      isOpen ? "text-[#ff6726]" : "text-black"
+                    )}
+                  >
+                    {item.title}
+                  </span>
+                  <ChevronDown
+                    className={cn(
+                      "size-5 shrink-0 text-black/50 transition-transform duration-200",
+                      isOpen && "rotate-180"
+                    )}
+                    aria-hidden
+                  />
+                </button>
+                <div
+                  className={cn(
+                    "grid transition-[grid-template-rows] duration-300 ease-out",
+                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  )}
+                >
+                  <div className="overflow-hidden">
+                    <div className="pb-5 pl-9 pr-1">
+                      <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
+                        {item.tag}
+                      </div>
+                      <p className="mt-2 !mb-0 !text-[1.125rem] leading-relaxed !text-black/70">
+                        {item.description}
+                      </p>
+                      <ul className="mt-4 space-y-2.5">
+                        {item.bullets.map((b) => (
+                          <li key={b} className="flex items-start gap-2.5">
+                            <Check
+                              className="mt-0.5 size-4 shrink-0 text-[#ff6726]"
+                              strokeWidth={2.5}
+                              aria-hidden
+                            />
+                            <span className="text-sm leading-relaxed text-black/80">
+                              {b}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                      <Link
+                        href={quotePageUrl("reverse-engineering")}
+                        className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#ff6726]"
+                      >
+                        Discuss this capability
+                        <ArrowRight className="size-3.5" strokeWidth={2.5} />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Desktop: exact hover card grid */}
+        <div className="hidden grid-cols-1 gap-4 md:grid md:grid-cols-6 md:gap-5">
           {CAPABILITIES.map((item, index) => {
             const isOrange = index === highlightedIndex;
             const Icon = item.icon;
@@ -466,7 +629,7 @@ function ReverseEngineering() {
     </section>
 
     {/* Feature video — half overlaps Process section below */}
-    <div className="relative z-20 mx-auto h-[70vh] max-w-7xl translate-y-[35vh] px-6">
+    <div className="relative z-20 mx-auto h-[34vh] max-w-7xl translate-y-[17vh] px-6 md:h-[70vh] md:translate-y-[35vh]">
       <div
         ref={featureVideoWrapRef}
         className="h-full w-full overflow-hidden rounded-2xl bg-black"
@@ -485,15 +648,15 @@ function ReverseEngineering() {
 
     {/* S5 — PROCESS (3-col numbered grid on dark gradient) */}
     <section className="relative z-10 bg-[linear-gradient(to_bottom_right,#121926,#01628a)] px-6 py-24 md:py-32">
-      <div className="mx-auto max-w-7xl pt-[35vh]">
+      <div className="mx-auto max-w-7xl pt-[17vh] md:pt-[35vh]">
         <div className="mb-12 max-w-3xl md:mb-16">
           <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
             Our Process
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-white max-md:!text-[1.875rem] max-md:!leading-[1.15] md:text-4xl">
             A <span className="text-[#ff6726]">Methodical Approach</span> to Recovering Design Information
           </h2>
-          <p className="mt-4 text-base leading-relaxed !text-white md:text-lg">
+          <p className="mt-4 text-base leading-relaxed !text-white max-md:!text-[1.125rem] md:text-lg">
             Our reverse engineering workflow is designed to produce reliable CAD models and documentation from existing hardware.
           </p>
         </div>
@@ -510,7 +673,7 @@ function ReverseEngineering() {
               <h3 className="mt-3 !text-xl !font-bold text-white">
                 {step.title}
               </h3>
-              <p className="!text-base !font-light !text-white/80">
+              <p className="!text-base !font-light !text-white/80 max-md:!text-[1.125rem]">
                 {step.description}
               </p>
             </div>
@@ -532,20 +695,26 @@ function ReverseEngineering() {
           </div>
           <h2
             id="re-industries-heading"
-            className="text-3xl font-bold tracking-tight text-white md:text-4xl"
+            className="text-3xl font-bold tracking-tight text-white max-md:!text-[1.875rem] max-md:!leading-[1.15] md:text-4xl"
           >
             Reverse Engineering for Maintenance, Product Development, and <span className="text-[#ff6726]">Modernization</span>
           </h2>
-          <p className="mt-4 text-base leading-relaxed !text-white md:text-lg">
+          <p className="mt-4 text-base leading-relaxed !text-white max-md:!text-[1.125rem] md:text-lg">
             Reverse engineering is valuable whenever physical components must be reproduced, documented, or improved.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div
+          className={cn(
+            "-mx-6 flex gap-4 overflow-x-auto px-6 pb-2",
+            "md:mx-0 md:grid md:grid-cols-2 md:gap-4 md:overflow-visible md:px-0 md:pb-0",
+            "lg:grid-cols-3 xl:grid-cols-5"
+          )}
+        >
           {WHO_WE_WORK_WITH.map((item) => (
             <article
               key={item.title}
-              className="group relative flex min-h-[280px] flex-col justify-end overflow-hidden rounded-2xl md:min-h-[300px]"
+              className="group relative flex min-h-[280px] w-[min(72vw,280px)] shrink-0 flex-col justify-end overflow-hidden rounded-2xl md:w-auto md:min-h-[300px]"
             >
               <img
                 src={item.imageSrc}
@@ -588,10 +757,10 @@ function ReverseEngineering() {
         <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
           Related Services
         </div>
-        <h2 className="text-2xl font-bold tracking-tight text-black md:text-3xl">
+        <h2 className="text-2xl font-bold tracking-tight text-black max-md:!text-[1.875rem] max-md:!leading-[1.15] md:text-3xl">
           Reverse engineering is commonly combined with:
         </h2>
-        <p className="mt-4 text-base leading-relaxed text-black/70 md:text-lg">
+        <p className="mt-4 text-base leading-relaxed text-black/70 max-md:!text-[1.125rem] md:text-lg">
           These services help transform existing parts into improved and production-ready designs.
         </p>
         <div className="mx-auto mt-8 flex max-w-4xl flex-row flex-wrap items-center justify-center gap-3">
@@ -617,20 +786,28 @@ function ReverseEngineering() {
         <div className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
           Get Started
         </div>
-        <h1 className="!text-6xl !leading-none font-bold text-white">
+        <h1 className="!text-6xl !leading-none font-bold text-white max-md:!text-[2rem] max-md:!leading-[1.1]">
           Recover the <span className="italic text-[#ff6726]">Design Data</span> You Need to Move Forward
         </h1>
-        <p className="mt-6 max-w-2xl text-base leading-relaxed !text-white md:text-lg">
+        <p className="mt-6 max-w-2xl text-base leading-relaxed !text-white max-md:!text-[1.125rem] md:text-lg">
           Whether you need to reproduce an obsolete part, document a legacy component, or build on an existing design, FormaSharp can convert physical hardware into accurate CAD models and technical drawings.
         </p>
-        <p className="mt-4 max-w-2xl text-base leading-relaxed !text-white md:text-lg">
+        <p className="mt-4 max-w-2xl text-base leading-relaxed !text-white max-md:!text-[1.125rem] md:text-lg">
           Tell us about the component, assembly, or equipment you need to recreate, and our team will recommend the most effective approach.
         </p>
-        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Link href={quotePageUrl("reverse-engineering")} className="button-primary inline-block">
+        <div className="mt-10 flex flex-col items-center justify-center gap-4 max-md:w-full max-md:items-stretch max-md:gap-3 sm:flex-row">
+          <Link
+            href={quotePageUrl("reverse-engineering")}
+            className="button-primary inline-block max-md:w-full max-md:text-center"
+          >
             Start Your Reverse Engineering Project
           </Link>
-          <Link href="/contact" className="button-secondary inline-block">Request a Consultation</Link>
+          <Link
+            href="/contact"
+            className="button-secondary inline-block max-md:w-full max-md:text-center"
+          >
+            Request a Consultation
+          </Link>
         </div>
         <div className="mt-10 font-mono text-xs tracking-wider text-white/40">
           Measurement · CAD Reconstruction · Drawings · Assemblies · Legacy Documentation

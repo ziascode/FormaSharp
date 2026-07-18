@@ -106,7 +106,7 @@ export default function Contact() {
       {/* BOOK + CALENDLY */}
       <section
         id="book-consultation"
-        className="relative min-h-screen scroll-mt-20 overflow-hidden bg-[#0a0f1e] pt-[18vh] pb-10 lg:pb-14"
+        className="relative min-h-screen scroll-mt-20 overflow-hidden bg-[#0a0f1e] pt-32 pb-10 md:pt-[18vh] lg:pb-14"
       >
         <div
           className="pointer-events-none absolute inset-0"
@@ -117,22 +117,15 @@ export default function Contact() {
           aria-hidden
         />
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-12 xl:gap-16">
-            <div className="text-left pt-6 lg:pt-14">
-              <h1 className="!mb-6 max-w-xl !text-4xl !leading-[1.05] font-bold text-white md:!text-5xl lg:!text-[3.25rem]">
+          <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-12 xl:gap-16">
+            <div className="text-left max-md:pt-0 pt-6 lg:pt-14">
+              <h1 className="!mb-0 max-w-xl !text-[2rem] !leading-[1.1] font-bold text-white md:!mb-6 md:!text-5xl md:!leading-[1.05] lg:!text-[3.25rem]">
                 Book your{" "}
                 <span className="text-[#ff6726]">free strategy call</span> today
               </h1>
-              <p className="max-w-md text-lg !text-white/75">
-                Walk away with clarity, priorities, and practical next steps.
-              </p>
-              <p className="mt-6 max-w-md text-sm !text-white/55">
-                Pick a time that works for you. No obligation, just a focused
-                conversation about your project.
-              </p>
               <Link
                 href="/request-a-quote"
-                className="mt-8 inline-flex max-w-lg items-center gap-2 border-b border-white/30 pb-0.5 text-lg font-medium !text-white transition-colors hover:border-[#ff6726] hover:!text-[#ff6726]"
+                className="mt-6 inline-flex max-w-lg items-center gap-2 border-b border-white/30 pb-0.5 text-base font-medium !text-white transition-colors hover:border-[#ff6726] hover:!text-[#ff6726] md:mt-8 md:text-lg"
               >
                 Or request a detailed quote to start your project
                 <span aria-hidden>&rarr;</span>
@@ -162,34 +155,34 @@ export default function Contact() {
             <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
               Get in Touch
             </div>
-            <h2 className="text-4xl font-bold leading-[1.08] tracking-tight text-neutral-950 md:text-5xl">
+            <h2 className="text-4xl font-bold leading-[1.08] tracking-tight text-neutral-950 max-md:!text-[1.875rem] max-md:!leading-[1.15] md:text-5xl">
               Other ways to reach us
             </h2>
-            <p className="mx-auto">
+            <p className="mx-auto max-md:!text-[1.125rem]">
               Prefer email or a quick phone call? We respond to messages promptly
               and are happy to help however suits you best.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
             {CONTACT_METHODS.map((method) => {
               const Icon = method.icon;
               const inner = (
                 <>
-                  <div className="mb-5 flex size-14 items-center justify-center rounded-2xl bg-[#ff6726]/10">
-                    <Icon className="size-7 text-[#ff6726]" strokeWidth={2} aria-hidden />
+                  <div className="mb-5 flex size-12 items-center justify-center rounded-2xl bg-[#ff6726]/10 md:size-14">
+                    <Icon className="size-6 text-[#ff6726] md:size-7" strokeWidth={2} aria-hidden />
                   </div>
                   <span className="font-mono text-xs uppercase tracking-[0.18em] text-black/50">
                     {method.label}
                   </span>
-                  <span className="mt-1 text-lg font-semibold text-neutral-950">
+                  <span className="mt-1 text-base font-semibold text-neutral-950 md:text-lg">
                     {method.value}
                   </span>
                 </>
               );
 
               const cardClass =
-                "group flex flex-col items-start rounded-2xl border border-black/10 bg-white p-8 shadow-sm transition-colors";
+                "group flex flex-col items-start rounded-2xl border border-black/10 bg-white p-6 shadow-sm transition-colors md:p-8";
 
               return method.href ? (
                 <a
@@ -211,7 +204,7 @@ export default function Contact() {
             <p className="font-mono text-xs uppercase tracking-[0.18em] text-black/50">
               Follow us
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
               {SOCIAL_LINKS.map((social) => (
                 <a
                   key={social.href}
@@ -245,12 +238,12 @@ export default function Contact() {
             <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
               How We Work With You
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-white max-md:!text-[1.875rem] max-md:!leading-[1.15] md:text-4xl">
               Clear communication, from first message to final delivery
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
             {APPROACH.map((item) => {
               const Icon = item.icon;
               return (
@@ -264,7 +257,7 @@ export default function Contact() {
                   <h3 className="!mb-2 !text-xl !font-bold text-white">
                     {item.title}
                   </h3>
-                  <p className="!mb-0 !text-base !text-white/80">
+                  <p className="!mb-0 !text-base !text-white/80 max-md:!text-[1.125rem]">
                     {item.description}
                   </p>
                 </div>

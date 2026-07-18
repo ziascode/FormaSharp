@@ -197,9 +197,9 @@ function Simulation() {
                 Request Engineering Analysis
               </Link>
             </div>
-            <div className="mt-8 w-full overflow-hidden rounded-2xl shadow-lg">
+            <div className="relative mt-8 aspect-[16/10] w-full overflow-hidden rounded-2xl bg-[#121926] shadow-lg">
               <video
-                className="aspect-[16/10] h-auto w-full object-cover"
+                className="absolute inset-0 block h-full w-full scale-[1.02] object-cover"
                 src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/thermal-vid.mp4"
                 autoPlay
                 muted
