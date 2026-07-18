@@ -5,6 +5,7 @@ import {
   ArrowRight,
   Blocks,
   Check,
+  ChevronDown,
   Factory,
   Layers,
   MessageSquareReply,
@@ -12,11 +13,9 @@ import {
   RulerDimensionLine,
 } from "lucide-react";
 import { DotPattern } from "@/components/ui/DotPatternProps";
-import ImageMasking1 from "@/components/ui/image-masking-1";
-import { DfmShowcase } from "@/components/ui/dfm-showcase";
+import ExtraBadges from "@/components/ExtraBadges";
 import { cn } from "@/lib/utils";
 import { quotePageUrl } from "@/lib/quoteForm";
-import ExtraBadges from "@/components/ExtraBadges";
 
 type CapabilityItem = {
   tag: string;
@@ -214,12 +213,15 @@ const CAPABILITY_MOTION =
 
 function DesignForManufacturing() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [accordionOpenIndex, setAccordionOpenIndex] = useState<number | null>(
+    null
+  );
   const activeCapability = CAPABILITIES[activeIndex];
 
   return (
     <div>
-      {/* HERO — S1 */}
-      <div className="relative min-h-[100vh] overflow-hidden bg-[#121926]">
+      {/* HERO — mobile: centered + flat overlay; md+ restores desktop gradient/padding */}
+      <div className="relative flex min-h-[100svh] flex-col overflow-hidden bg-[#121926] md:block md:min-h-[100vh]">
         <video
           className="absolute inset-0 z-0 h-full w-full object-cover"
           src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/dfm1.mp4"
@@ -230,51 +232,65 @@ function DesignForManufacturing() {
           preload="metadata"
           aria-hidden
         />
-        {/* Left dark → right fully transparent (readability for hero copy on the left) */}
+        {/* Mobile: flat overlay */}
         <div
-          className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(to_top_right,rgba(18,25,38,0.97)_0%,rgba(18,25,38,0.78)_22%,rgba(18,25,38,0.48)_45%,rgba(18,25,38,0.2)_68%,transparent_88%,transparent_100%)]"
+          className="pointer-events-none absolute inset-0 z-[1] bg-[#121926]/70 md:hidden"
           aria-hidden
         />
-        <div className="relative z-10 flex min-h-[100vh] w-full flex-col justify-end items-end">
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-start justify-start gap-6 px-4 py-12 !pt-[20vh] text-left md:flex-row md:py-16 lg:py-24">
+        {/* Desktop: existing left→right gradient */}
+        <div
+          className="pointer-events-none absolute inset-0 z-[1] hidden bg-[linear-gradient(to_top_right,rgba(18,25,38,0.97)_0%,rgba(18,25,38,0.78)_22%,rgba(18,25,38,0.48)_45%,rgba(18,25,38,0.2)_68%,transparent_88%,transparent_100%)] md:block"
+          aria-hidden
+        />
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center gap-6 px-6 pb-10 pt-28 text-left md:flex-none md:flex-row md:justify-start md:px-4 md:py-16 md:!pt-[20vh] lg:py-24">
           <div className="max-w-3xl">
-            <h4>
+            <h4 className="!mb-0 !text-[0.6875rem] !font-medium !uppercase !tracking-[0.14em] !text-white/90 md:!text-[length:inherit] md:!font-[inherit] md:!tracking-[inherit] md:!text-inherit">
               DESIGN FOR MANUFACTURING{" "}
               <span className="text-[#ff6726]">(DFM)</span>
             </h4>
-            <h1 className="max-w-3xl !text-6xl !leading-none font-bold text-white pt-5">
+            <h1 className="max-w-3xl !text-[2rem] !leading-[1.1] font-bold text-white pt-5 md:!text-6xl md:!leading-none">
               Prepare your product for efficient,{" "}
               <span className="text-[#ff6726]">cost-effective</span> production.
             </h1>
-            <h3 className="max-w-2xl text-lg text-white/80">
-
+            <h3 className="max-w-2xl !text-[1.125rem] text-white/80 md:!text-lg">
             </h3>
-            <div className="flex flex-col items-start gap-4 sm:flex-row">
-              <Link href={quotePageUrl("dfm")} className="button-primary inline-block">
+            <div className="mt-8 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-start sm:gap-4">
+              <Link
+                href={quotePageUrl("dfm")}
+                className="button-primary inline-block w-full text-center sm:w-auto"
+              >
                 Optimize Your Design for Manufacturing
               </Link>
-              <Link href="/contact" className="button-secondary inline-block">Discuss Your Project</Link>
+              <Link
+                href="/contact"
+                className="button-secondary inline-block w-full text-center sm:w-auto"
+              >
+                Discuss Your Project
+              </Link>
             </div>
           </div>
         </div>
-        
+        <div className="relative z-10 mt-auto p-0 md:hidden">
+          <ExtraBadges className="[&>div]:!mt-0" />
         </div>
       </div>
 
-
-      {/* <div className="mx-auto w-full max-w-7xl px-4 py-8 md:px-6">
-          <ExtraBadges contentAlign="center" />
-        </div> */}
-
       {/* PROBLEM — S2 */}
-      <div className="max-w-7xl mx-auto px-6 py-24 md:py-32">
-      <div className="max-w-7xl mx-auto px-6 flex flex-row items-start justify-around gap-8 large:gap-8  py-12">
-            <h2 className=" font-bold text-black w-[40%]">What our DFM services deliver</h2>
-            <p className="text-lg text-black w-[60%]">Design for Manufacturing is the process of evaluating how a product will be made and
-            identifying opportunities to simplify production without compromising performance. Our recommendations are tailored to the intended manufacturing method, production volume, and project objectives. Whether your product will be machined, fabricated, molded, or assembled from multiple components, DFM helps align design decisions with efficient production practices.</p>
-
+      <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-around gap-6 px-0 py-12 md:flex-row md:gap-8 md:px-6 large:gap-8">
+          <h2 className="!text-[1.875rem] font-bold !leading-[1.15] text-black md:w-[40%] md:!text-[length:inherit] md:!leading-[inherit]">
+            What our DFM services deliver
+          </h2>
+          <p className="!text-[1.125rem] text-black md:w-[60%] md:!text-lg">
+            Design for Manufacturing is the process of evaluating how a product
+            will be made and identifying opportunities to simplify production
+            without compromising performance. Our recommendations are tailored
+            to the intended manufacturing method, production volume, and project
+            objectives. Whether your product will be machined, fabricated,
+            molded, or assembled from multiple components, DFM helps align
+            design decisions with efficient production practices.
+          </p>
         </div>
-       
       </div>
 
      
@@ -289,13 +305,92 @@ function DesignForManufacturing() {
             <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
               Capabilities
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-black md:text-4xl">
+            <h2 className="!text-[1.875rem] font-bold !leading-[1.15] tracking-tight text-black md:!text-4xl md:!leading-[inherit]">
               Six areas of review, tailored to your process and volume.
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-10">
-            {/* Tab list — horizontal scroll on mobile, vertical rail on md+ */}
+          {/* Mobile: accordion with icons */}
+          <div className="flex flex-col border-t border-black/10 md:hidden">
+            {CAPABILITIES.map((item, index) => {
+              const isOpen = accordionOpenIndex === index;
+              const Icon = item.icon;
+              return (
+                <div key={item.title} className="border-b border-black/10">
+                  <button
+                    type="button"
+                    aria-expanded={isOpen}
+                    onClick={() =>
+                      setAccordionOpenIndex(isOpen ? null : index)
+                    }
+                    className="flex w-full items-center gap-3 py-4 text-left"
+                  >
+                    <Icon
+                      strokeWidth={1.5}
+                      className="size-6 shrink-0 text-[#ff6726]"
+                      aria-hidden
+                    />
+                    <span
+                      className={cn(
+                        "min-w-0 flex-1 text-base font-semibold leading-snug",
+                        isOpen ? "text-[#ff6726]" : "text-black"
+                      )}
+                    >
+                      {item.title}
+                    </span>
+                    <ChevronDown
+                      className={cn(
+                        "size-5 shrink-0 text-black/50 transition-transform duration-200",
+                        isOpen && "rotate-180"
+                      )}
+                      aria-hidden
+                    />
+                  </button>
+                  <div
+                    className={cn(
+                      "grid transition-[grid-template-rows] duration-300 ease-out",
+                      isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                    )}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="pb-5 pl-9 pr-1">
+                        <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
+                          {item.tag}
+                        </div>
+                        <p className="mt-2 !mb-0 !text-[1.125rem] leading-relaxed !text-black/70">
+                          {item.description}
+                        </p>
+                        <ul className="mt-4 space-y-2.5">
+                          {item.bullets.map((b) => (
+                            <li key={b} className="flex items-start gap-2.5">
+                              <Check
+                                className="mt-0.5 size-4 shrink-0 text-[#ff6726]"
+                                strokeWidth={2.5}
+                                aria-hidden
+                              />
+                              <span className="text-sm leading-relaxed text-black/80">
+                                {b}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                        <Link
+                          href="/contact"
+                          className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#ff6726]"
+                        >
+                          Book a Free Consultation
+                          <ArrowRight className="size-3.5" strokeWidth={2.5} />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Desktop: existing tabs + panel (unchanged) */}
+          <div className="hidden grid-cols-1 gap-6 md:grid md:grid-cols-12 md:gap-10">
             <div
               role="tablist"
               aria-label="DFM capabilities"
@@ -351,7 +446,6 @@ function DesignForManufacturing() {
               })}
             </div>
 
-            {/* Active panel */}
             <div
               role="tabpanel"
               id={`dfm-cap-panel-${activeIndex}`}
@@ -496,10 +590,10 @@ function DesignForManufacturing() {
             <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
               Our Process
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+            <h2 className="!text-[1.875rem] font-bold !leading-[1.15] tracking-tight text-white md:!text-4xl md:!leading-[inherit]">
               A structured review focused on manufacturing efficiency.
             </h2>
-            <p className="mt-4 text-base leading-relaxed !text-white md:text-lg">
+            <p className="mt-4 !text-[1.125rem] leading-relaxed !text-white md:!text-lg">
               Our Design for Manufacturing process is designed to uncover
               practical improvements before production resources are committed.
             </p>
@@ -509,15 +603,15 @@ function DesignForManufacturing() {
             {PROCESS_STEPS.map((step, i) => (
               <div
                 key={step.title}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm md:p-7"
+                className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm md:p-7"
               >
-                <div className="text-5xl font-bold text-[#ff6726]">
+                <div className="!text-4xl font-bold text-[#ff6726] md:!text-5xl">
                   {String(i + 1).padStart(2, "0")}
                 </div>
                 <h3 className="mt-3 !text-xl !font-bold text-white">
                   {step.title}
                 </h3>
-                <p className="!text-base !font-light !text-white/80">
+                <p className="!text-[1.125rem] !font-light !text-white/80 md:!text-base">
                   {step.description}
                 </p>
               </div>
@@ -537,24 +631,32 @@ function DesignForManufacturing() {
           <div className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
             Get Started
           </div>
-          <h1 className="!text-6xl !leading-none font-bold text-white">
+          <h1 className="!text-[2rem] !leading-[1.1] font-bold text-white md:!text-6xl md:!leading-none">
             Reduce production costs
             <br />
             <span className="italic text-[#ff6726]">before</span> manufacturing
             begins.
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed !text-white md:text-lg">
+          <p className="mt-6 max-w-2xl !text-[1.125rem] leading-relaxed !text-white md:!text-lg">
             Whether you are preparing a new product for launch or improving an
             existing design, FormaSharp can identify practical changes that
             simplify production and support better manufacturing outcomes. Share
             your CAD files, drawings, or supplier feedback, and our team will
             recommend the most effective path forward.
           </p>
-          <div className="mt-10 flex flex-col flex-wrap items-center justify-center gap-4 sm:flex-row">
-            <Link href={quotePageUrl("dfm")} className="button-primary inline-block">
+          <div className="mt-10 flex w-full flex-col flex-wrap items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4">
+            <Link
+              href={quotePageUrl("dfm")}
+              className="button-primary inline-block w-full text-center sm:w-auto"
+            >
               Optimize Your Design for Manufacturing
             </Link>
-            <Link href="/contact" className="button-secondary inline-block">Book a Free Consultation</Link>
+            <Link
+              href="/contact"
+              className="button-secondary inline-block w-full text-center sm:w-auto"
+            >
+              Book a Free Consultation
+            </Link>
           </div>
           <div className="mt-10 font-mono text-xs tracking-wider text-white/40">
             Tolerance · Part Count · Materials · Assembly · Supplier Feedback
