@@ -17,6 +17,7 @@ import { ReverseShowcase } from "@/components/ui/reverse-showcase";
 import { cn } from "@/lib/utils";
 import { quotePageUrl } from "@/lib/quoteForm";
 import ExtraBadges from "@/components/ExtraBadges";
+import { prepareSafariVideo, trySafariPlay } from "@/lib/safariVideo";
 
 type CapabilityItem = {
   tag: string;
@@ -242,6 +243,8 @@ function ReverseEngineering() {
     const video = featureVideoRef.current;
     if (!wrap || !video) return;
 
+    prepareSafariVideo(video);
+
     const isMobile = window.matchMedia("(max-width: 767px)").matches;
     const threshold = isMobile ? 1 : 0.5;
 
@@ -253,7 +256,7 @@ function ReverseEngineering() {
           !featureVideoPlayedRef.current
         ) {
           featureVideoPlayedRef.current = true;
-          void video.play();
+          trySafariPlay(video);
           observer.disconnect();
         }
       },

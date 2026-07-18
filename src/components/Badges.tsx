@@ -1,24 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ScrollyVideo from "scrolly-video/dist/ScrollyVideo.cjs.jsx";
 import { TextReveal } from "@/components/ui/text-reveal";
 import ImageMasking1 from "@/components/ui/image-masking-1";
 import { section } from "@/lib/sectionSpacing";
+import { prefersWebCodecsForScrolly } from "@/lib/safariVideo";
 
 const COPY =
   "We are an engineering partner focused on developing products that can actually be built.";
 const IMAGE_SRC =
   "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/3dproduct-opt.jpg";
 const VIDEO_SRC =
-  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/hero-animation.mov";
+  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/03/hero-animation.mp4";
 
 function ScrollVideo({ className }: { className?: string }) {
+  const [useWebCodecs, setUseWebCodecs] = useState(false);
+
+  useEffect(() => {
+    setUseWebCodecs(prefersWebCodecsForScrolly());
+  }, []);
+
   return (
     <div className={className}>
       <ScrollyVideo
         videoPercentage={0}
         transitionSpeed={16}
         frameThreshold={0.05}
-        useWebCodecs
+        useWebCodecs={useWebCodecs}
         full
         src={VIDEO_SRC}
       />

@@ -18,8 +18,10 @@ import ImageMasking1 from "@/components/ui/image-masking-1";
 import { ProductDesignShowcase } from "@/components/ui/product-design-showcase";
 import { cn } from "@/lib/utils";
 import { quotePageUrl } from "@/lib/quoteForm";
+import AutoplayVideo from "@/components/AutoplayVideo";
 import ExtraBadges from "@/components/ExtraBadges";
 import ScrollyVideo from "scrolly-video/dist/ScrollyVideo.cjs.jsx";
+import { prefersWebCodecsForScrolly } from "@/lib/safariVideo";
 
 type CapabilityItem = {
   tag: string;
@@ -265,6 +267,12 @@ function ProductDesign() {
   const activeStage = PROCESS_STEPS[activeStageIndex];
 
   const [heroScrollPercent, setHeroScrollPercent] = useState(0);
+  const [useWebCodecs, setUseWebCodecs] = useState(false);
+
+  useEffect(() => {
+    setUseWebCodecs(prefersWebCodecsForScrolly());
+  }, []);
+
   useEffect(() => {
     const onScroll = () => {
       const vh = window.innerHeight || 1;
@@ -332,7 +340,7 @@ function ProductDesign() {
               full={false}
               transitionSpeed={8}
               frameThreshold={0.05}
-              useWebCodecs
+              useWebCodecs={useWebCodecs}
             />
           </div>
         </div>
@@ -353,7 +361,7 @@ function ProductDesign() {
             trackScroll={false}
             transitionSpeed={8}
             frameThreshold={0.05}
-            useWebCodecs
+            useWebCodecs={useWebCodecs}
             full
           />
         </div>
@@ -818,13 +826,10 @@ function ProductDesign() {
     </section>
 
 <div className="max-md:w-full max-md:overflow-hidden max-md:bg-[#121926]">
-  <video
+  <AutoplayVideo
     className="max-md:block max-md:aspect-video max-md:w-full max-md:object-cover"
     src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/cnc.mp4"
-    autoPlay
-    muted
     loop
-    playsInline
   />
 </div>
 

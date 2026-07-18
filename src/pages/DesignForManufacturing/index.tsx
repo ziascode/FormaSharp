@@ -12,6 +12,7 @@ import {
   PackageSearch,
   RulerDimensionLine,
 } from "lucide-react";
+import AutoplayVideo from "@/components/AutoplayVideo";
 import { DotPattern } from "@/components/ui/DotPatternProps";
 import ExtraBadges from "@/components/ExtraBadges";
 import { cn } from "@/lib/utils";
@@ -222,13 +223,10 @@ function DesignForManufacturing() {
     <div>
       {/* HERO — dual trees: mobile-only vs exact desktop */}
       <div className="relative overflow-hidden bg-[#121926]">
-        <video
+        <AutoplayVideo
           className="absolute inset-0 z-0 h-full w-full object-cover"
           src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/dfm1.mp4"
-          autoPlay
-          muted
           loop
-          playsInline
           preload="metadata"
           aria-hidden
         />

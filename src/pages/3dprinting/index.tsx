@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import AutoplayVideo from "@/components/AutoplayVideo";
 import { DotPattern } from "@/components/ui/DotPatternProps";
 import { ProjectShowcase } from "@/components/ui/project-showcase";
 import { quotePageUrl } from "@/lib/quoteForm";
@@ -34,13 +35,10 @@ function ThreeDPrinting() {
                 </Link>
               </div>
               <div className="relative mt-8 aspect-[16/10] w-full overflow-hidden rounded-2xl bg-[#121926] shadow-lg">
-                <video
+                <AutoplayVideo
                   className="absolute inset-0 h-full w-full scale-[1.02] object-cover"
                   src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/3d-printing.mp4"
-                  autoPlay
-                  muted
                   loop
-                  playsInline
                   preload="metadata"
                   aria-hidden
                 />
@@ -104,13 +102,10 @@ assess assembly, and make informed decisions with greater certainty.</p>
       </div>
       <div className="relative z-20 hidden h-[70vh] items-center justify-center max-w-7xl mx-auto md:flex">
         <div className="w-[80vw] h-[70vh] rounded-2xl overflow-hidden shadow-2xl">
-        <video
+        <AutoplayVideo
           className="h-full w-full rounded-2xl object-cover"
           src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/3d-printing.mp4"
-          autoPlay
-          muted
           loop
-          playsInline
           controls
           preload="metadata"
         />

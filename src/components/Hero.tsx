@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import ExtraBadges from "@/components/ExtraBadges";
+import { enableSafariAutoplay } from "@/lib/safariVideo";
 
 const HERO_VIDEO_SRC = "/videos/decon2-scrub.mp4";
 
@@ -13,57 +14,7 @@ export default function Hero() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
-    // iOS requires these as live properties (not just JSX attrs) before play().
-    video.muted = true;
-    video.defaultMuted = true;
-    video.playsInline = true;
-    video.setAttribute("muted", "");
-    video.setAttribute("playsinline", "");
-    video.setAttribute("webkit-playsinline", "");
-
-    let cancelled = false;
-
-    const tryPlay = () => {
-      if (cancelled) return;
-      const playPromise = video.play();
-      if (playPromise === undefined) return;
-      playPromise.catch(() => {
-        // Autoplay blocked (Low Power Mode, etc.) — unlock on first gesture.
-        const unlock = () => {
-          video.muted = true;
-          video.play().catch(() => {});
-          window.removeEventListener("touchstart", unlock);
-          window.removeEventListener("click", unlock);
-        };
-        window.addEventListener("touchstart", unlock, { once: true, passive: true });
-        window.addEventListener("click", unlock, { once: true });
-      });
-    };
-
-    if (video.readyState >= 2) {
-      tryPlay();
-    } else {
-      video.addEventListener("loadeddata", tryPlay, { once: true });
-      video.addEventListener("canplay", tryPlay, { once: true });
-      video.load();
-    }
-
-    // Retry when the hero scrolls into view (e.g. back-navigation).
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) tryPlay();
-      },
-      { threshold: 0.25 }
-    );
-    observer.observe(video);
-
-    return () => {
-      cancelled = true;
-      observer.disconnect();
-      video.removeEventListener("loadeddata", tryPlay);
-      video.removeEventListener("canplay", tryPlay);
-    };
+    return enableSafariAutoplay(video);
   }, []);
 
   const scrollToServices = (e: React.MouseEvent<HTMLAnchorElement>) => {

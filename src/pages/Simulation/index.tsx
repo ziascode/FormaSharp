@@ -11,6 +11,7 @@ import {
   Thermometer,
   Wind,
 } from "lucide-react";
+import AutoplayVideo from "@/components/AutoplayVideo";
 import { DotPattern } from "@/components/ui/DotPatternProps";
 import { SimulationShowcase } from "@/components/ui/simulation-showcase";
 import { cn } from "@/lib/utils";
@@ -198,13 +199,10 @@ function Simulation() {
               </Link>
             </div>
             <div className="relative mt-8 aspect-[16/10] w-full overflow-hidden rounded-2xl bg-[#121926] shadow-lg">
-              <video
+              <AutoplayVideo
                 className="absolute inset-0 block h-full w-full scale-[1.02] object-cover"
                 src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/thermal-vid.mp4"
-                autoPlay
-                muted
                 loop
-                playsInline
                 preload="metadata"
                 aria-hidden
               />
@@ -218,13 +216,10 @@ function Simulation() {
 
       {/* Desktop hero — exact current markup */}
       <div className="relative hidden min-h-[100vh] md:block">
-        <video
+        <AutoplayVideo
           className="absolute inset-0 z-0 h-full w-full object-cover"
           src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/rc4.mp4"
-          autoPlay
-          muted
           loop
-          playsInline
           preload="metadata"
           aria-hidden
         />
