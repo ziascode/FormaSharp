@@ -1,7 +1,16 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import type { LucideIcon } from "lucide-react";
-import { Box, Microscope, Minimize2, Thermometer, Wind } from "lucide-react";
+import {
+  ArrowRight,
+  Box,
+  Check,
+  ChevronDown,
+  Microscope,
+  Minimize2,
+  Thermometer,
+  Wind,
+} from "lucide-react";
 import { DotPattern } from "@/components/ui/DotPatternProps";
 import { SimulationShowcase } from "@/components/ui/simulation-showcase";
 import { cn } from "@/lib/utils";
@@ -152,53 +161,104 @@ const CAPABILITY_MOTION =
 function Simulation() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [accordionOpenIndex, setAccordionOpenIndex] = useState<number | null>(
+    null
+  );
   const highlightedIndex = hoveredIndex ?? activeIndex;
 
   return (
     <div>
 
-    {/* HERO — video background */}
-    <div className="relative min-h-[100vh] overflow-hidden bg-[#121926]">
-      <video
-        className="absolute inset-0 z-0 h-full w-full object-cover"
-        src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/rc4.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        aria-hidden
-      />
-      {/* Diagonal scrim: darker bottom-left for hero copy, fading transparent toward top-right */}
-      <div
-        
-      />
-      <div className="relative z-10 mx-auto !pt-[20vh] flex flex-row items-center justify-start max-w-7xl flex-col gap-6 px-4 py-12 md:py-16 lg:py-24">
-        <div>
-            <h4>MECHANICAL ENGINEERING & <span className="text-[#ff6726]">SIMULATION</span></h4>
-            <h1 className="max-w-3xl !text-6xl !leading-none font-bold text-white pt-5">
-            Better engineering decisions start <span className="text-[#ff6726]">before</span> production.
+    {/* HERO — dual trees: mobile-only vs exact desktop */}
+    <div className="relative overflow-hidden bg-[#121926]">
+      {/* Mobile hero — gradient bg; video in box under CTA */}
+      <div className="relative z-10 flex min-h-[100svh] flex-col bg-[linear-gradient(to_bottom_right,#121926,#01628a)] md:hidden">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-start gap-5 px-6 pb-4 pt-36 text-left">
+          <div>
+            <h4 className="!mb-0 !text-[0.6875rem] !font-medium !uppercase !tracking-[0.14em] !text-white/90">
+              MECHANICAL ENGINEERING &{" "}
+              <span className="text-[#ff6726]">SIMULATION</span>
+            </h4>
+            <h1 className="max-w-3xl !text-[2rem] !leading-[1.1] font-bold text-white pt-4">
+              Better engineering decisions start{" "}
+              <span className="text-[#ff6726]">before</span> production.
             </h1>
-            <h3 className="max-w-2xl text-lg text-white/80">
-            Formasharp uses thermal analysis, structural optimization, and failure investigation to reveal crucial fail points in your design, before manufacturing locks you in. Fewer prototypes. No surprises at production.
+            <h3 className="max-w-2xl !text-[1.125rem] text-white/80">
+              Formasharp uses thermal analysis, structural optimization, and
+              failure investigation to reveal crucial fail points in your
+              design, before manufacturing locks you in. Fewer prototypes. No
+              surprises at production.
             </h3>
-            <div>
-            <Link href={quotePageUrl("simulation")} className="button-primary inline-block">
-            Request Engineering Analysis
-            </Link>
+            <div className="mt-6">
+              <Link
+                href={quotePageUrl("simulation")}
+                className="button-primary inline-block w-full text-center"
+              >
+                Request Engineering Analysis
+              </Link>
             </div>
+            <div className="mt-8 w-full overflow-hidden rounded-2xl shadow-lg">
+              <video
+                className="aspect-[16/10] h-auto w-full object-cover"
+                src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/thermal-vid.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-hidden
+              />
+            </div>
+          </div>
         </div>
-        
-        
+        <div className="relative z-10 mt-auto shrink-0 p-0">
+          <ExtraBadges className="[&>div]:!mt-0" />
+        </div>
       </div>
-      <div className="relative z-10 py-8">
-        <ExtraBadges/>
+
+      {/* Desktop hero — exact current markup */}
+      <div className="relative hidden min-h-[100vh] md:block">
+        <video
+          className="absolute inset-0 z-0 h-full w-full object-cover"
+          src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/rc4.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden
+        />
+        {/* Diagonal scrim: darker bottom-left for hero copy, fading transparent toward top-right */}
+        <div
+
+        />
+        <div className="relative z-10 mx-auto !pt-[20vh] flex flex-row items-center justify-start max-w-7xl flex-col gap-6 px-4 py-12 md:py-16 lg:py-24">
+          <div>
+              <h4>MECHANICAL ENGINEERING & <span className="text-[#ff6726]">SIMULATION</span></h4>
+              <h1 className="max-w-3xl !text-6xl !leading-none font-bold text-white pt-5">
+              Better engineering decisions start <span className="text-[#ff6726]">before</span> production.
+              </h1>
+              <h3 className="max-w-2xl text-lg text-white/80">
+              Formasharp uses thermal analysis, structural optimization, and failure investigation to reveal crucial fail points in your design, before manufacturing locks you in. Fewer prototypes. No surprises at production.
+              </h3>
+              <div>
+              <Link href={quotePageUrl("simulation")} className="button-primary inline-block">
+              Request Engineering Analysis
+              </Link>
+              </div>
+          </div>
+
+
+        </div>
+        <div className="relative z-10 py-8">
+          <ExtraBadges/>
+        </div>
       </div>
     </div>
 
   
 
-    {/* SERVICES — Capabilities (from static HTML → JSX) */}
+    {/* SERVICES — mobile accordion; desktop exact hover cards */}
     <section
       id="services"
       className="border-y border-black/5 bg-stone-50 py-24 md:py-32"
@@ -209,19 +269,99 @@ function Simulation() {
           <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
             Capabilities
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-black md:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-black max-md:!text-[1.875rem] max-md:!leading-[1.15] md:text-4xl">
             Every tool you need
             <br />
             to validate a design.
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-black/70 md:text-lg">
+          <p className="mt-4 text-base leading-relaxed text-black/70 max-md:!text-[1.125rem] md:text-lg">
             From structural integrity to aerodynamic  optimization and failure
             investigation, FormaSharp covers the full spectrum of mechanical
             engineering simulation.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-6 md:gap-5">
+        {/* Mobile: accordion with icons */}
+        <div className="flex flex-col border-t border-black/10 md:hidden">
+          {CAPABILITIES.map((item, index) => {
+            const isOpen = accordionOpenIndex === index;
+            const Icon = item.icon;
+            return (
+              <div key={item.title} className="border-b border-black/10">
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  onClick={() =>
+                    setAccordionOpenIndex(isOpen ? null : index)
+                  }
+                  className="flex w-full items-center gap-3 py-4 text-left"
+                >
+                  <Icon
+                    strokeWidth={1.5}
+                    className="size-6 shrink-0 text-[#ff6726]"
+                    aria-hidden
+                  />
+                  <span
+                    className={cn(
+                      "min-w-0 flex-1 text-base font-semibold leading-snug",
+                      isOpen ? "text-[#ff6726]" : "text-black"
+                    )}
+                  >
+                    {item.title}
+                  </span>
+                  <ChevronDown
+                    className={cn(
+                      "size-5 shrink-0 text-black/50 transition-transform duration-200",
+                      isOpen && "rotate-180"
+                    )}
+                    aria-hidden
+                  />
+                </button>
+                <div
+                  className={cn(
+                    "grid transition-[grid-template-rows] duration-300 ease-out",
+                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  )}
+                >
+                  <div className="overflow-hidden">
+                    <div className="pb-5 pl-9 pr-1">
+                      <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
+                        {item.tag}
+                      </div>
+                      <p className="mt-2 !mb-0 !text-[1.125rem] leading-relaxed !text-black/70">
+                        {item.description}
+                      </p>
+                      <ul className="mt-4 space-y-2.5">
+                        {item.bullets.map((b) => (
+                          <li key={b} className="flex items-start gap-2.5">
+                            <Check
+                              className="mt-0.5 size-4 shrink-0 text-[#ff6726]"
+                              strokeWidth={2.5}
+                              aria-hidden
+                            />
+                            <span className="text-sm leading-relaxed text-black/80">
+                              {b}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                      <Link
+                        href="/contact"
+                        className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#ff6726]"
+                      >
+                        Speak With an Engineer
+                        <ArrowRight className="size-3.5" strokeWidth={2.5} />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Desktop: exact hover card grid */}
+        <div className="hidden grid-cols-1 gap-4 md:grid md:grid-cols-6 md:gap-5">
           {CAPABILITIES.map((item, index) => {
             const isOrange = index === highlightedIndex;
             const Icon = item.icon;
@@ -316,59 +456,97 @@ function Simulation() {
       </div>
     </section>
 
-  {/* intro section for engineering analysis */}
-    <div className="max-w-7xl mx-auto px-6 py-24 md:py-32 !mb-[-35vh]">
-       {/* <ExtraBadges /> */}
-       <div className="text-black/90 flex flex-col justify-center text-center">
-        <h2 className=" max-w-2xl mx-auto"> Engineering analysis<span className="text-[#ff6726]"> for early-stage design</span></h2>
-        <p className=" max-w-7xl mx-auto"> Engineering decisions carry real consequences. A component that appears robust on screen
+  {/* intro + image — dual trees */}
+    {/* Mobile: stacked, no overlap */}
+    <div className="mx-auto max-w-7xl px-6 py-24 md:hidden">
+      <div className="flex flex-col justify-center text-center text-black/90">
+        <h2 className="mx-auto max-w-2xl !text-[1.875rem] font-bold !leading-[1.15] tracking-tight">
+          Engineering analysis
+          <span className="text-[#ff6726]"> for early-stage design</span>
+        </h2>
+        <p className="mx-auto mt-4 max-w-7xl !text-[1.125rem] leading-relaxed">
+          Engineering decisions carry real consequences. A component that
+          appears robust on screen may crack under load or overheat during
+          operation. FormaSharp provides mechanical engineering and simulation
+          services that help startups, manufacturers, and engineering teams
+          evaluate designs before committing to tooling or production. We
+          uncover performance issues early and identify opportunities for
+          improvement.
+        </p>
+        <Link href="/contact" className="button-tertiary mx-auto mt-6 inline-block">
+          Book a Consultation →
+        </Link>
+      </div>
+      <div className="relative z-20 mt-10 w-full overflow-hidden rounded-2xl shadow-2xl">
+        <img
+          className="aspect-[4/3] h-auto w-full object-cover"
+          alt="Engineering analysis for early-stage design"
+          src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/mechanical-1.jpg"
+        />
+      </div>
+    </div>
+
+    {/* Desktop: exact overlap composition */}
+    <div className="hidden md:block">
+      <div className="max-w-7xl mx-auto px-6 py-24 md:py-32 !mb-[-35vh]">
+         {/* <ExtraBadges /> */}
+         <div className="text-black/90 flex flex-col justify-center text-center">
+          <h2 className=" max-w-2xl mx-auto"> Engineering analysis<span className="text-[#ff6726]"> for early-stage design</span></h2>
+          <p className=" max-w-7xl mx-auto"> Engineering decisions carry real consequences. A component that appears robust on screen
 may crack under load or overheat during operation.
 FormaSharp provides mechanical engineering and simulation services that help startups,
 manufacturers, and engineering teams evaluate designs before committing to tooling or
 production. We uncover performance issues early and identify opportunities for
 improvement.</p>
-        <Link href="/contact" className="button-tertiary mx-auto inline-block">
-          Book a Consultation →
-        </Link>
-       </div>
-    </div>
+          <Link href="/contact" className="button-tertiary mx-auto inline-block">
+            Book a Consultation →
+          </Link>
+         </div>
+      </div>
 
-    <div className="relative z-20 h-[70vh] flex items-center justify-center max-w-7xl mx-auto translate-y-[35vh]">
-        <div className="w-[80vw] h-[70vh] rounded-2xl overflow-hidden shadow-2xl">
-        <img
-          className="h-full w-full rounded-2xl object-cover"
-          alt="Engineering analysis for early-stage design"
-          src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/mechanical-1.jpg"
-        />
-        </div>
+      <div className="relative z-20 h-[70vh] flex items-center justify-center max-w-7xl mx-auto translate-y-[35vh]">
+          <div className="w-[80vw] h-[70vh] rounded-2xl overflow-hidden shadow-2xl">
+          <img
+            className="h-full w-full rounded-2xl object-cover"
+            alt="Engineering analysis for early-stage design"
+            src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/mechanical-1.jpg"
+          />
+          </div>
+      </div>
     </div>
 
     <section
       aria-labelledby="who-we-work-with-heading"
       className="bg-[linear-gradient(to_bottom_right,#121926,#01628a)] py-24 md:py-32 "
     >
-      <div className="mx-auto max-w-7xl px-6 pt-[35vh]">
+      <div className="mx-auto max-w-7xl px-6 pt-8 md:pt-[35vh]">
         <div className="mb-10 max-w-3xl md:mb-14">
           <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
             Who we work with
           </div>
           <h2
             id="who-we-work-with-heading"
-            className="text-3xl font-bold tracking-tight text-white md:text-4xl"
+            className="text-3xl font-bold tracking-tight text-white max-md:!text-[1.875rem] max-md:!leading-[1.15] md:text-4xl"
           >
             Built for teams that can&apos;t afford to guess.
           </h2>
-          <p className="mt-4 text-base leading-relaxed !text-white md:text-lg">
+          <p className="mt-4 text-base leading-relaxed !text-white max-md:!text-[1.125rem] md:text-lg">
             Simulation-backed clarity for product teams shipping hardware under
             real-world constraints.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div
+          className={cn(
+            "-mx-6 flex gap-4 overflow-x-auto px-6 pb-2",
+            "md:mx-0 md:grid md:grid-cols-2 md:gap-4 md:overflow-visible md:px-0 md:pb-0",
+            "lg:grid-cols-3 xl:grid-cols-5"
+          )}
+        >
           {WHO_WE_WORK_WITH.map((item) => (
             <article
               key={item.title}
-              className="group relative flex min-h-[280px] flex-col justify-end overflow-hidden rounded-2xl md:min-h-[300px]"
+              className="group relative flex min-h-[280px] w-[min(72vw,280px)] shrink-0 flex-col justify-end overflow-hidden rounded-2xl md:w-auto md:min-h-[300px]"
             >
               <img
                 src={item.imageSrc}
@@ -385,7 +563,9 @@ improvement.</p>
                 aria-hidden
               />
               <div className="relative z-10 flex flex-col justify-end p-5 md:p-6">
-                <h4 className="translate-y-[1.6em] font-bold !text-lg text-white">{item.title}</h4>
+                <h4 className="translate-y-[1.6em] font-bold !text-lg text-white">
+                  {item.title}
+                </h4>
                 <p
                   className={cn(
                     "max-h-0 overflow-hidden opacity-0 transition-all group-hover:mt-1 group-hover:max-h-28 group-hover:opacity-100",
@@ -443,21 +623,29 @@ improvement.</p>
         <div className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
           Get Started
         </div>
-        <h1 className="!text-6xl !leading-none font-bold text-white">
+        <h1 className="!text-6xl !leading-none font-bold text-white max-md:!text-[2rem] max-md:!leading-[1.1]">
           Stop guessing.
           <br />
           Start <span className="italic text-[#ff6726]">knowing</span>.
         </h1>
-        <p className="mt-6 max-w-2xl text-base leading-relaxed !text-white md:text-lg">
+        <p className="mt-6 max-w-2xl text-base leading-relaxed !text-white max-md:!text-[1.125rem] md:text-lg">
           Share your CAD files, design goals, or performance concerns and
           we&apos;ll recommend the most effective engineering approach for your
           project.
         </p>
-        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Link href={quotePageUrl("simulation")} className="button-primary inline-block">
+        <div className="mt-10 flex flex-col items-center justify-center gap-4 max-md:w-full max-md:items-stretch max-md:gap-3 sm:flex-row">
+          <Link
+            href={quotePageUrl("simulation")}
+            className="button-primary inline-block max-md:w-full max-md:text-center"
+          >
             Request Engineering Analysis
           </Link>
-          <Link href="/contact" className="button-secondary inline-block">Speak With an Engineer</Link>
+          <Link
+            href="/contact"
+            className="button-secondary inline-block max-md:w-full max-md:text-center"
+          >
+            Speak With an Engineer
+          </Link>
         </div>
         <div className="mt-10 font-mono text-xs tracking-wider text-white/40">
           Structural Optimization · Aerodynamic Optimization · Failure Investigation
