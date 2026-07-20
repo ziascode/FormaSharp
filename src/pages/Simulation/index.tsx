@@ -214,39 +214,45 @@ function Simulation() {
         </div>
       </div>
 
-      {/* Desktop hero — exact current markup */}
-      <div className="relative hidden min-h-[100vh] md:block">
-        <AutoplayVideo
-          className="absolute inset-0 z-0 h-full w-full object-cover"
-          src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/rc4.mp4"
-          loop
-          preload="metadata"
-          aria-hidden
-        />
-        {/* Diagonal scrim: darker bottom-left for hero copy, fading transparent toward top-right */}
-        <div
-
-        />
-        <div className="relative z-10 mx-auto !pt-[20vh] flex flex-row items-center justify-start max-w-7xl flex-col gap-6 px-4 py-12 md:py-16 lg:py-24">
-          <div>
-              <h4>MECHANICAL ENGINEERING & <span className="text-[#ff6726]">SIMULATION</span></h4>
-              <h1 className="max-w-3xl !text-6xl !leading-none font-bold text-white pt-5">
-              Better engineering decisions start <span className="text-[#ff6726]">before</span> production.
-              </h1>
-              <h3 className="max-w-2xl text-lg text-white/80">
-              Formasharp uses thermal analysis, structural optimization, and failure investigation to reveal crucial fail points in your design, before manufacturing locks you in. Fewer prototypes. No surprises at production.
-              </h3>
-              <div>
-              <Link href={quotePageUrl("simulation")} className="button-primary inline-block">
-              Request Engineering Analysis
+      {/* Desktop hero — gradient bg; video left, copy right */}
+      <div className="relative hidden min-h-[100vh] flex-col bg-[linear-gradient(to_bottom_right,#121926,#01628a)] md:flex">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-row items-center gap-10 px-6 pb-8 pt-28 lg:gap-14 lg:px-10 lg:pt-32">
+          <div className="min-w-0 flex-1">
+            <h4>
+              MECHANICAL ENGINEERING &{" "}
+              <span className="text-[#ff6726]">SIMULATION</span>
+            </h4>
+            <h1 className="max-w-3xl !pt-5 !text-5xl !font-bold !leading-none text-white lg:!text-6xl">
+              Better engineering decisions start{" "}
+              <span className="text-[#ff6726]">before</span> production.
+            </h1>
+            <h3 className="max-w-2xl text-lg text-white/80">
+              Formasharp uses thermal analysis, structural optimization, and
+              failure investigation to reveal crucial fail points in your
+              design, before manufacturing locks you in. Fewer prototypes. No
+              surprises at production.
+            </h3>
+            <div className="mt-6">
+              <Link
+                href={quotePageUrl("simulation")}
+                className="button-primary inline-block"
+              >
+                Request Engineering Analysis
               </Link>
-              </div>
+            </div>
           </div>
-
-
+          <div className="relative w-[48%] shrink-0 overflow-hidden rounded-2xl bg-[#121926] shadow-2xl aspect-[16/10]">
+            <AutoplayVideo
+              className="absolute inset-0 h-full w-full scale-[1.02] object-cover"
+              src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/07/thermal-vid.mp4"
+              loop
+              preload="metadata"
+              aria-hidden
+            />
+          </div>
         </div>
         <div className="relative z-10 py-8">
-          <ExtraBadges/>
+          <ExtraBadges />
         </div>
       </div>
     </div>
