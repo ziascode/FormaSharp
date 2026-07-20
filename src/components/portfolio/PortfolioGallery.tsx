@@ -19,8 +19,13 @@ export default function PortfolioGallery({ images }: PortfolioGalleryProps) {
     const slide = track.children[index] as HTMLElement | undefined;
     if (!slide) return;
 
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const left = isMobile
+      ? slide.offsetLeft - (track.clientWidth - slide.clientWidth) / 2
+      : slide.offsetLeft;
+
     track.scrollTo({
-      left: slide.offsetLeft,
+      left: Math.max(0, left),
       behavior: "smooth",
     });
     setActiveIndex(index);
@@ -48,12 +53,18 @@ export default function PortfolioGallery({ images }: PortfolioGalleryProps) {
       const slides = Array.from(track.children) as HTMLElement[];
       if (slides.length === 0) return;
 
-      const scrollLeft = track.scrollLeft;
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      const reference = isMobile
+        ? track.scrollLeft + track.clientWidth / 2
+        : track.scrollLeft;
       let closestIndex = 0;
       let closestDistance = Number.POSITIVE_INFINITY;
 
       slides.forEach((slide, index) => {
-        const distance = Math.abs(slide.offsetLeft - scrollLeft);
+        const slidePoint = isMobile
+          ? slide.offsetLeft + slide.clientWidth / 2
+          : slide.offsetLeft;
+        const distance = Math.abs(slidePoint - reference);
         if (distance < closestDistance) {
           closestDistance = distance;
           closestIndex = index;
@@ -70,15 +81,23 @@ export default function PortfolioGallery({ images }: PortfolioGalleryProps) {
   if (images.length === 0) return null;
 
   return (
-    <section className="overflow-hidden bg-[#121926] py-24 md:py-32">
+    <section className="overflow-hidden bg-[#121926] py-16 md:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="mb-8 max-w-3xl md:mb-12">
-          <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
-            Gallery
+        <div className="mb-6 flex items-end justify-between gap-4 md:mb-12">
+          <div className="max-w-3xl">
+            <div className="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.2em] text-[#ff6726] md:text-xs">
+              Gallery
+            </div>
+            <h2 className="!mb-0 !text-[1.875rem] !font-bold !leading-[1.15] tracking-tight text-white md:!text-4xl md:!leading-none">
+              Project visuals
+            </h2>
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
-            Project visuals
-          </h2>
+          {images.length > 1 ? (
+            <p className="shrink-0 pb-1 font-mono text-xs tracking-wide text-white/50 md:hidden">
+              {String(activeIndex + 1).padStart(2, "0")} /{" "}
+              {String(images.length).padStart(2, "0")}
+            </p>
+          ) : null}
         </div>
       </div>
 
@@ -88,22 +107,24 @@ export default function PortfolioGallery({ images }: PortfolioGalleryProps) {
         onMouseLeave={() => setIsPaused(false)}
         onFocusCapture={() => setIsPaused(true)}
         onBlurCapture={() => setIsPaused(false)}
+        onTouchStart={() => setIsPaused(true)}
+        onTouchEnd={() => setIsPaused(false)}
       >
         <div
           ref={trackRef}
-          className="portfolio-gallery-track flex gap-5 overflow-x-auto scroll-smooth px-6 pb-2 md:gap-6 md:px-[max(1.5rem,calc((100vw-80rem)/2+2.5rem))]"
+          className="portfolio-gallery-track flex gap-3 overflow-x-auto scroll-smooth px-4 pb-2 max-md:snap-x max-md:snap-mandatory md:gap-6 md:px-[max(1.5rem,calc((100vw-80rem)/2+2.5rem))]"
           aria-label="Project gallery"
         >
           {images.map((image, index) => (
             <figure
               key={`${image.sourceUrl}-${index}`}
-              className="portfolio-gallery-slide relative shrink-0 overflow-hidden rounded-2xl bg-white/5"
+              className="portfolio-gallery-slide relative shrink-0 overflow-hidden rounded-xl bg-white/5 max-md:snap-center md:rounded-2xl"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={image.sourceUrl}
                 alt={image.altText || `Project image ${index + 1}`}
-                className="h-[min(52vh,520px)] w-full object-cover"
+                className="aspect-[4/3] w-full object-cover md:aspect-auto md:h-[min(52vh,520px)]"
                 loading={index === 0 ? "eager" : "lazy"}
               />
             </figure>
@@ -111,17 +132,17 @@ export default function PortfolioGallery({ images }: PortfolioGalleryProps) {
         </div>
 
         {images.length > 1 ? (
-          <div className="mx-auto mt-6 flex max-w-7xl items-center gap-2 px-6 lg:px-10">
+          <div className="mx-auto mt-5 flex max-w-7xl items-center justify-center gap-2 px-6 md:mt-6 md:justify-start lg:px-10">
             {images.map((_, index) => (
               <button
                 key={index}
                 type="button"
                 aria-label={`Go to gallery image ${index + 1}`}
                 onClick={() => scrollToIndex(index)}
-                className={`h-2 rounded-full transition-all ${
+                className={`rounded-full transition-all max-md:h-2.5 ${
                   index === activeIndex
-                    ? "w-8 bg-[#ff6726]"
-                    : "w-2 bg-white/30 hover:bg-white/50"
+                    ? "h-2 w-8 bg-[#ff6726] max-md:w-7"
+                    : "h-2 w-2 bg-white/30 hover:bg-white/50 max-md:w-2.5"
                 }`}
               />
             ))}

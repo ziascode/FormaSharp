@@ -831,6 +831,7 @@ p {
 
 @media (max-width: 768px) {
   .portfolio-gallery-slide {
-    width: 85vw;
+    width: calc(100vw - 2rem);
+    scroll-snap-align: center;
   }
 }

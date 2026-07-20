@@ -50,7 +50,7 @@ export default function PortfolioIndex({
         canonical={page?.uri ?? "/portfolio/"}
       />
 
-      {/* HERO — aligned with service page typography */}
+      {/* HERO — mobile type scale; desktop unchanged */}
       <section className="relative overflow-hidden bg-[#121926]">
         <div
           className="pointer-events-none absolute inset-0"
@@ -60,23 +60,23 @@ export default function PortfolioIndex({
           }}
           aria-hidden
         />
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 md:px-8 md:py-24 lg:px-10 lg:py-28">
-          <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-2 lg:gap-16">
+        <div className="relative z-10 mx-auto max-w-7xl px-6 pb-16 pt-32 md:px-8 md:py-24 lg:px-10 lg:py-28">
+          <div className="grid grid-cols-1 items-end gap-6 md:gap-10 lg:grid-cols-2 lg:gap-16">
             <div>
-              <h4 className="!mb-0 !text-white">
+              <h4 className="!mb-0 !text-[0.6875rem] !font-medium !uppercase !tracking-[0.14em] !text-white/90 md:!text-sm md:!tracking-normal">
                 OUR <span className="text-[#ff6726]">WORK</span>
               </h4>
-              <h1 className="max-w-2xl !pt-5 !text-5xl !font-bold !leading-none !text-white md:!text-6xl">
+              <h1 className="max-w-2xl !pt-4 !text-[2rem] !font-bold !leading-[1.1] !text-white md:!pt-5 md:!text-5xl md:!leading-none lg:!text-6xl">
                 {page?.title ?? "Portfolio"}
               </h1>
             </div>
             <div className="max-w-xl lg:pb-2">
               {page?.content ? (
-                <div className="rich-text-content max-w-none !text-lg !leading-relaxed !text-white/80 [&_p]:!mb-4 [&_p]:!text-white/80 [&_p:last-child]:!mb-0">
+                <div className="rich-text-content max-w-none !text-[1.125rem] !leading-relaxed !text-white/80 md:!text-lg [&_p]:!mb-4 [&_p]:!text-[1.125rem] [&_p]:!text-white/80 md:[&_p]:!text-lg [&_p:last-child]:!mb-0">
                   <RichText html={page.content} />
                 </div>
               ) : (
-                <h3 className="!mb-0 max-w-2xl !text-lg !font-normal !leading-relaxed !text-white/80">
+                <h3 className="!mb-0 max-w-2xl !text-[1.125rem] !font-normal !leading-relaxed !text-white/80 md:!text-lg">
                   Explore product design and engineering projects from concept
                   through to production-ready solutions.
                 </h3>
@@ -86,19 +86,19 @@ export default function PortfolioIndex({
         </div>
       </section>
 
-      {/* PROJECT GRID — 2 columns at all breakpoints */}
-      <section className="bg-[#f8f9fa] py-24 md:py-32">
+      {/* PROJECT GRID — 1 col mobile, 2 cols from sm up */}
+      <section className="bg-[#f8f9fa] py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="mb-10 max-w-3xl md:mb-14">
+          <div className="mb-8 max-w-3xl md:mb-14">
             <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
               Case Studies
             </div>
-            <h2 className="!mb-0 text-3xl font-bold leading-[1.08] tracking-tight text-neutral-950 md:text-4xl lg:text-[2.75rem] lg:leading-[1.06]">
+            <h2 className="!mb-0 !text-[1.875rem] !font-bold !leading-[1.15] tracking-tight text-neutral-950 md:!text-4xl lg:!text-[2.75rem] lg:!leading-[1.06]">
               Selected projects
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 md:gap-8">
             {items.map((item) => {
               const image = cardImage(item);
 
@@ -106,7 +106,7 @@ export default function PortfolioIndex({
                 <Link
                   key={item.id}
                   href={`/portfolio/${item.slug}`}
-                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#01628a]/25 hover:shadow-[0_20px_40px_-20px_rgba(18,25,38,0.25)]"
+                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#01628a]/25 hover:shadow-[0_20px_40px_-20px_rgba(18,25,38,0.25)] max-md:active:translate-y-0"
                 >
                   <div className="aspect-[4/3] overflow-hidden bg-neutral-200">
                     {image ? (
@@ -127,14 +127,14 @@ export default function PortfolioIndex({
                       </div>
                     )}
                   </div>
-                  <div className="flex flex-1 flex-col p-4 sm:p-5 md:p-6">
-                    <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] !text-[#ff6726] sm:text-xs">
+                  <div className="flex flex-1 flex-col p-5 md:p-6">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] !text-[#ff6726]">
                       Case Study
                     </p>
-                    <h3 className="!mb-4 !text-base !font-bold !leading-snug !text-neutral-950 transition-colors group-hover:!text-[#01628a] sm:!text-lg md:!text-xl">
+                    <h3 className="!mb-4 !text-lg !font-bold !leading-snug !text-neutral-950 transition-colors group-hover:!text-[#01628a] md:!text-xl">
                       {item.title}
                     </h3>
-                    <span className="mt-auto inline-flex items-center gap-2 text-sm font-medium !text-[#01628a] transition-colors group-hover:!text-[#ff6726] sm:text-base">
+                    <span className="mt-auto inline-flex items-center gap-2 text-base font-medium !text-[#01628a] transition-colors group-hover:!text-[#ff6726]">
                       Explore case study
                       <span aria-hidden className="transition-transform group-hover:translate-x-1">
                         →
