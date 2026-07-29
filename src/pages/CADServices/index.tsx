@@ -127,23 +127,23 @@ const INDUSTRIES: IndustryItem[] = [
     description:
       "Convert concepts into detailed digital models that support engineering, prototyping, and supplier communication.",
     imageSrc:
-      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/premium_photo-1710962439403-a35fbc684b15.jpeg",
-    imageAlt: "Product development CAD modeling context",
+      "https://images.unsplash.com/photo-1586868538513-51335a0c5337?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Engineers reviewing a CAD model for product development",
   },
   {
     title: "Manufacturing and Fabrication",
     description:
       "Prepare precise drawings and assemblies for machining, sheet metal fabrication, welding, and assembly operations.",
     imageSrc:
-      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/6indus-scaled.jpg",
-    imageAlt: "Manufacturing and fabrication documentation context",
+      "https://images.unsplash.com/photo-1740209475472-aa7d280f7452?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "CNC machining and manufacturing fabrication context",
   },
   {
     title: "Industrial Equipment",
     description:
       "Document complex parts and systems used in machinery and production environments.",
     imageSrc:
-      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/2cars-scaled.jpg",
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/6indus-scaled.jpg",
     imageAlt: "Industrial equipment CAD documentation context",
   },
   {
@@ -151,16 +151,16 @@ const INDUSTRIES: IndustryItem[] = [
     description:
       "Develop organized design files for products requiring frequent revisions and rapid iteration.",
     imageSrc:
-      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/3med-scaled.jpg",
-    imageAlt: "Consumer product CAD modeling context",
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Consumer product design and CAD iteration context",
   },
   {
     title: "Engineering Departments",
     description:
       "Provide additional modeling capacity for internal teams facing tight deadlines or specialized tasks.",
     imageSrc:
-      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/randd.jpg",
-    imageAlt: "Engineering department CAD support context",
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Engineering department prototyping and CAD support work",
   },
 ];
 

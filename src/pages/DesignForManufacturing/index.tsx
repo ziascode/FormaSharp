@@ -120,45 +120,46 @@ type IndustryItem = {
   imageAlt: string;
 };
 
-// TODO: swap per-industry image
-const CARD_IMAGE_PLACEHOLDER =
-  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/ecommerce-engi.jpg";
-
 const INDUSTRIES: IndustryItem[] = [
   {
     title: "Consumer Products",
     description:
       "Refine designs for efficient tooling, assembly, and high-volume production.",
-    imageSrc: CARD_IMAGE_PLACEHOLDER,
-    imageAlt: "Consumer product manufacturing context",
+    imageSrc:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Consumer product manufacturing and assembly context",
   },
   {
     title: "Industrial Equipment",
     description:
       "Simplify complex components and assemblies to improve fabrication and maintenance.",
-    imageSrc: CARD_IMAGE_PLACEHOLDER,
+    imageSrc:
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/6indus-scaled.jpg",
     imageAlt: "Industrial equipment manufacturing context",
   },
   {
     title: "Startup Hardware",
     description:
       "Prepare products for supplier quoting and first production runs with greater confidence.",
-    imageSrc: CARD_IMAGE_PLACEHOLDER,
-    imageAlt: "Startup hardware manufacturing context",
+    imageSrc:
+      "https://images.unsplash.com/photo-1611505908502-5b67e53e3a76?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Startup hardware prototype ready for first production run",
   },
   {
     title: "Custom Tools and Fixtures",
     description:
       "Reduce fabrication complexity while preserving performance requirements.",
-    imageSrc: CARD_IMAGE_PLACEHOLDER,
-    imageAlt: "Custom tooling and fixtures context",
+    imageSrc:
+      "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Custom tooling and fixtures for fabrication",
   },
   {
     title: "Engineering Departments",
     description:
       "Support internal teams with focused manufacturability reviews and implementation.",
-    imageSrc: CARD_IMAGE_PLACEHOLDER,
-    imageAlt: "Engineering team DFM review context",
+    imageSrc:
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Engineering team conducting a DFM review",
   },
 ];
 

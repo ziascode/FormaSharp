@@ -124,10 +124,6 @@ type WhoWeWorkWithItem = {
   imageAlt: string;
 };
 
-// TODO: swap per-industry image
-const CARD_IMAGE_PLACEHOLDER =
-  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/ecommerce-engi.jpg";
-
 const WHO_WE_WORK_WITH: WhoWeWorkWithItem[] = [
   {
     title: "Manufacturing and Production Equipment",
@@ -142,31 +138,32 @@ const WHO_WE_WORK_WITH: WhoWeWorkWithItem[] = [
     description:
       "Create replacement parts when supplier documentation is unavailable.",
     imageSrc:
-      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/premium_photo-1710962439403-a35fbc684b15.jpeg",
-    imageAlt: "Industrial maintenance and replacement part context",
+      "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Industrial maintenance technician creating replacement parts",
   },
   {
     title: "Product Redesign Projects",
     description:
       "Digitize existing components to support updates, performance improvements, and cost reduction.",
-    imageSrc: CARD_IMAGE_PLACEHOLDER,
-    imageAlt: "Product redesign engineering context",
+    imageSrc:
+      "https://images.unsplash.com/photo-1586868538513-51335a0c5337?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Engineers digitizing a part for product redesign in CAD",
   },
   {
     title: "Quality and Inspection Support",
     description:
       "Compare current parts to reconstructed CAD geometry to identify deviations.",
     imageSrc:
-      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/3med-scaled.jpg",
-    imageAlt: "Quality and inspection engineering context",
+      "https://images.unsplash.com/photo-1564901523975-b18a3eb1d11f?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Precision caliper measurement for quality inspection",
   },
   {
     title: "Legacy Product Documentation",
     description:
       "Build organized engineering records for products developed before modern CAD workflows.",
     imageSrc:
-      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/randd.jpg",
-    imageAlt: "Legacy product documentation engineering context",
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Legacy product CAD documentation and engineering records",
   },
 ];
 

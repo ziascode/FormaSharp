@@ -139,8 +139,8 @@ const INDUSTRIES: IndustryItem[] = [
     description:
       "Products that balance usability, visual appeal, and reliable function across everyday applications.",
     imageSrc:
-      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/premium_photo-1710962439403-a35fbc684b15.jpeg",
-    imageAlt: "Engineering workspace representing consumer product development",
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Consumer electronics product on a clean surface",
   },
   {
     title: "Industrial Equipment",
@@ -155,24 +155,24 @@ const INDUSTRIES: IndustryItem[] = [
     description:
       "Products that require precise integration, thoughtful ergonomics, and dependable performance.",
     imageSrc:
-      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/2cars-scaled.jpg",
-    imageAlt: "Medical and technical device product design context",
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/3med-scaled.jpg",
+    imageAlt: "Medical device and clinical technology context",
   },
   {
     title: "Custom Tools & Fixtures",
     description:
       "Specialized equipment tailored to unique production, testing, or service requirements.",
     imageSrc:
-      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/3med-scaled.jpg",
-    imageAlt: "Medical device engineering and precision validation",
+      "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Workshop tools and custom fixtures for production",
   },
   {
     title: "Startup Hardware Products",
     description:
       "Helping innovators move from sketches and ideas to fully defined products ready for prototyping and market validation.",
     imageSrc:
-      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/randd.jpg",
-    imageAlt: "Research and development engineering workspace",
+      "https://images.unsplash.com/photo-1611505908502-5b67e53e3a76?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "3D printed startup hardware prototype in development",
   },
 ];
 

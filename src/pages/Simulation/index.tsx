@@ -112,43 +112,45 @@ type WhoWeWorkWithItem = {
   imageAlt: string;
 };
 
-const CARD_IMAGE_PLACEHOLDER =
-  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/ecommerce-engi.jpg";
-
 const WHO_WE_WORK_WITH: WhoWeWorkWithItem[] = [
   {
     title: "Consumer Electronics",
     description:
       "Enclosure cooling, thermal management, structural performance for compact devices.",
-    imageSrc: "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/premium_photo-1710962439403-a35fbc684b15.jpeg",
-    imageAlt: "Engineering workspace representing consumer electronics development",
+    imageSrc:
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Circuit board and consumer electronics engineering context",
   },
   {
     title: "Industrial Equipment",
     description:
       "Brackets, housings, and structural assemblies under demanding operating conditions.",
-    imageSrc: "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/6indus-scaled.jpg",
+    imageSrc:
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/6indus-scaled.jpg",
     imageAlt: "Industrial equipment and structural engineering context",
   },
   {
     title: "Tool Design",
     description:
       "Fixtures, jigs, and production tooling validated for load, heat, and mechanical stress before fabrication.",
-    imageSrc: "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/2cars-scaled.jpg",
-    imageAlt: "Tool design and production tooling engineering context",
+    imageSrc:
+      "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Production tooling and fixture design context",
   },
   {
     title: "Medical Devices",
     description:
       "Precision validation where durability, reliability, and thermal control are non-negotiable.",
-    imageSrc: "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/3med-scaled.jpg",
+    imageSrc:
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/3med-scaled.jpg",
     imageAlt: "Medical device engineering and precision validation",
   },
   {
     title: "R&D & Innovation",
     description:
       "Concept studies, engineering investigations, and design comparison for emerging products.",
-    imageSrc: "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/randd.jpg",
+    imageSrc:
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/randd.jpg",
     imageAlt: "Research and development engineering workspace",
   },
 ];

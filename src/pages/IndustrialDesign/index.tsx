@@ -89,15 +89,16 @@ type IndustryItem = {
   imageAlt: string;
 };
 
-const CARD_IMAGE_PLACEHOLDER =
-  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/photo-1730266681489-12825532acb2.jpeg";
+const CAPABILITY_CARD_IMAGE =
+  "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/cad-design.jpg";
 
 const INDUSTRIES: IndustryItem[] = [
   {
     title: "Consumer Products",
     description:
       "Developing products that combine usability, strong visual identity, and intuitive interaction for retail and consumer-facing markets.",
-    imageSrc: CARD_IMAGE_PLACEHOLDER,
+    imageSrc:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80&auto=format&fit=crop",
     imageAlt: "Consumer product industrial design context",
   },
   {
@@ -105,32 +106,32 @@ const INDUSTRIES: IndustryItem[] = [
     description:
       "Designing durable and ergonomic products used in industrial, commercial, and professional environments.",
     imageSrc:
-      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/dfm2.jpg",
-    imageAlt: "Professional tools industrial design context",
+      "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Professional tools and equipment industrial design context",
   },
   {
     title: "Startup Hardware Products",
     description:
       "Helping emerging companies develop polished product concepts that communicate professionalism and market readiness.",
     imageSrc:
-      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/cad-early-stage-design.jpg",
-    imageAlt: "Startup hardware industrial design context",
+      "https://images.unsplash.com/photo-1611505908502-5b67e53e3a76?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Startup hardware product prototype on a 3D printer",
   },
   {
     title: "Medical & Technical Devices",
     description:
       "Creating clean, approachable product designs that balance usability, clarity, and technical function.",
     imageSrc:
-      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/ecommerce-engi.jpg",
-    imageAlt: "Medical and technical device design context",
+      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/3med-scaled.jpg",
+    imageAlt: "Medical and technical device industrial design context",
   },
   {
     title: "Smart Devices & Electronics",
     description:
       "Refining the interaction and appearance of connected devices, electronic enclosures, and technology-driven products.",
     imageSrc:
-      "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/04/cad-design.jpg",
-    imageAlt: "Smart device industrial design context",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Smart device and electronics industrial design context",
   },
 ];
 
@@ -252,7 +253,7 @@ function IndustrialDesign() {
               <span className="text-[#ff6726]">Use</span>
             </h1>
             <h3 className="max-w-2xl !text-[1.125rem] text-white/80 md:!text-lg">
-              FormaSharp's industrial design practice balances usability,
+              FormaSharp&apos;s industrial design practice balances usability,
               aesthetics, and engineering, so your product looks right, feels
               right, and performs in the real world.
             </h3>
@@ -592,7 +593,7 @@ function IndustrialDesign() {
                 <div className="lg:col-span-2">
                   <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl bg-stone-100 shadow-sm">
                     <img
-                      src={CARD_IMAGE_PLACEHOLDER}
+                      src={CAPABILITY_CARD_IMAGE}
                       alt=""
                       className="absolute inset-0 size-full object-cover"
                     />

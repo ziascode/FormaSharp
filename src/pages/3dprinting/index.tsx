@@ -158,10 +158,10 @@ assess assembly, and make informed decisions with greater certainty.</p>
           </div>
         </div>
         <Link
-          href="/contact"
+          href={quotePageUrl("prototyping")}
           className="button-secondary mt-10 inline-block w-full max-w-sm text-center"
         >
-          Upload a file
+          Get Started
         </Link>
       </div>
 
@@ -186,8 +186,12 @@ assess assembly, and make informed decisions with greater certainty.</p>
         </div>
 
       </div>
-      <button className="button-secondary mt-10 mx-auto !px-18 text-center">Upload a file 
-      </button>
+      <Link
+        href={quotePageUrl("prototyping")}
+        className="button-secondary mt-10 mx-auto inline-block !px-18 text-center"
+      >
+        Get Started
+      </Link>
 
     </div>
 
@@ -221,10 +225,10 @@ assess assembly, and make informed decisions with greater certainty.</p>
               Request a Quote
             </Link>
             <Link
-              href="/contact"
+              href={quotePageUrl("prototyping")}
               className="button-secondary inline-block max-md:w-full max-md:text-center"
             >
-              Upload a File
+              Get Started
             </Link>
           </div>
           <div className="mt-10 font-mono text-xs tracking-wider text-white/40">
