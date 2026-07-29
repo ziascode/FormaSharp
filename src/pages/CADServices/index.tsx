@@ -18,6 +18,8 @@ import { CadShowcase } from "@/components/ui/cad-showcase";
 import { cn } from "@/lib/utils";
 import { quotePageUrl } from "@/lib/quoteForm";
 import ExtraBadges from "@/components/ExtraBadges";
+import Seo from "@/components/Seo";
+import { SERVICE_PAGE_SEO, serviceJsonLd } from "@/lib/schema";
 
 type CapabilityItem = {
   tag: string;
@@ -222,6 +224,13 @@ function CADServices() {
   const activeCapability = CAPABILITIES[activeIndex];
 
   return (
+    <>
+      <Seo
+        title={SERVICE_PAGE_SEO.CADServices.title}
+        description={SERVICE_PAGE_SEO.CADServices.description}
+        canonical={SERVICE_PAGE_SEO.CADServices.path}
+        jsonLd={serviceJsonLd("CADServices")}
+      />
     <div>
       {/* HERO — dual trees: mobile-only vs exact desktop */}
       <div className="relative overflow-hidden bg-[#121926]">
@@ -752,6 +761,7 @@ function CADServices() {
         </div>
       </DotPattern>
     </div>
+    </>
   );
 }
 

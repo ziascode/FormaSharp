@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import ExitIntentPopup, { openContactPopup } from "@/components/ExitIntentPopup";
 import Footer from "@/components/Footer";
+import OrganizationJsonLd from "@/components/OrganizationJsonLd";
 
 type LayoutProps = {
   children: ReactNode;
@@ -125,6 +126,7 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <div className="flex min-h-screen flex-col bg-white text-neutral-50">
+      <OrganizationJsonLd />
       <header
         className={`fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-white transition-all duration-500 ease-out ${
           isSolidNav

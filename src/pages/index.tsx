@@ -83,8 +83,7 @@ const STATS = [
   { value: "Credential 3", label: "Details" },
 ];
 
-export default function Home({ page, pageType, services, posts }: HomePageProps) {
-  const title = page?.title || "Home";
+export default function Home({ page, services, posts }: HomePageProps) {
   const heroTitle = page?.title || HERO_TITLE_FALLBACK;
   const heroDescription = page?.content
     ? undefined
@@ -95,9 +94,9 @@ export default function Home({ page, pageType, services, posts }: HomePageProps)
     <>
     <div className="bg-slate-300">
       <Seo
-        title={title}
-        description={pageType ? `${pageType} page` : undefined}
-        canonical={page?.uri ?? undefined}
+        title="Engineering & Product Design in Toronto"
+        description="FormaSharp provides product design, CAD, simulation, DFM, and 3D prototyping for manufacturers and startups in Toronto, the GTA, and Southern Ontario."
+        canonical="/"
       />
 
       <Hero />

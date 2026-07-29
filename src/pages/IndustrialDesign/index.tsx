@@ -15,6 +15,8 @@ import { IndustrialDesignShowcase } from "@/components/ui/industrial-design-show
 import { cn } from "@/lib/utils";
 import { quotePageUrl } from "@/lib/quoteForm";
 import ExtraBadges from "@/components/ExtraBadges";
+import Seo from "@/components/Seo";
+import { SERVICE_PAGE_SEO, serviceJsonLd } from "@/lib/schema";
 
 type CapabilityItem = {
   tag: string;
@@ -219,6 +221,13 @@ function IndustrialDesign() {
   const activeCapability = CAPABILITIES[activeIndex];
 
   return (
+    <>
+      <Seo
+        title={SERVICE_PAGE_SEO.IndustrialDesign.title}
+        description={SERVICE_PAGE_SEO.IndustrialDesign.description}
+        canonical={SERVICE_PAGE_SEO.IndustrialDesign.path}
+        jsonLd={serviceJsonLd("IndustrialDesign")}
+      />
     <div>
       {/* HERO — mobile BD type; md+ restores current desktop */}
       <div className="relative flex min-h-[100svh] flex-col overflow-hidden bg-[#121926] md:block md:min-h-[100vh]">
@@ -690,6 +699,7 @@ function IndustrialDesign() {
         </div>
       </DotPattern>
     </div>
+    </>
   );
 }
 

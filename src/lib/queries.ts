@@ -74,6 +74,12 @@ export const GET_SITEMAP_ENTRIES = /* GraphQL */ `
         modified
       }
     }
+    portfolioItems(first: $first, where: { status: PUBLISH }) {
+      nodes {
+        slug
+        modified
+      }
+    }
   }
 `;
 

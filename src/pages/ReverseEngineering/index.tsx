@@ -18,6 +18,8 @@ import { cn } from "@/lib/utils";
 import { quotePageUrl } from "@/lib/quoteForm";
 import ExtraBadges from "@/components/ExtraBadges";
 import { prepareSafariVideo, trySafariPlay } from "@/lib/safariVideo";
+import Seo from "@/components/Seo";
+import { SERVICE_PAGE_SEO, serviceJsonLd } from "@/lib/schema";
 
 type CapabilityItem = {
   tag: string;
@@ -296,6 +298,13 @@ function ReverseEngineering() {
   };
 
   return (
+    <>
+      <Seo
+        title={SERVICE_PAGE_SEO.ReverseEngineering.title}
+        description={SERVICE_PAGE_SEO.ReverseEngineering.description}
+        canonical={SERVICE_PAGE_SEO.ReverseEngineering.path}
+        jsonLd={serviceJsonLd("ReverseEngineering")}
+      />
     <div>
 
     {/* HERO — dual trees: mobile gradient + media; desktop exact */}
@@ -643,7 +652,7 @@ function ReverseEngineering() {
           src="https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/refinal.mp4"
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
         />
       </div>
     </div>
@@ -819,8 +828,7 @@ function ReverseEngineering() {
     </DotPattern>
 
     </div>
-
-
+    </>
   );
 }
 

@@ -6,6 +6,10 @@ import {
   toAbsoluteUrl,
   type YoastSeo,
 } from "@/lib/seo";
+import { ORG_LOGO_URL, serializeJsonLd, type JsonLd } from "@/lib/schema";
+
+const GOOGLE_SITE_VERIFICATION =
+  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim() || undefined;
 
 export type SeoProps = {
   title?: string;
@@ -20,6 +24,8 @@ export type SeoProps = {
   ogType?: string;
   /** Post slug — used when rewriting Yoast JSON-LD paths to `/blog/[slug]` */
   slug?: string | null;
+  /** Extra JSON-LD objects (Service, BreadcrumbList, etc.) */
+  jsonLd?: JsonLd | JsonLd[];
 };
 
 export default function Seo({
@@ -31,6 +37,7 @@ export default function Seo({
   ogImage,
   ogType,
   slug,
+  jsonLd,
 }: SeoProps) {
   const yoastTitle = seo?.title?.trim() || undefined;
   const finalTitle =
@@ -55,7 +62,7 @@ export default function Seo({
   const ogDescription =
     seo?.opengraphDescription?.trim() || finalDescription;
   const ogImageUrl =
-    seo?.opengraphImage?.sourceUrl || ogImage || undefined;
+    seo?.opengraphImage?.sourceUrl || ogImage || ORG_LOGO_URL;
   const finalOgType = seo?.opengraphType || ogType || "website";
   // Prefer frontend canonical over Yoast opengraphUrl (points at WordPress)
   const ogUrl =
@@ -73,9 +80,21 @@ export default function Seo({
     frontendPath: frontendPath?.replace(/^\//, "") || undefined,
   });
 
+  const extraJsonLd = jsonLd
+    ? Array.isArray(jsonLd)
+      ? jsonLd
+      : [jsonLd]
+    : [];
+
   return (
     <Head>
       <title>{finalTitle}</title>
+      {GOOGLE_SITE_VERIFICATION && (
+        <meta
+          name="google-site-verification"
+          content={GOOGLE_SITE_VERIFICATION}
+        />
+      )}
       {finalDescription && (
         <meta name="description" content={finalDescription} />
       )}
@@ -104,6 +123,13 @@ export default function Seo({
           dangerouslySetInnerHTML={{ __html: schemaRaw }}
         />
       )}
+      {extraJsonLd.map((item, index) => (
+        <script
+          key={`jsonld-${index}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(item) }}
+        />
+      ))}
     </Head>
   );
 }

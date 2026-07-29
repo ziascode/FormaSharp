@@ -22,6 +22,8 @@ import AutoplayVideo from "@/components/AutoplayVideo";
 import ExtraBadges from "@/components/ExtraBadges";
 import ScrollyVideo from "scrolly-video/dist/ScrollyVideo.cjs.jsx";
 import { prefersWebCodecsForScrolly } from "@/lib/safariVideo";
+import Seo from "@/components/Seo";
+import { SERVICE_PAGE_SEO, serviceJsonLd } from "@/lib/schema";
 
 type CapabilityItem = {
   tag: string;
@@ -289,6 +291,13 @@ function ProductDesign() {
   }, []);
 
   return (
+    <>
+      <Seo
+        title={SERVICE_PAGE_SEO.ProductDesign.title}
+        description={SERVICE_PAGE_SEO.ProductDesign.description}
+        canonical={SERVICE_PAGE_SEO.ProductDesign.path}
+        jsonLd={serviceJsonLd("ProductDesign")}
+      />
     <div>
 
     {/* HERO — dual trees: mobile gradient + video box; desktop exact ScrollyVideo */}
@@ -989,8 +998,7 @@ function ProductDesign() {
     </DotPattern>
 
     </div>
-
-
+    </>
   );
 }
 

@@ -17,6 +17,8 @@ import { DotPattern } from "@/components/ui/DotPatternProps";
 import ExtraBadges from "@/components/ExtraBadges";
 import { cn } from "@/lib/utils";
 import { quotePageUrl } from "@/lib/quoteForm";
+import Seo from "@/components/Seo";
+import { SERVICE_PAGE_SEO, serviceJsonLd } from "@/lib/schema";
 
 type CapabilityItem = {
   tag: string;
@@ -220,6 +222,13 @@ function DesignForManufacturing() {
   const activeCapability = CAPABILITIES[activeIndex];
 
   return (
+    <>
+      <Seo
+        title={SERVICE_PAGE_SEO.DesignForManufacturing.title}
+        description={SERVICE_PAGE_SEO.DesignForManufacturing.description}
+        canonical={SERVICE_PAGE_SEO.DesignForManufacturing.path}
+        jsonLd={serviceJsonLd("DesignForManufacturing")}
+      />
     <div>
       {/* HERO — dual trees: mobile-only vs exact desktop */}
       <div className="relative overflow-hidden bg-[#121926]">
@@ -711,6 +720,7 @@ function DesignForManufacturing() {
         </div>
       </DotPattern>
     </div>
+    </>
   );
 }
 

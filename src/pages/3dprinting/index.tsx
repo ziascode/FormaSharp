@@ -5,9 +5,18 @@ import { DotPattern } from "@/components/ui/DotPatternProps";
 import { ProjectShowcase } from "@/components/ui/project-showcase";
 import { quotePageUrl } from "@/lib/quoteForm";
 import ExtraBadges from "@/components/ExtraBadges";
+import Seo from "@/components/Seo";
+import { SERVICE_PAGE_SEO, serviceJsonLd } from "@/lib/schema";
 
 function ThreeDPrinting() {
   return (
+    <>
+      <Seo
+        title={SERVICE_PAGE_SEO["3dprinting"].title}
+        description={SERVICE_PAGE_SEO["3dprinting"].description}
+        canonical={SERVICE_PAGE_SEO["3dprinting"].path}
+        jsonLd={serviceJsonLd("3dprinting")}
+      />
     <div>
       {/* HERO — dual trees: mobile-only vs exact desktop */}
       <div className="relative overflow-hidden bg-[#121926]">
@@ -225,6 +234,7 @@ assess assembly, and make informed decisions with greater certainty.</p>
         </div>
       </DotPattern>
     </div>
+    </>
   );
 }
 

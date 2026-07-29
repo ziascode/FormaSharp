@@ -147,7 +147,7 @@ export default function ServicesIndex() {
     <>
       <Seo
         title="Services"
-        description="Engineering services in Toronto and Ontario: product design, CAD, simulation, reverse engineering, DFM, and 3D printing from FormaSharp."
+        description="Engineering services in Toronto, the GTA, and Southern Ontario: product design, CAD, simulation, reverse engineering, DFM, and 3D printing from FormaSharp."
         canonical="/services"
       />
 

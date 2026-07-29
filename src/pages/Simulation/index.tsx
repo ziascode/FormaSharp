@@ -17,6 +17,8 @@ import { SimulationShowcase } from "@/components/ui/simulation-showcase";
 import { cn } from "@/lib/utils";
 import { quotePageUrl } from "@/lib/quoteForm";
 import ExtraBadges from "@/components/ExtraBadges";
+import Seo from "@/components/Seo";
+import { SERVICE_PAGE_SEO, serviceJsonLd } from "@/lib/schema";
 
 type CapabilityItem = {
   tag: string;
@@ -168,6 +170,13 @@ function Simulation() {
   const highlightedIndex = hoveredIndex ?? activeIndex;
 
   return (
+    <>
+      <Seo
+        title={SERVICE_PAGE_SEO.Simulation.title}
+        description={SERVICE_PAGE_SEO.Simulation.description}
+        canonical={SERVICE_PAGE_SEO.Simulation.path}
+        jsonLd={serviceJsonLd("Simulation")}
+      />
     <div>
 
     {/* HERO — dual trees: mobile-only vs exact desktop */}
@@ -655,8 +664,7 @@ improvement.</p>
     </DotPattern>
 
     </div>
-
-
+    </>
   );
 }
 
