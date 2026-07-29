@@ -23,7 +23,7 @@ function FinalCta() {
           in touch shortly.
         </p>
         <div className="mt-10 flex flex-col flex-wrap items-center justify-center gap-4 sm:flex-row">
-          <Link href="/contact" className="button-primary inline-block">
+          <Link href="/request-a-quote" className="button-primary inline-block">
             Start Your Project
           </Link>
           <Link href="/contact" className="button-secondary inline-block">

@@ -73,7 +73,7 @@ function StatCell({
         ease: [0.22, 1, 0.36, 1],
       }}
       className={cn(
-        "relative px-4 py-5 sm:px-6 sm:py-7 md:px-8 md:py-8",
+        "relative px-3 py-5 sm:px-6 sm:py-7 md:px-8 md:py-8",
         index % 2 === 0 && "border-r",
         index < 2 && "border-b lg:border-b-0",
         index < total - 1 && "lg:border-r",
@@ -96,7 +96,7 @@ function StatCell({
 
       <p
         className={cn(
-          "mt-4 !mb-0 max-w-none font-mono text-[10px] uppercase leading-relaxed tracking-[0.14em] sm:mt-6 sm:max-w-[14ch] sm:text-xs sm:tracking-[0.18em]",
+          "mt-3 !mb-0 font-mono text-[8.5px] uppercase leading-snug tracking-[0.06em] sm:mt-6 sm:max-w-[14ch] sm:text-xs sm:leading-relaxed sm:tracking-[0.18em]",
           isDark ? "!text-white" : "text-black/50",
         )}
       >

@@ -141,19 +141,19 @@ export default function RequestAQuotePage() {
         canonical="/request-a-quote/"
       />
 
-      <section className="relative min-h-screen overflow-hidden bg-[linear-gradient(to_bottom_right,#f0f7fb,#ffffff,#e3f1f7)] pb-20 pt-[22vh] md:pb-28">
+      <section className="relative min-h-screen overflow-hidden bg-[linear-gradient(to_bottom_right,#121926,#01628a)] pb-20 pt-[22vh] md:pb-28">
         <div className="relative z-10 mx-auto max-w-2xl px-6">
           <div className="mb-10 text-center">
-            <h1 className="!text-4xl !font-bold !leading-tight text-neutral-950 md:!text-5xl">
+            <h1 className="!text-4xl !font-bold !leading-tight text-white md:!text-5xl">
               Tell us about your project
             </h1>
-            <p className="mx-auto mt-4 max-w-lg text-base text-neutral-700">
+            <p className="mx-auto mt-4 max-w-lg text-base !text-white/90">
               A few details help us respond with a relevant estimate. Sketches,
               early ideas, and rough concepts are welcome.
             </p>
           </div>
 
-          <div className="overflow-hidden rounded-2xl border border-neutral-200/90 bg-white p-6 shadow-[0_12px_48px_rgba(18,25,38,0.12),0_2px_8px_rgba(18,25,38,0.06)] ring-1 ring-neutral-950/5 md:p-10">
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-white p-6 shadow-[0_12px_48px_rgba(18,25,38,0.28),0_2px_8px_rgba(18,25,38,0.12)] md:p-10">
             {isSubmitted ? (
               <div className="py-6 text-center">
                 <div className="mx-auto mb-5 flex size-14 items-center justify-center rounded-full bg-[#ff6726]/10">
@@ -370,7 +370,7 @@ export default function RequestAQuotePage() {
           </div>
 
           {!isSubmitted ? (
-            <p className="mt-6 text-center text-xs text-neutral-600">
+            <p className="mt-6 text-center text-xs !text-white/70">
               Typical response within 1 business day · No obligation
             </p>
           ) : null}

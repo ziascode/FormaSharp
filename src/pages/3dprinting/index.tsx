@@ -134,7 +134,7 @@ assess assembly, and make informed decisions with greater certainty.</p>
               2. Get Your Quote
             </h3>
             <p className="!text-[1.125rem] !font-light !text-white">
-              Receive a transparent quote within 48 hour withm material options,
+              Receive a transparent quote within 48 hour with material options,
               lead times, and finish levels clearly outlined.
             </p>
           </div>

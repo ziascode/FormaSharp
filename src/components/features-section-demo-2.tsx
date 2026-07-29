@@ -18,7 +18,7 @@ const features = [
   {
     title: "Engineering-First Approach",
     description:
-      "We approach every project with a focus on engineering excellence, ensuring designs built on a solid technical foundation.",
+      "We approach every project with a focus on engineering excellence, ensuring designs are built on a solid technical foundation.",
     icon: <IconTerminal2 />,
   },
   {

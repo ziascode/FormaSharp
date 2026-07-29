@@ -60,6 +60,7 @@ const SERVICE_LINKS: NavChild[] = [
 
 const RESOURCE_LINKS: NavChild[] = [
   { href: "/blog", label: "Blog" },
+  { href: "/portfolio", label: "Portfolio" },
   { href: "/patent-ip", label: "Patent & IP" },
 ];
 

@@ -154,7 +154,7 @@ const INDUSTRIES: IndustryItem[] = [
       "Products that require precise integration, thoughtful ergonomics, and dependable performance.",
     imageSrc:
       "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/2cars-scaled.jpg",
-    imageAlt: "Automotive engineering and vehicle systems analysis",
+    imageAlt: "Medical and technical device product design context",
   },
   {
     title: "Custom Tools & Fixtures",

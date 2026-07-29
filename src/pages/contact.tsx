@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Script from "next/script";
 import {
   ArrowRight,
   Lightbulb,
@@ -11,6 +10,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import Seo from "@/components/Seo";
+import CalendlyPopupButton from "@/components/CalendlyPopupButton";
 
 const CONTACT = {
   email: "admin@formasharp.com",
@@ -38,7 +38,7 @@ const CONTACT_METHODS = [
     icon: MapPin,
     label: "Location",
     value: CONTACT.location,
-    href: undefined,
+    href: undefined as string | undefined,
   },
 ];
 
@@ -103,10 +103,10 @@ export default function Contact() {
         canonical="/contact/"
       />
 
-      {/* BOOK + CALENDLY */}
+      {/* HERO — Calendly CTA left, contact details right */}
       <section
         id="book-consultation"
-        className="relative min-h-screen scroll-mt-20 overflow-hidden bg-[#0a0f1e] pt-32 pb-10 md:pt-[18vh] lg:pb-14"
+        className="relative scroll-mt-20 overflow-hidden bg-[#0a0f1e] pt-32 pb-16 md:min-h-[85vh] md:pb-20 md:pt-[18vh]"
       >
         <div
           className="pointer-events-none absolute inset-0"
@@ -117,116 +117,111 @@ export default function Contact() {
           aria-hidden
         />
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-12 xl:gap-16">
-            <div className="text-left max-md:pt-0 pt-6 lg:pt-14">
-              <h1 className="!mb-0 max-w-xl !text-[2rem] !leading-[1.1] font-bold text-white md:!mb-6 md:!text-5xl md:!leading-[1.05] lg:!text-[3.25rem]">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16 xl:gap-20">
+            {/* Left — booking CTA */}
+            <div className="text-left">
+              <div className="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.2em] text-[#ff6726] md:text-xs">
+                Contact
+              </div>
+              <h1 className="!mb-0 max-w-xl !text-[2rem] !leading-[1.1] font-bold text-white md:!text-5xl md:!leading-[1.05] lg:!text-[3.25rem]">
                 Book your{" "}
-                <span className="text-[#ff6726]">free strategy call</span> today
+                <span className="text-[#ff6726]">free strategy call</span>{" "}
+                today
               </h1>
-              <Link
-                href="/request-a-quote"
-                className="mt-6 inline-flex max-w-lg items-center gap-2 border-b border-white/30 pb-0.5 text-base font-medium !text-white transition-colors hover:border-[#ff6726] hover:!text-[#ff6726] md:mt-8 md:text-lg"
-              >
-                Or request a detailed quote to start your project
-                <span aria-hidden>&rarr;</span>
-              </Link>
+              <p className="mt-5 max-w-lg text-base leading-relaxed !text-white/95 max-md:!text-[1.125rem] md:mt-6 md:text-lg">
+                Pick a time that works for you. We&apos;ll review your project
+                goals and outline clear next steps, with no commitment required.
+              </p>
+              <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-4">
+                <CalendlyPopupButton
+                  url={CALENDLY_URL}
+                  className="button-primary inline-block w-full text-center sm:w-auto disabled:cursor-wait disabled:opacity-80"
+                >
+                  Book a Free Call
+                </CalendlyPopupButton>
+                <Link
+                  href="/request-a-quote"
+                  className="button-secondary inline-block w-full text-center sm:w-auto"
+                >
+                  Request a Quote
+                </Link>
+              </div>
             </div>
 
-            <div
-              className="calendly-inline-widget w-full overflow-hidden rounded-2xl border border-white/10 bg-white shadow-[0_12px_48px_rgba(0,0,0,0.35)]"
-              data-url={CALENDLY_URL}
-              style={{
-                minWidth: "280px",
-                height: "min(680px, calc(100svh - 11rem))",
-              }}
-            />
+            {/* Right — email, phone, location */}
+            <div className="flex flex-col gap-3 md:gap-4">
+              {CONTACT_METHODS.map((method) => {
+                const Icon = method.icon;
+                const inner = (
+                  <>
+                    <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-[#ff6726]/15 md:size-12">
+                      <Icon
+                        className="size-5 text-[#ff6726] md:size-6"
+                        strokeWidth={2}
+                        aria-hidden
+                      />
+                    </div>
+                    <span className="min-w-0 text-left">
+                      <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-white/50 md:text-xs">
+                        {method.label}
+                      </span>
+                      <span className="mt-0.5 block text-base font-semibold text-white md:text-lg">
+                        {method.value}
+                      </span>
+                    </span>
+                  </>
+                );
+
+                const cardClass =
+                  "flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur-sm transition-colors md:px-6 md:py-5";
+
+                return method.href ? (
+                  <a
+                    key={method.label}
+                    href={method.href}
+                    className={`${cardClass} hover:border-[#ff6726]/40 hover:bg-[#ff6726]/10`}
+                  >
+                    {inner}
+                  </a>
+                ) : (
+                  <div key={method.label} className={cardClass}>
+                    {inner}
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <Script
-            src="https://assets.calendly.com/assets/external/widget.js"
-            strategy="lazyOnload"
-          />
         </div>
       </section>
 
-      {/* CONTACT INFO */}
-      <section className="bg-[#f8f9fa] py-24 md:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="mb-10 max-w-3xl text-center md:mx-auto md:mb-14">
-            <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6726]">
-              Get in Touch
-            </div>
-            <h2 className="text-4xl font-bold leading-[1.08] tracking-tight text-neutral-950 max-md:!text-[1.875rem] max-md:!leading-[1.15] md:text-5xl">
-              Other ways to reach us
-            </h2>
-            <p className="mx-auto max-md:!text-[1.125rem]">
-              Prefer email or a quick phone call? We respond to messages promptly
-              and are happy to help however suits you best.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
-            {CONTACT_METHODS.map((method) => {
-              const Icon = method.icon;
-              const inner = (
-                <>
-                  <div className="mb-5 flex size-12 items-center justify-center rounded-2xl bg-[#ff6726]/10 md:size-14">
-                    <Icon className="size-6 text-[#ff6726] md:size-7" strokeWidth={2} aria-hidden />
-                  </div>
-                  <span className="font-mono text-xs uppercase tracking-[0.18em] text-black/50">
-                    {method.label}
+      {/* SOCIAL */}
+      <section className="bg-[#f8f9fa] py-16 md:py-20">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-5 px-6 lg:px-10">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-black/50">
+            Follow us
+          </p>
+          <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
+            {SOCIAL_LINKS.map((social) => (
+              <a
+                key={social.href}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 rounded-2xl border border-black/10 bg-white px-5 py-3.5 shadow-sm transition-colors hover:border-[#ff6726]/40 hover:bg-[#ff6726]/5"
+              >
+                <span className="flex size-10 items-center justify-center rounded-xl bg-[#ff6726]/10 text-[#ff6726] transition-colors group-hover:bg-[#ff6726]/15">
+                  {social.icon}
+                </span>
+                <span className="text-left">
+                  <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-black/50">
+                    {social.label}
                   </span>
-                  <span className="mt-1 text-base font-semibold text-neutral-950 md:text-lg">
-                    {method.value}
+                  <span className="block text-sm font-semibold text-neutral-950">
+                    {social.value}
                   </span>
-                </>
-              );
-
-              const cardClass =
-                "group flex flex-col items-start rounded-2xl border border-black/10 bg-white p-6 shadow-sm transition-colors md:p-8";
-
-              return method.href ? (
-                <a
-                  key={method.label}
-                  href={method.href}
-                  className={`${cardClass} hover:border-[#ff6726]/40 hover:bg-[#ff6726]/5`}
-                >
-                  {inner}
-                </a>
-              ) : (
-                <div key={method.label} className={cardClass}>
-                  {inner}
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="mt-10 flex flex-col items-center gap-5 md:mt-14">
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-black/50">
-              Follow us
-            </p>
-            <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
-              {SOCIAL_LINKS.map((social) => (
-                <a
-                  key={social.href}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-3 rounded-2xl border border-black/10 bg-white px-5 py-3.5 shadow-sm transition-colors hover:border-[#ff6726]/40 hover:bg-[#ff6726]/5"
-                >
-                  <span className="flex size-10 items-center justify-center rounded-xl bg-[#ff6726]/10 text-[#ff6726] transition-colors group-hover:bg-[#ff6726]/15">
-                    {social.icon}
-                  </span>
-                  <span className="text-left">
-                    <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-black/50">
-                      {social.label}
-                    </span>
-                    <span className="block text-sm font-semibold text-neutral-950">
-                      {social.value}
-                    </span>
-                  </span>
-                </a>
-              ))}
-            </div>
+                </span>
+              </a>
+            ))}
           </div>
         </div>
       </section>

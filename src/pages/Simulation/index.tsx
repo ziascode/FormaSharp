@@ -129,11 +129,11 @@ const WHO_WE_WORK_WITH: WhoWeWorkWithItem[] = [
     imageAlt: "Industrial equipment and structural engineering context",
   },
   {
-    title: "Automotive",
+    title: "Tool Design",
     description:
-      "Vibration, heat transfer, and mechanical stress for vehicle systems and hardware.",
+      "Fixtures, jigs, and production tooling validated for load, heat, and mechanical stress before fabrication.",
     imageSrc: "https://palevioletred-quetzal-629835.hostingersite.com/wp-content/uploads/2026/05/2cars-scaled.jpg",
-    imageAlt: "Automotive engineering and vehicle systems analysis",
+    imageAlt: "Tool design and production tooling engineering context",
   },
   {
     title: "Medical Devices",
@@ -185,7 +185,7 @@ function Simulation() {
               <span className="text-[#ff6726]">before</span> production.
             </h1>
             <h3 className="max-w-2xl !text-[1.125rem] text-white/80">
-              Formasharp uses thermal analysis, structural optimization, and
+              FormaSharp uses thermal analysis, structural optimization, and
               failure investigation to reveal crucial fail points in your
               design, before manufacturing locks you in. Fewer prototypes. No
               surprises at production.

@@ -326,9 +326,9 @@ export default function About() {
             mechanical system, we are here to help you build it right.
           </p>
           <div className="mt-10 flex flex-col flex-wrap items-center justify-center gap-4 sm:flex-row">
-            <InteractiveHoverButton className="button-primary">
+            <Link href="/request-a-quote" className="button-primary">
               Start Your Project
-            </InteractiveHoverButton>
+            </Link>
             <Link href="/contact" className="button-secondary inline-block">
               Book a Consultation
             </Link>
