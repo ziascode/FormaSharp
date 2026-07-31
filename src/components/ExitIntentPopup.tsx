@@ -29,12 +29,15 @@ function markExitIntentShown(): void {
 export default function ExitIntentPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [form, setForm] = useState({
     fullName: "",
     company: "",
     email: "",
     contactNumber: "",
     message: "",
+    website: "",
   });
 
   const enabledRef = useRef(true);
@@ -44,11 +47,13 @@ export default function ExitIntentPopup() {
     enabledRef.current = false;
     markExitIntentShown();
     setIsSubmitted(false);
+    setSubmitError(null);
     setIsOpen(true);
   }, []);
 
   const openManually = useCallback(() => {
     setIsSubmitted(false);
+    setSubmitError(null);
     setIsOpen(true);
   }, []);
 
@@ -106,9 +111,45 @@ export default function ExitIntentPopup() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    setSubmitError(null);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/forms/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: form.fullName,
+          email: form.email,
+          phone: form.contactNumber,
+          company: form.company,
+          message: form.message,
+          website: form.website,
+        }),
+      });
+
+      if (!response.ok) {
+        const data = (await response.json().catch(() => null)) as {
+          message?: string;
+        } | null;
+        setSubmitError(
+          data?.message ||
+            "Something went wrong sending your message. Please try again.",
+        );
+        setIsSubmitting(false);
+        return;
+      }
+
+      setIsSubmitted(true);
+    } catch {
+      setSubmitError(
+        "Could not reach the server. Please check your connection and try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (!isOpen) return null;
@@ -166,7 +207,7 @@ export default function ExitIntentPopup() {
                 connect!
               </p>
 
-              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              <form onSubmit={handleSubmit} className="relative flex flex-col gap-4">
                 <Field
                   label="Full Name"
                   name="fullName"
@@ -218,11 +259,33 @@ export default function ExitIntentPopup() {
                   />
                 </div>
 
+                {/* Honeypot — hidden from users */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
+                >
+                  <label htmlFor="exit-website">Website</label>
+                  <input
+                    id="exit-website"
+                    name="website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={form.website}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                {submitError ? (
+                  <p className="text-sm text-red-600">{submitError}</p>
+                ) : null}
+
                 <button
                   type="submit"
-                  className="mt-2 inline-flex w-fit rounded-full bg-[linear-gradient(to_bottom_right,#121926,#01628a)] px-8 py-3 font-semibold text-white transition-opacity hover:opacity-90"
+                  disabled={isSubmitting}
+                  className="mt-2 inline-flex w-fit rounded-full bg-[linear-gradient(to_bottom_right,#121926,#01628a)] px-8 py-3 font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  Submit
+                  {isSubmitting ? "Sending..." : "Submit"}
                 </button>
               </form>
             </>

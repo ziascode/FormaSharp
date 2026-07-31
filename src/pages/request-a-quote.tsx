@@ -128,9 +128,50 @@ export default function RequestAQuotePage() {
     e.preventDefault();
     if (!validateStep2()) return;
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 600));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+    setErrors((prev) => ({ ...prev, description: undefined }));
+
+    try {
+      const response = await fetch("/api/forms/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: form.fullName,
+          email: form.email,
+          phone: form.phone,
+          company: form.company,
+          service: form.service,
+          stage: form.stage,
+          timeline: form.timeline,
+          budget: form.budget,
+          description: form.description,
+          website: "", // honeypot
+        }),
+      });
+
+      if (!response.ok) {
+        const data = (await response.json().catch(() => null)) as {
+          message?: string;
+        } | null;
+        setErrors((prev) => ({
+          ...prev,
+          description:
+            data?.message ||
+            "Something went wrong sending your request. Please try again.",
+        }));
+        setIsSubmitting(false);
+        return;
+      }
+
+      setIsSubmitted(true);
+    } catch {
+      setErrors((prev) => ({
+        ...prev,
+        description:
+          "Could not reach the server. Please check your connection and try again.",
+      }));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -181,8 +222,24 @@ export default function RequestAQuotePage() {
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} noValidate>
+              <form onSubmit={handleSubmit} noValidate className="relative">
                 <ProgressBar step={step} />
+
+                {/* Honeypot — hidden from users */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
+                >
+                  <label htmlFor="quote-website">Website</label>
+                  <input
+                    id="quote-website"
+                    name="website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    defaultValue=""
+                  />
+                </div>
 
                 {step === 1 ? (
                   <div className="animate-in fade-in duration-300">
